@@ -1,0 +1,22 @@
+{
+  "name": "edgtreasury",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": "git@github.com:opensquare-network/edgtreasury.git",
+  "author": "OpenSquare <https://www.opensquare.network/>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=15.0.0"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+    "husky": "^7.0.2",
+    "pinst": "^2.1.6"
+  },
+  "dependencies": {
+    "prettier": "^2.2.1"
+  }
+}
