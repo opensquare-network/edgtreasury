@@ -1,3 +1,4 @@
+const { handleTreasuryProposeCall } = require("./proposal/propose");
 const { handleTipCloseCall } = require("./tip/close");
 const { handleTipCall } = require("./tip/tip");
 const { handleReportAwesomeCall } = require("./tip/reportAwesome");
@@ -30,6 +31,7 @@ async function handleExtrinsics(extrinsics = [], allEvents = [], blockIndexer) {
       await handleReportAwesomeCall(call, signer, indexer, events);
       await handleTipCall(call, signer, indexer, events);
       await handleTipCloseCall(call, signer, indexer, events);
+      await handleTreasuryProposeCall(call, signer, indexer, events)
     })
   }
 }

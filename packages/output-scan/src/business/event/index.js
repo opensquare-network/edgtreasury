@@ -1,3 +1,4 @@
+const { handleTreasuryProposalEvent } = require("./proposal");
 const { handleTipEvent } = require("./tip");
 
 async function handleEvents(events, extrinsics, blockIndexer) {
@@ -20,6 +21,7 @@ async function handleEvents(events, extrinsics, blockIndexer) {
     }
 
     await handleTipEvent(event, indexer, events, extrinsic);
+    await handleTreasuryProposalEvent(event, indexer, events, extrinsic);
   }
 }
 
