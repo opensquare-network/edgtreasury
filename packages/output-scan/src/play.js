@@ -4,8 +4,8 @@ const { getApi } = require("./chain/api")
 
 async function test() {
   const blockHeights = [
-    931360,
-    1008000
+    5007038,
+    5561564
   ];
 
   const api = await getApi();
