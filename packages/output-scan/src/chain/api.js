@@ -17,6 +17,30 @@ async function getApi() {
   return api
 }
 
+// For test
+async function setApi(endpoint = "wss://mainnet.edgewa.re") {
+  if (!api) {
+    provider = new WsProvider(endpoint, 1000);
+
+    api = await ApiPromise.create({ provider, typesBundle: spec.typesBundle, });
+    console.log(`Connected to ${ getEndpoint() }`)
+  }
+
+  return api
+}
+
+// for test
+function setProvider(p) {
+  provider = p;
+}
+
+// for test
+function getProvider() {
+  return provider;
+}
+
 module.exports = {
   getApi,
+  setProvider,
+  setApi,
 }

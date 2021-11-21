@@ -1,9 +1,12 @@
 require("dotenv").config();
+const { scanNormalizedBlock } = require("./scan/block");
 const { getApi } = require("./chain/api")
 
 async function test() {
   const blockHeights = [
-    17949
+    // 5072527,
+    // 8916529,
+    9135674,
   ];
 
   const api = await getApi();
@@ -12,7 +15,7 @@ async function test() {
     const block = await api.rpc.chain.getBlock(blockHash);
     const allEvents = await api.query.system.events.at(blockHash);
 
-    console.log(block, allEvents);
+    await scanNormalizedBlock(block.block, allEvents);
     console.log('finished')
   }
 }
