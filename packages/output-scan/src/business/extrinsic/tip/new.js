@@ -43,7 +43,7 @@ async function handleNewTip(call, author, indexer, events, isReport = false) {
   }
 
   if (!isReport) {
-    timelineItem.args.value = new BigNumber(call.args[2].toNumber()).toString()
+    timelineItem.args.value = call.args[2].toString()
   }
 
   const obj = {

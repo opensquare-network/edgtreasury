@@ -52,6 +52,7 @@ async function oneStepScan(startHeight) {
       await updateScanHeight(block.height);
     } catch (e) {
       await sleep(3000);
+      console.log(`Error with block scan ${ block.height }`, e)
       logger.error(`Error with block scan ${ block.height }`, e);
       process.exit(1);
     } finally {
