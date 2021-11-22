@@ -1,12 +1,18 @@
 require("dotenv").config();
+const { setSpecHeights } = require("./chain/specs");
 const { scanNormalizedBlock } = require("./scan/block");
 const { getApi } = require("./chain/api")
 
 async function test() {
   const blockHeights = [
-    5007038,
-    5561564
+    4227561,
+    4227649,
+    4227681,
+    4475183,
+    4636800,
   ];
+
+  setSpecHeights(blockHeights)
 
   const api = await getApi();
   for (const height of blockHeights) {
@@ -15,8 +21,8 @@ async function test() {
     const allEvents = await api.query.system.events.at(blockHash);
 
     await scanNormalizedBlock(block.block, allEvents);
-    console.log('finished')
   }
+  console.log('finished')
 }
 
 test();
