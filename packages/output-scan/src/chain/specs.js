@@ -22,7 +22,7 @@ async function findRegistry(height) {
   const mostRecentChangeHeight = findLast(
     versionChangedHeights,
     (h) => h <= height
-  );
+  ) + 1;
   if (!mostRecentChangeHeight) {
     throw new Error(`Can not find registry for height ${height}`);
   }
