@@ -22,12 +22,12 @@ async function unwrapProxy(call, signer, indexer, events, cb) {
 }
 
 async function handleMultisig(call, signer, indexer, events, cb) {
-  const registry = await findRegistry(indexer);
+  const registry = await findRegistry(indexer.blockHeight);
   const callHex = call.args[3];
   const threshold = call.args[0].toNumber();
   const otherSignatories = call.args[1].toJSON();
   const multisigAddr = calcMultisigAddress(
-    [signer, ...otherSignatories],
+    [signer.toString(), ...otherSignatories],
     threshold,
     registry.chainSS58
   );
