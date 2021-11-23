@@ -6,6 +6,7 @@ const { sleep } = require("../utils/sleep");
 const { getLatestHeight } = require("../chain/latestHead");
 const { getNextScanHeight } = require("../mongo/scanHeight");
 const last = require("lodash.last");
+const { negligibleHeights } = require("./ignoredHeights");
 const { getHeadUsedInGB } = require("../utils/memory");
 const { updateSpecs } = require("../chain/specs");
 const { logger } = require("../logger");
@@ -46,6 +47,10 @@ async function oneStepScan(startHeight) {
   }
 
   for (const block of blocks) {
+    if (negligibleHeights.includes(block.height)) {
+      continue
+    }
+
     // TODO: do following operations in one transaction
     try {
       await scanNormalizedBlock(block.block, block.events);

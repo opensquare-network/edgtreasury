@@ -39,6 +39,7 @@ async function fetchBlocksFromDb(heights = []) {
     } catch (e) {
       logger.error(`can not construct block from db data at ${ blockInDb.height }`, e)
       block = await fetchOneBlockFromNode(blockInDb.height);
+      logger.error(`But success fetch from node ${ blockInDb.height }`)
     }
 
     blocks.push(block)
