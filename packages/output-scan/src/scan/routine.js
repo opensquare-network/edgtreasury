@@ -37,7 +37,9 @@ async function oneStepScan(startHeight) {
   // todo: update spec heights
   const heights = [];
   for (let i = startHeight; i <= targetHeight; i++) {
-    heights.push(i)
+    if (!negligibleHeights.includes(i)) {
+      heights.push(i)
+    }
   }
 
   const blocks = await fetchBlocks(heights);

@@ -1,3 +1,5 @@
+const { handleSpecialBlock } = require("./block");
+const { specialHeights } = require("./specialHeights");
 const { getMetaScanHeight } = require("../chain/specs");
 const { updateSpecs } = require("../chain/specs");
 const { logger } = require("../logger");
@@ -61,11 +63,15 @@ async function oneStepScan(startHeight) {
   for (const block of blocks) {
     // TODO: do following operations in one transaction
     try {
-      const indexer = getBlockIndexer(block.block);
+      let seats;
+      if (specialHeights.includes(block.height)) {
+        seats = await handleSpecialBlock(block.height);
+      } else {
+        const indexer = getBlockIndexer(block.block);
+        seats = await scanNormalizedBlock(block.block, block.events, indexer);
+      }
 
-      const seats = await scanNormalizedBlock(block.block, block.events, indexer);
       await updateScanStatus(block.height, seats);
-
       await tryCreateStatPoint(indexer);
     } catch (e) {
       await sleep(1000);

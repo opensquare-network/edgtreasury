@@ -1,9 +1,9 @@
+const { specialDataArr } = require("./specialHeights");
 const { getNowIncomeSeats } = require("../mongo/scanHeight");
 const { bigAdds, bigAdd } = require("../utils");
 const { handleEvents } = require("../business/event");
 
-async function scanNormalizedBlock(block, blockEvents, blockIndexer) {
-  const details = await handleEvents(blockEvents, block.extrinsics, blockIndexer);
+async function calcSeats(details) {
   const detailSlash = bigAdds([
     details.stakingSlash,
     details.idSlash,
@@ -25,6 +25,21 @@ async function scanNormalizedBlock(block, blockEvents, blockIndexer) {
   }
 }
 
+async function handleSpecialBlock(height) {
+  const data = specialDataArr.find(data => data.height === height)
+  if (!data) {
+    return
+  }
+
+  return calcSeats(data.details);
+}
+
+async function scanNormalizedBlock(block, blockEvents, blockIndexer) {
+  const details = await handleEvents(blockEvents, block.extrinsics, blockIndexer);
+  return calcSeats(details);
+}
+
 module.exports = {
+  handleSpecialBlock,
   scanNormalizedBlock,
 }

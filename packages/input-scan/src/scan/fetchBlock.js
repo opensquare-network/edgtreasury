@@ -1,3 +1,4 @@
+const { specialHeights } = require("./specialHeights");
 const { getApi } = require("../chain/api");
 const { findRegistry } = require("../chain/specs");
 const { getBlocksByHeights } = require("../mongo/meta");
@@ -33,6 +34,11 @@ async function fetchBlocksFromDb(heights = []) {
 
   const blocks = [];
   for (const blockInDb of blocksInDb) {
+    if (specialHeights.includes(blocksInDb.height)) {
+      blocks.push({ height: blocksInDb.height });
+      continue
+    }
+
     let block
     try {
       block = await constructBlockFromDbData(blockInDb);
