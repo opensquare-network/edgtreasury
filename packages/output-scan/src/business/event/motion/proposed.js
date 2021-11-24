@@ -65,6 +65,7 @@ async function handleProposed(event, indexer, blockEvents) {
         const proposalInfo = await getTreasuryProposalInfoFromImage(proposalHash, indexer);
 
         const externalInfo = {
+          indexer,
           section,
           method,
           proposalInfo,

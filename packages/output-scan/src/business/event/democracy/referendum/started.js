@@ -1,5 +1,6 @@
+const { handleBusinessWhenReferendumStarted } = require("./hooks/started");
+const { getRawReferendumInfo } = require("../../../common/democracy/referendumStorage");
 const { insertDemocracyReferendum } = require("../../../../mongo/service/democracyReferendum");
-const { getReferendumInfoFromStorage } = require("../../../common/democracy/referendumStorage");
 const {
   ReferendumEvents,
   TimelineItemTypes,
@@ -9,10 +10,11 @@ async function handleStarted(event, indexer, blockEvents = []) {
   const eventData = event.data.toJSON();
   const [referendumIndex, threshold] = eventData;
 
-  const referendumInfo = await getReferendumInfoFromStorage(
-    referendumIndex,
-    indexer
-  );
+  const infoRaw = await getRawReferendumInfo(referendumIndex, indexer);
+  if (!infoRaw.isSome) {
+    throw new Error(`find no referendumInfo at ${ indexer.blockHeight }`)
+  }
+  const referendumInfo = infoRaw.toJSON();
 
   const state = {
     indexer,
@@ -39,6 +41,8 @@ async function handleStarted(event, indexer, blockEvents = []) {
   }
 
   await insertDemocracyReferendum(obj);
+  const preimageHash = infoRaw.unwrap().asOngoing.proposalHash.toJSON();
+  await handleBusinessWhenReferendumStarted(referendumIndex, preimageHash, indexer);
 }
 
 module.exports = {

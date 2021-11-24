@@ -11,6 +11,21 @@ async function insertProposal(proposalObj) {
   await col.insertOne(proposalObj);
 }
 
+async function addProposalReferendum(proposalIndex, referendumInfo) {
+  const col = await getProposalCollection();
+  if (!referendumInfo) {
+    return
+  }
+
+  const update = {
+    $push: {
+      referendums: referendumInfo
+    }
+  }
+
+  await col.updateOne({ proposalIndex }, update);
+}
+
 async function addProposalExternalMotion(proposalIndex, externalMotion) {
   const col = await getProposalCollection();
   if (!externalMotion) {
@@ -50,6 +65,7 @@ async function updateProposal(proposalIndex, updates, timelineItem, motionInfo) 
 }
 
 module.exports = {
+  addProposalReferendum,
   addProposalExternalMotion,
   insertProposal,
   updateProposal,
