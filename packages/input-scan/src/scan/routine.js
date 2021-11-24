@@ -14,6 +14,7 @@ const { getLatestHeight } = require("../chain/latestHead");
 const { sleep } = require("../utils/sleep");
 const { getApi } = require("../chain/api");
 const { getNextScanHeight } = require("../mongo/scanHeight");
+const last = require("lodash.last");
 
 async function beginScan() {
   let scanHeight = await getNextScanHeight();
@@ -66,25 +67,29 @@ async function oneStepScan(startHeight) {
       let seats;
       if (specialHeights.includes(block.height)) {
         seats = await handleSpecialBlock(block.height);
+        await updateScanStatus(block.height, seats);
       } else {
         const indexer = getBlockIndexer(block.block);
         seats = await scanNormalizedBlock(block.block, block.events, indexer);
+        await updateScanStatus(block.height, seats);
+        await tryCreateStatPoint(indexer);
       }
-
-      await updateScanStatus(block.height, seats);
-      await tryCreateStatPoint(indexer);
     } catch (e) {
       await sleep(1000);
-      logger.error(`Error with block scan ${block.height}`, e);
+      logger.error(`Error with block scan ${ block.height }`, e);
     } finally {
       if (getHeadUsedInGB() > 1) {
         console.log(
-          `${getHeadUsedInGB()}GB heap used, restart process in case of memory leak`
+          `${ getHeadUsedInGB() }GB heap used, restart process in case of memory leak`
         );
         process.exit(0);
       }
     }
   }
+
+  const lastHeight = last(blocks || []).height;
+  logger.info(`${ lastHeight } scan finished!`);
+  return lastHeight + 1;
 }
 
 module.exports = {

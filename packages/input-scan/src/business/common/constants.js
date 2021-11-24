@@ -186,6 +186,14 @@ const BalancesEvents = Object.freeze({
 const edgTreasuryAccount = "jz77v8cHXwEWbPnbfQScXnU9Qy5VkHnDLfpDsuDYUZ7ELae";
 const DotTreasuryAccount = "13UVJyLnbVp9RBZYFwFGyDvVd1y27Tt8tkntv6Q7JVPhFsTB";
 
+const StakingEvents = Object.freeze({
+  EraPayout: "EraPayout",
+  EraPaid: "EraPaid",
+  Slash: "Slash",
+  Slashed: "Slashed",
+  Reward: "Reward",
+});
+
 module.exports = {
   Modules,
   TipEvents,
@@ -216,4 +224,5 @@ module.exports = {
   BountyStatus,
   TreasuryRewardEvents,
   IdentityEvents,
+  StakingEvents,
 };

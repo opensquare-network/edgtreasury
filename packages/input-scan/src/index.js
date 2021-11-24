@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { beginScan } = require("./scan/routine");
 const { updateSpecs } = require("./chain/specs");
 const { subscribeChainHeight } = require("./chain/latestHead");
