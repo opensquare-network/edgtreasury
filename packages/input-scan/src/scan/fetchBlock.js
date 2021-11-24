@@ -35,7 +35,7 @@ async function fetchBlocksFromDb(heights = []) {
 
   const blocks = [];
   for (const blockInDb of blocksInDb) {
-    if (specialHeights.includes(blocksInDb.height)) {
+    if (specialHeights.includes(blockInDb.height)) {
       blocks.push({ height: blocksInDb.height });
       continue
     }
