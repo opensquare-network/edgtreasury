@@ -11,6 +11,21 @@ async function insertProposal(proposalObj) {
   await col.insertOne(proposalObj);
 }
 
+async function addProposalExternalMotion(proposalIndex, externalMotion) {
+  const col = await getProposalCollection();
+  if (!externalMotion) {
+    return
+  }
+
+  const update = {
+    $push: {
+      externalMotions: externalMotion
+    }
+  }
+
+  await col.updateOne({ proposalIndex }, update);
+}
+
 async function updateProposal(proposalIndex, updates, timelineItem, motionInfo) {
   const col = await getProposalCollection();
   let update = {
@@ -35,6 +50,7 @@ async function updateProposal(proposalIndex, updates, timelineItem, motionInfo) 
 }
 
 module.exports = {
+  addProposalExternalMotion,
   insertProposal,
   updateProposal,
 };

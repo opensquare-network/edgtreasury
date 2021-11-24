@@ -9,7 +9,7 @@ async function handleDemocracyEvents(event, indexer, events, extrinsic) {
   }
 
   if (DemocracyEvents.PreimageNoted === method) {
-    await handlePreimageNoted(event, indexer)
+    await handlePreimageNoted(event, indexer, events, extrinsic)
   }
 }
 

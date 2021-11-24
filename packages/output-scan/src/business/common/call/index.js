@@ -26,8 +26,10 @@ async function handleMultisig(call, signer, indexer, events, cb) {
   const callHex = call.args[3];
   const threshold = call.args[0].toNumber();
   const otherSignatories = call.args[1].toJSON();
+
+  const signerAddress = typeof signer === 'string' ? signer : signer.toString();
   const multisigAddr = calcMultisigAddress(
-    [signer.toString(), ...otherSignatories],
+    [signerAddress, ...otherSignatories],
     threshold,
     registry.chainSS58
   );

@@ -3,7 +3,7 @@ const { handleRejected } = require("./rejected");
 const { Modules, TreasuryProposalEvents, } = require("../../common/constants");
 
 function isTreasuryProposalEvent(section, method) {
-  if (![Modules.Treasury, Modules.Tips].includes(section)) {
+  if (![Modules.Treasury].includes(section)) {
     return false;
   }
 

@@ -3,6 +3,22 @@ const { hexToU8a } = require("@polkadot/util");
 const { getApi } = require("../../../../chain/api");
 const { normalizeCall } = require("../../call/normalize");
 
+async function queryImageCall(imageHash, indexer) {
+  const api = await getApi();
+  const raw = await api.query.democracy.preimages.at(indexer.blockHash, imageHash);
+  if (!raw.isSome) {
+    return null;
+  }
+
+  const registry = await findRegistry(indexer.blockHeight);
+
+  try {
+    return registry.createType("Proposal", raw.unwrap().asAvailable.data);
+  } catch (e) {
+    return null
+  }
+}
+
 async function getPreImageFromStorage(hash, indexer) {
   const api = await getApi();
   const raw = await api.query.democracy.preimages.at(indexer.blockHash, hash);
@@ -28,5 +44,6 @@ async function getPreImageFromStorage(hash, indexer) {
 }
 
 module.exports = {
+  queryImageCall,
   getPreImageFromStorage,
 };

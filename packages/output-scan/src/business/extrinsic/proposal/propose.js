@@ -61,6 +61,7 @@ async function handleTreasuryProposeCall(call, author, indexer, events) {
     state,
     timeline: [timelineItem],
     motions: [],
+    externalMotions: [],
   };
 
   await insertProposal(obj);

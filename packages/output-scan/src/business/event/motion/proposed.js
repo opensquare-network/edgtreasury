@@ -1,3 +1,6 @@
+const { addProposalExternalMotion } = require("../../../mongo/service/proposal");
+const { getTreasuryProposalInfoFromImage } = require("../../common/democracy/preImage/isTreasuryProposal");
+const { isDemocracyExternalMotion } = require("../../common/democracy/utils");
 const { handleBusinessWhenMotionProposed } = require("./hooks/proposed");
 const { isProposalMotion } = require("../../common/motion/utils");
 const { isBountyMotion } = require("../../common/bounty/utils/motion");
@@ -43,7 +46,7 @@ async function handleProposed(event, indexer, blockEvents) {
     proposer,
     indexer,
     blockEvents,
-    (call) => {
+    async (call, singer, indexer) => {
       const { section, method, args } = call;
       if (isProposalMotion(section, method)) {
         const treasuryProposalIndex = args[0].toJSON();
@@ -57,6 +60,18 @@ async function handleProposed(event, indexer, blockEvents) {
           index: treasuryBountyIndex,
           method,
         });
+      } else if (isDemocracyExternalMotion(section, method)) {
+        const proposalHash = args[0].toJSON();
+        const proposalInfo = await getTreasuryProposalInfoFromImage(proposalHash, indexer);
+
+        const externalInfo = {
+          section,
+          method,
+          proposalInfo,
+        }
+        if (proposalInfo) {
+          await addProposalExternalMotion(proposalInfo.proposalIndex, externalInfo);
+        }
       }
     },
   )
