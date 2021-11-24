@@ -23,7 +23,7 @@ describe("test get motion voting", () => {
     const blockHash = await api.rpc.chain.getBlockHash(blockHeight);
     const indexer = { blockHash, blockHeight };
 
-    const voting = await getMotionVoting(indexer.blockHash, '0xd4361a70deafcadde8234a0c33ece2c81f5113912bd802d8916a59fa531ddec5');
+    const voting = await getMotionVoting(indexer, '0xd4361a70deafcadde8234a0c33ece2c81f5113912bd802d8916a59fa531ddec5');
     expect(voting).toEqual({
       "index": 26,
       "threshold": 8,

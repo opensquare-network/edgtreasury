@@ -21,7 +21,7 @@ async function handleNewTip(call, author, indexer, events, isReport = false) {
   const [tipHash] = newTipEvent.event.data.toJSON()
   const reason = call.args[0].toHuman();
 
-  const newMeta = await getTipMetaFromStorage(indexer.blockHash, tipHash);
+  const newMeta = await getTipMetaFromStorage(indexer, tipHash);
   const medianValue = computeTipValue(newMeta)
   const tippersCount = await getTippersCountFromApi(indexer.blockHash);
   const tipFindersFee = await getTipFindersFeeFromApi(indexer.blockHash);

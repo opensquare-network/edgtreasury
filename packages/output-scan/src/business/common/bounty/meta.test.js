@@ -8,7 +8,10 @@ async function testBountyData(api, height, bountyIndex, toTestMeta) {
   await setSpecHeights([height]);
   const blockHash = await api.rpc.chain.getBlockHash(height);
 
-  const meta = await getBountyMeta(blockHash, bountyIndex);
+  const meta = await getBountyMeta({
+    blockHeight: height,
+    blockHash
+  }, bountyIndex);
   expect(meta).toEqual(toTestMeta);
 }
 
@@ -16,7 +19,10 @@ async function testBountyDescription(api, height, bountyIndex, target) {
   await setSpecHeights([height]);
   const blockHash = await api.rpc.chain.getBlockHash(height);
 
-  const description = await getBountyDescription(blockHash, bountyIndex)
+  const description = await getBountyDescription({
+    blockHeight: height,
+    blockHash
+  }, bountyIndex)
   expect(description).toBe(target)
 }
 

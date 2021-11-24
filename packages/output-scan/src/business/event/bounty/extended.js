@@ -12,7 +12,7 @@ async function handleBountyExtended(event, indexer, events, extrinsic) {
   const eventData = event.data.toJSON();
   const bountyIndex = eventData[0];
 
-  const meta = await getBountyMeta(indexer.blockHash, bountyIndex);
+  const meta = await getBountyMeta(indexer, bountyIndex);
 
   let caller = extrinsic.signer;
   let remark = '';

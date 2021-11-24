@@ -8,7 +8,10 @@ async function testProposalData(api, height, proposalIndex, toTestMeta) {
   await setSpecHeights([height]);
   const blockHash = await api.rpc.chain.getBlockHash(height);
 
-  const meta = await getTreasuryProposalMeta(blockHash, proposalIndex);
+  const meta = await getTreasuryProposalMeta({
+    blockHeight: height,
+    blockHash
+  }, proposalIndex);
   expect(meta).toEqual(toTestMeta);
 }
 
@@ -24,7 +27,12 @@ describe("test get treasury proposal", () => {
   });
 
   test("meta works", async () => {
-    await testProposalData(api, 17949, 0, null)
+    await testProposalData(api, 17949, 0, {
+      "proposer": "mWfGoSmKy1NiWfsiEwtjnb9ZvQGuyjd5ewiZ8xNdCdtuMoR",
+      "value": "0x00000000000000001bc16d674ec80000",
+      "beneficiary": "nY8ym4bZJUdf2aazFkQBonFr9APJdciasfHJSEBp1ZkY2cv",
+      "bond": "0x000000000000003635c9adc5dea00000"
+    })
 
     await testProposalData(api, 5013103, 21, {
       "proposer": "jcE6HmvqtCJZf5aPeUhVCrp1VbFxhZkHNodXGZAbqUXRDNe",

@@ -26,7 +26,7 @@ async function handleTreasuryProposeCall(call, author, indexer, events) {
   }
 
   const [proposalIndex] = proposedEvent.event.data.toJSON()
-  let meta = await getTreasuryProposalMeta(indexer.blockHash, proposalIndex);
+  let meta = await getTreasuryProposalMeta(indexer, proposalIndex);
   if (!meta) {
     meta = {
       proposer: author.toString(),

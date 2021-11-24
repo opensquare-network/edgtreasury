@@ -1,6 +1,7 @@
 const { getTipFindersFeeFromApi } = require("../utils");
 const { setSpecHeights } = require("../../../../chain/specs");
 const { setApi } = require("../../../../chain/api");
+jest.setTimeout(3000000);
 
 async function testGetTipFindersFee(api, height, target) {
   const blockHash = await api.rpc.chain.getBlockHash(height);

@@ -12,7 +12,7 @@ async function handleVoted(event, indexer) {
   const eventData = event.data.toJSON();
   const [voter, hash, approve,] = eventData;
 
-  const voting = await getMotionVoting(indexer.blockHash, hash);
+  const voting = await getMotionVoting(indexer, hash);
   const updates = { voting };
   const timelineItem = {
     type: TimelineItemTypes.event,

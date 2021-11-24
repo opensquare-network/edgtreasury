@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=15.0.0"
   },
+  "scripts": {
+    "test": "jest src"
+  },
   "dependencies": {
     "@edgeware/node-types": "3.6.2-wako",
     "@polkadot/api": "3.8.1",

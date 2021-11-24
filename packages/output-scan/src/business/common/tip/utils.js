@@ -1,3 +1,4 @@
+const { findDecorated } = require("../../../chain/specs");
 const { getMetadataConstByBlockHash, getMetadataConstsByBlockHash } = require("../metadata/const");
 const { getApi } = require("../../../chain/api");
 const {
@@ -11,30 +12,31 @@ const { GenericCall } = require("@polkadot/types");
 const { blake2AsHex } = require("@polkadot/util-crypto");
 const { isHex, hexToString } = require("@polkadot/util");
 
-async function getTipMetaFromStorage(blockHash, tipHash) {
+async function getTipMetaFromStorage(indexer, tipHash) {
   const api = await getApi();
-
-  let rawMeta;
-  if (api.query.treasury?.tips) {
-    rawMeta = await api.query.treasury?.tips.at(blockHash, tipHash);
+  const decorated = await findDecorated(indexer.blockHeight);
+  let key;
+  if (decorated.query.treasury?.tips) {
+    key = [decorated.query.treasury?.tips, tipHash];
   } else {
-    rawMeta = await api.query.tips.tips.at(blockHash, tipHash);
+    key = [decorated.query.tips?.tips, tipHash];
   }
 
+  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   return rawMeta.toJSON();
 }
 
-async function getTipReason(blockHash, reasonHash) {
+async function getTipReason(indexer, reasonHash) {
   const api = await getApi();
-
-  // todo: Very early tip reason can not be got by this way
-  let rawMeta;
-  if (api.query.treasury?.reasons) {
-    rawMeta = await api.query.treasury?.reasons.at(blockHash, reasonHash);
+  const decorated = await findDecorated(indexer.blockHeight);
+  let key;
+  if (decorated.query.treasury?.reasons) {
+    key = [decorated.query.treasury?.tips, reasonHash];
   } else {
-    rawMeta = await api.query.tips.reasons.at(blockHash, reasonHash);
+    key = [decorated.query.tips?.reasons, reasonHash];
   }
 
+  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   const maybeTxt = rawMeta.toHuman();
   if (isHex(maybeTxt)) {
     return hexToString(maybeTxt);

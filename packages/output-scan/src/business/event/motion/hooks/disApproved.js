@@ -15,7 +15,7 @@ async function handleBounty(bountyIndex, indexer) {
     state: BountyStatus.Proposed,
   };
 
-  const meta = await getBountyMeta(indexer.blockHash, bountyIndex);
+  const meta = await getBountyMeta(indexer, bountyIndex);
   if (meta) {
     await updateBounty(bountyIndex, { meta, state });
   }

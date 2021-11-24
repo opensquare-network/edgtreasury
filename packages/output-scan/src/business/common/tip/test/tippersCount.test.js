@@ -1,6 +1,7 @@
 const { setSpecHeights } = require("../../../../chain/specs");
 const { getTippersCountFromApi } = require("../utils");
 const { setApi } = require("../../../../chain/api");
+jest.setTimeout(3000000);
 
 async function testTippersCount(api, height, target) {
   const blockHash = await api.rpc.chain.getBlockHash(height);

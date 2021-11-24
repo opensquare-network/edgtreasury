@@ -1,15 +1,18 @@
+const { findDecorated } = require("../../../chain/specs");
 const { getApi } = require("../../../chain/api");
 
-async function getBountyDescription(blockHash, bountyIndex) {
+async function getBountyDescription(indexer, bountyIndex) {
   const api = await getApi();
+  const decorated = await findDecorated(indexer.blockHeight);
 
-  let rawMeta;
-  if (api.query.treasury?.bountyDescriptions) {
-    rawMeta = await api.query.treasury?.bountyDescriptions.at(blockHash, bountyIndex);
+  let key;
+  if (decorated.query.treasury?.bountyDescriptions) {
+    key = [decorated.query.treasury?.bountyDescriptions, bountyIndex];
   } else {
-    rawMeta = await api.query.bounties.bountyDescriptions.at(blockHash, bountyIndex);
+    key = [decorated.query.bounties?.bountyDescriptions, bountyIndex];
   }
 
+  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   return rawMeta.toHuman();
 }
 

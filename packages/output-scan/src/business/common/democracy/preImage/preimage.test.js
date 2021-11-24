@@ -14,6 +14,36 @@ describe("test get proposal image", () => {
     await api.disconnect();
   });
 
+  test("works at 24701", async () => {
+    const blockHeight = 24701;
+    setSpecHeights([blockHeight]);
+    const blockHash = await api.rpc.chain.getBlockHash(blockHeight);
+    const indexer = { blockHash, blockHeight };
+
+    const hash =
+      "0xde9e4f903b9fa39eaa4d0eab1c027b2666c48b7393973dcc8b06f721bf0bbffc";
+    const image = await getPreImageFromStorage(hash, indexer);
+    expect(image).toEqual({
+      "data": "0x06095501",
+      "provider": "inosLKn3EsJHdAXWef1rzx5ZUgFAUJt6bYtfjVQiLbXuUYv",
+      "deposit": "40000000000000000",
+      "since": 24701,
+      "imageValid": true,
+      "call": {
+        "callIndex": "0x0609",
+        "section": "staking",
+        "method": "setValidatorCount",
+        "args": [
+          {
+            "name": "new",
+            "type": "Compact<u32>",
+            "value": 85
+          }
+        ]
+      }
+    })
+  })
+
   test(" works", async () => {
     const blockHeight = 8929603;
     setSpecHeights([blockHeight]);

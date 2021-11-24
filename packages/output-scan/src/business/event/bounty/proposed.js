@@ -11,8 +11,8 @@ async function handleProposed(event, indexer) {
   const eventData = event.data.toJSON();
   const bountyIndex = eventData[0];
 
-  const meta = await getBountyMeta(indexer.blockHash, bountyIndex);
-  const description = await getBountyDescription(indexer.blockHash, bountyIndex);
+  const meta = await getBountyMeta(indexer, bountyIndex);
+  const description = await getBountyDescription(indexer, bountyIndex);
 
   const proposer = meta.proposer;
   const args = {

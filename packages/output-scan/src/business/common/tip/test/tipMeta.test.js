@@ -9,7 +9,10 @@ async function testTipReason(api, height, reasonHash, toTestReason) {
   const blockHash = await api.rpc.chain.getBlockHash(height);
 
   const reason = await getTipReason(
-    blockHash,
+    {
+      blockHeight: height,
+      blockHash
+    },
     reasonHash,
   );
   expect(reason).toEqual(toTestReason);
@@ -19,7 +22,10 @@ async function testTipData(api, height, hash, toTestMeta) {
   await setSpecHeights([height]);
   const blockHash = await api.rpc.chain.getBlockHash(height);
 
-  const meta = await getTipMetaFromStorage(blockHash, hash);
+  const meta = await getTipMetaFromStorage({
+    blockHeight: height,
+    blockHash
+  }, hash);
   expect(meta).toEqual(toTestMeta);
 }
 
