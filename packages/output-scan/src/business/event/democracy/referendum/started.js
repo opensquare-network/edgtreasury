@@ -41,8 +41,11 @@ async function handleStarted(event, indexer, blockEvents = []) {
   }
 
   await insertDemocracyReferendum(obj);
-  const preimageHash = infoRaw.unwrap().asOngoing.proposalHash.toJSON();
-  await handleBusinessWhenReferendumStarted(referendumIndex, preimageHash, indexer);
+  let proposalHash = referendumInfo.proposalHash;
+  if (!proposalHash) {
+    proposalHash = referendumInfo.Ongoing.proposalHash;
+  }
+  await handleBusinessWhenReferendumStarted(referendumIndex, proposalHash, indexer);
 }
 
 module.exports = {
