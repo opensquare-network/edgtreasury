@@ -5,7 +5,10 @@ const { getApi } = require("./chain/api")
 
 async function test() {
   const blockHeights = [
-    8929639,
+    8929603,
+    8956800,
+    9057600,
+    9072000
   ];
 
   setSpecHeights(blockHeights)

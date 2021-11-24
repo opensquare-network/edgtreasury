@@ -173,6 +173,7 @@ const PreImageEvents = Object.freeze({
 const DemocracyEvents = Object.freeze({
   ...DemocracyExternalEvents,
   ...PreImageEvents,
+  ...ReferendumEvents,
 })
 
 const BalancesEvents = Object.freeze({
