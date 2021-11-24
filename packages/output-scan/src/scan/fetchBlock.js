@@ -1,3 +1,4 @@
+const { isUseMetaDb } = require("../env");
 const { getApi } = require("../chain/api");
 const { findRegistry } = require("../chain/specs");
 const { getBlocksByHeights } = require("../mongo/meta");
@@ -5,7 +6,7 @@ const { GenericBlock } = require("@polkadot/types");
 const { logger } = require("../logger")
 
 async function fetchBlocks(heights = []) {
-  if (process.env.USE_META) {
+  if (isUseMetaDb()) {
     return await fetchBlocksFromDb(heights);
   } else {
     return await fetchBlocksFromNode(heights);
