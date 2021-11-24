@@ -170,6 +170,11 @@ const PreImageEvents = Object.freeze({
   PreimageReaped: "PreimageReaped",
 });
 
+const DemocracyEvents = Object.freeze({
+  ...DemocracyExternalEvents,
+  ...PreImageEvents,
+})
+
 const BalancesEvents = Object.freeze({
   Transfer: "Transfer",
 });
@@ -205,4 +210,5 @@ module.exports = {
   BountyEvents,
   BountyMethods,
   BountyStatus,
+  DemocracyEvents,
 };

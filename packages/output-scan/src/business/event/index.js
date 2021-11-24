@@ -1,3 +1,4 @@
+const { handleDemocracyEvents } = require("./democracy");
 const { handleBurntEvent } = require("./burnt");
 const { handleMotionEvent } = require("./motion");
 const { handleBountyEvent } = require("./bounty");
@@ -23,11 +24,13 @@ async function handleEvents(events, extrinsics, blockIndexer) {
       extrinsic = extrinsics[extrinsicIndex];
     }
 
-    await handleTipEvent(event, indexer, events, extrinsic);
-    await handleTreasuryProposalEvent(event, indexer, events, extrinsic);
-    await handleBountyEvent(event, indexer, events, extrinsic);
-    await handleMotionEvent(event, indexer, events, extrinsic);
-    await handleBurntEvent(event, indexer, events, extrinsic);
+    const handlingArgs = [event, indexer, events, extrinsic];
+    await handleTipEvent(...handlingArgs);
+    await handleTreasuryProposalEvent(...handlingArgs);
+    await handleBountyEvent(...handlingArgs);
+    await handleMotionEvent(...handlingArgs);
+    await handleBurntEvent(...handlingArgs);
+    await handleDemocracyEvents(...handlingArgs);
   }
 }
 

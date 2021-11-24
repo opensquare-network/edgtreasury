@@ -31,6 +31,7 @@ let proposalCol = null;
 let motionCol = null;
 let burntCol = null;
 let outTransferCol = null;
+let preImageCol = null;
 
 let weeklyStatsCol = null;
 
@@ -50,6 +51,7 @@ async function initDb() {
   burntCol = db.collection(burntCollectionName);
   weeklyStatsCol = db.collection(weeklyStatsCollectionName);
   outTransferCol = db.collection(outTransferColName);
+  preImageCol = db.collection("democracyPreImage");
 
   await _createIndexes();
 }
@@ -109,6 +111,11 @@ async function getOutTransferCollection() {
   return outTransferCol;
 }
 
+async function getDemocracyPreImageCollection() {
+  await tryInit(preImageCol);
+  return preImageCol;
+}
+
 async function close() {
   if (client) {
     await client.close();
@@ -125,4 +132,5 @@ module.exports = {
   getBurntCollection,
   getWeeklyStatsCollection,
   getOutTransferCollection,
+  getDemocracyPreImageCollection,
 };
