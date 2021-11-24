@@ -1,6 +1,6 @@
 const { isProposalMotion } = require("../../../common/motion/utils");
 const { updateProposal } = require("../../../../mongo/service/proposal");
-const { isStateChangeBountyMotion } = require("../../../common/bounty/utils/motion");
+const { isStateChangeBountyMotion, isBountyMotion } = require("../../../common/bounty/utils/motion");
 const { updateBounty } = require("../../../../mongo/service/bounty");
 const { handleWrappedCall } = require("../../../common/call");
 const {
@@ -44,8 +44,8 @@ async function handleProposalCall(motion, call, author, indexer) {
 }
 
 async function handleBountyCall(motion, call, author, indexer) {
-  const { method, args } = call;
-  if (!isStateChangeBountyMotion(method)) {
+  const { section, method, args } = call;
+  if (!isBountyMotion(section, method)) {
     return
   }
 
@@ -59,25 +59,23 @@ async function handleBountyCall(motion, call, author, indexer) {
   }
 
   let updates = {};
-  let stateName;
-  if (BountyMethods.closeBounty === method) {
-    stateName = 'CloseVoting';
-  } else if (BountyMethods.approveBounty === method) {
-    stateName = 'ApproveVoting';
-  }
+  if (isStateChangeBountyMotion(method)) {
+    let stateName;
+    if (BountyMethods.closeBounty === method) {
+      stateName = 'CloseVoting';
+    } else if (BountyMethods.approveBounty === method) {
+      stateName = 'ApproveVoting';
+    }
 
-  if (!stateName) {
-    return
-  }
-
-  updates = {
-    state: {
-      indexer,
-      state: stateName,
-      data: {
-        motionState: motion.state,
-        motionVoting: motion.voting,
-      },
+    updates = {
+      state: {
+        indexer,
+        state: stateName,
+        data: {
+          motionState: motion.state,
+          motionVoting: motion.voting,
+        },
+      }
     }
   }
 
