@@ -26,6 +26,10 @@ let proposalCol = null;
 let motionCol = null;
 let burntCol = null;
 let outTransferCol = null;
+let preImageCol = null;
+let democracyReferendumCol = null;
+
+let weeklyStatsCol = null;
 
 async function initDb() {
   client = await MongoClient.connect(mongoUrl, {
@@ -41,6 +45,10 @@ async function initDb() {
   motionCol = db.collection(motionCollectionName);
   burntCol = db.collection(burntCollectionName);
   outTransferCol = db.collection(outTransferColName);
+  preImageCol = db.collection("democracyPreImage");
+  democracyReferendumCol = db.collection("democracyReferendum");
+
+  weeklyStatsCol = db.collection("weeklyStats");
 
   await _createIndexes();
 }
@@ -90,6 +98,21 @@ async function getOutTransferCollection() {
   return outTransferCol;
 }
 
+async function getDemocracyPreImageCollection() {
+  await tryInit(preImageCol);
+  return preImageCol;
+}
+
+async function getDemocracyReferendumCollection() {
+  await tryInit(democracyReferendumCol);
+  return democracyReferendumCol;
+}
+
+async function getWeeklyStatsCollection() {
+  await tryInit(weeklyStatsCol);
+  return weeklyStatsCol;
+}
+
 async function closeDataDbClient() {
   await client.close()
 }
@@ -102,4 +125,7 @@ module.exports = {
   getBurntCollection,
   getOutTransferCollection,
   closeDataDbClient,
+  getDemocracyPreImageCollection,
+  getDemocracyReferendumCollection,
+  getWeeklyStatsCollection,
 };

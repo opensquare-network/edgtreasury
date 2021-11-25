@@ -2,8 +2,8 @@ const { getDemocracyReferendumCollection } = require("../index");
 
 async function insertReferendum(referendumObj) {
   const col = await getDemocracyReferendumCollection();
-  const { referendumIndex } = referendumObj;
-  const maybeInDb = await col.findOne({ referendumIndex });
+  const { index } = referendumObj;
+  const maybeInDb = await col.findOne({ index });
   if (maybeInDb) {
     return;
   }

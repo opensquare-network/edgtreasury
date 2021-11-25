@@ -1,4 +1,6 @@
 require("dotenv").config();
+const { getDemocracyHeights } = require("./heights/democracy");
+const { getWeeklyStatsHeights } = require("./heights/weeklyStats");
 const { getBountyHeights } = require("./heights/bounty");
 const { getMotionHeights } = require("./heights/motion");
 const { closeKnownClient } = require("./mongo/knownHeight");
@@ -27,6 +29,12 @@ async function main() {
 
   const outTransferHeights = await getOutTransferHeights();
   await saveKnownHeights(outTransferHeights);
+
+  const weeklyStatsHeights = await getWeeklyStatsHeights();
+  await saveKnownHeights(weeklyStatsHeights);
+
+  const democracyHeights = await getDemocracyHeights();
+  await saveKnownHeights(democracyHeights);
 }
 
 main()
