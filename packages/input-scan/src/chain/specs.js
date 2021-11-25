@@ -82,4 +82,5 @@ module.exports = {
   findRegistry,
   setSpecHeights,
   getMetaScanHeight,
+  findDecorated,
 };

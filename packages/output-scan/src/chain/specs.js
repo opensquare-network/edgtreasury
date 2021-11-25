@@ -1,4 +1,5 @@
 const findLast = require("lodash.findlast");
+const { getScanHeight } = require("../mongo/meta");
 const { getApi } = require("./api");
 const { getAllVersionChangeHeights } = require("../mongo/meta");
 const { expandMetadata } = require("@polkadot/metadata");
@@ -6,6 +7,11 @@ const { expandMetadata } = require("@polkadot/metadata");
 let versionChangedHeights = [];
 let registryMap = {};
 let decoratedMap = {};
+let metaScanHeight = 1;
+
+function getMetaScanHeight() {
+  return metaScanHeight;
+}
 
 // For test
 function setSpecHeights(heights = []) {
@@ -14,6 +20,7 @@ function setSpecHeights(heights = []) {
 
 async function updateSpecs() {
   versionChangedHeights = await getAllVersionChangeHeights();
+  metaScanHeight = await getScanHeight();
 }
 
 function getSpecHeights() {
@@ -75,4 +82,5 @@ module.exports = {
   findRegistry,
   findDecorated,
   setSpecHeights,
+  getMetaScanHeight,
 };

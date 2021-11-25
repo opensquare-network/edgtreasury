@@ -1,18 +1,24 @@
 const { scanNormalizedBlock } = require("./block");
 const { updateScanHeight } = require("../mongo/scanHeight");
 const { fetchBlocks } = require("./fetchBlock");
-const { getScanStep } = require("../env");
 const { sleep } = require("../utils/sleep");
 const { getLatestHeight } = require("../chain/latestHead");
 const { getNextScanHeight } = require("../mongo/scanHeight");
 const last = require("lodash.last");
+const { scanKnownHeights } = require("./known");
+const { firstScanKnowHeights, isUseMetaDb, getScanStep } = require("../env");
 const { negligibleHeights } = require("./ignoredHeights");
 const { getHeadUsedInGB } = require("../utils/memory");
-const { updateSpecs } = require("../chain/specs");
+const { updateSpecs, getMetaScanHeight } = require("../chain/specs");
 const { logger } = require("../logger");
 
 async function beginScan() {
   await updateSpecs();
+
+  if (firstScanKnowHeights()) {
+    await scanKnownHeights()
+  }
+
   let scanHeight = await getNextScanHeight();
   while (true) {
     scanHeight = await oneStepScan(scanHeight);
@@ -34,7 +40,12 @@ async function oneStepScan(startHeight) {
     targetHeight = startHeight + step;
   }
 
-  // todo: update spec heights
+  if (isUseMetaDb()) {
+    if (targetHeight > getMetaScanHeight()) {
+      await updateSpecs();
+    }
+  }
+
   const heights = [];
   for (let i = startHeight; i <= targetHeight; i++) {
     if (!negligibleHeights.includes(i)) {

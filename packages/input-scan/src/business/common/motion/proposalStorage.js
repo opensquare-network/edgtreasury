@@ -1,4 +1,4 @@
-const { findDecorated } = require("@edgtreasury/output-scan/src/chain/specs");
+const { findDecorated } = require("../../../chain/specs");
 const { getApi } = require("../../../chain/api");
 const { normalizeCall } = require("./utils");
 const {
