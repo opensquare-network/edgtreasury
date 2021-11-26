@@ -7,9 +7,8 @@ const { getOverview } = require("../../websocket/store");
 
 class StatsController {
   async getWeeklyStatsHistory(ctx) {
-    const { chain } = ctx.params;
-    const inputWeeklyStatsCol = await getInputWeeklyStatsCollection(chain);
-    const outputWeeklyStatsCol = await getOutputWeeklyStatsCollection(chain);
+    const inputWeeklyStatsCol = await getInputWeeklyStatsCollection();
+    const outputWeeklyStatsCol = await getOutputWeeklyStatsCollection();
 
     const inputWeeklyStats = await inputWeeklyStatsCol.find({}).toArray();
     const outputWeeklyStats = await outputWeeklyStatsCol.find({}).toArray();
@@ -40,8 +39,7 @@ class StatsController {
   }
 
   async getTreasuryInOut(ctx) {
-    const { chain } = ctx.params;
-    const overview = getOverview(chain);
+    const overview = getOverview();
     if (!overview) {
       ctx.body = {};
       return;

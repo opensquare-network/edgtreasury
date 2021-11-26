@@ -5,7 +5,6 @@ const descriptionService = require("../../services/description.service");
 
 class ProposalsController {
   async getProposals(ctx) {
-    const { chain } = ctx.params;
     const { page, pageSize } = extractPage(ctx);
     const { status } = ctx.request.query;
     if (pageSize === 0 || page < 0) {
@@ -17,7 +16,7 @@ class ProposalsController {
     if (status) {
       condition["state.state"] = status;
     }
-    const proposalCol = await getProposalCollection(chain);
+    const proposalCol = await getProposalCollection();
 
     const total = proposalCol.countDocuments(condition);
     const list = proposalCol
@@ -59,10 +58,9 @@ class ProposalsController {
   }
 
   async getProposalDetail(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
 
-    const proposalCol = await getProposalCollection(chain);
+    const proposalCol = await getProposalCollection();
     const proposal = await proposalCol.findOne({ proposalIndex });
     if (!proposal) {
       ctx.status = 404;
@@ -71,7 +69,7 @@ class ProposalsController {
 
     const motionHashes = (proposal.motions || []).map(motionInfo => motionInfo.hash);
 
-    const motionCol = await getMotionCollection(chain);
+    const motionCol = await getMotionCollection();
     const proposalMotions = await motionCol
       .find({
         hash: { $in: motionHashes }
@@ -106,8 +104,7 @@ class ProposalsController {
   }
 
   async getProposalSummary(ctx) {
-    const { chain } = ctx.params;
-    const proposalCol = await getProposalCollection(chain);
+    const proposalCol = await getProposalCollection();
     const total = await proposalCol.estimatedDocumentCount();
     const countByStates = await proposalCol
       .aggregate([
@@ -127,12 +124,10 @@ class ProposalsController {
   }
 
   async getProposalLinks(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
 
     ctx.body = await linkService.getLinks({
       indexer: {
-        chain,
         type: "proposal",
         index: proposalIndex,
       },
@@ -140,14 +135,12 @@ class ProposalsController {
   }
 
   async createProposalLink(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
     const { link, description } = ctx.request.body;
 
     ctx.body = await linkService.createLink(
       {
         indexer: {
-          chain,
           type: "proposal",
           index: proposalIndex,
         },
@@ -159,14 +152,12 @@ class ProposalsController {
   }
 
   async deleteProposalLink(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
     const linkIndex = parseInt(ctx.params.linkIndex);
 
     ctx.body = await linkService.deleteLink(
       {
         indexer: {
-          chain,
           type: "proposal",
           index: proposalIndex,
         },
@@ -177,12 +168,10 @@ class ProposalsController {
   }
 
   async getProposalDescription(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
 
     ctx.body = await descriptionService.getDescription({
       indexer: {
-        chain,
         type: "proposal",
         index: proposalIndex,
       },
@@ -190,14 +179,12 @@ class ProposalsController {
   }
 
   async setProposalDescription(ctx) {
-    const { chain } = ctx.params;
     const proposalIndex = parseInt(ctx.params.proposalIndex);
     const { description } = ctx.request.body;
 
     ctx.body = await descriptionService.setDescription(
       {
         indexer: {
-          chain,
           type: "proposal",
           index: proposalIndex,
         },
