@@ -82,6 +82,8 @@ async function calcOverview() {
     bestProposalBeneficiaries,
     bestTipFinders,
     income: incomeScan?.seats || {
+      minting: 0,
+      stakingRemainder: 0,
       inflation: 0,
       slash: 0,
       transfer: 0,

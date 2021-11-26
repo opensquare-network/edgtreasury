@@ -9,10 +9,10 @@ async function listenAndEmitInfo(io) {
       const roomId = room;
       socket.join(roomId);
 
-      if (room?.data === chainStatusRoom) {
+      if (room === chainStatusRoom) {
         const scanHeight = getScanHeight();
         io.to(roomId).emit("scanStatus", { height: scanHeight });
-      } else if (room?.data === overviewRoom) {
+      } else if (room === overviewRoom) {
         const overview = getOverview();
         io.to(roomId).emit("overview", overview);
       }
