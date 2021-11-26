@@ -1,0 +1,19 @@
+{
+  "name": "@edgtreasury/price",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=15.0.0"
+  },
+  "scripts": {
+    "deploy:edg": "pm2 start ecosystem.config.js --only edg-price-tracker"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "dayjs": "^1.10.4",
+    "dotenv": "^8.2.0",
+    "minimist": "^1.2.5",
+    "mongodb": "^4.1.3",
+    "node-fetch": "^2.6.1"
+  }
+}
