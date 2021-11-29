@@ -5,17 +5,19 @@ export const PRIMARY_THEME_COLOR = "#DF405D";
 export const SECONDARY_THEME_COLOR = "#FFEEF1";
 export const WARNING_COLOR = "#EC4730";
 
-export const OVERVIEW_PROPOSALS_COLOR = "#DF405D";
-export const OVERVIEW_TIPS_COLOR = "#F1AC26";
-export const OVERVIEW_BOUNTIES_COLOR = "#635FEC";
-export const OVERVIEW_BURNT_COLOR = "#EE7735";
+export const OVERVIEW_PROPOSALS_COLOR = "#FF3B80";
+export const OVERVIEW_TIPS_COLOR = "#2DE1C5";
+export const OVERVIEW_BOUNTIES_COLOR = "#11CAF0";
+export const OVERVIEW_BURNT_COLOR = "#FFC008";
 export const OVERVIEW_INFLATION_COLOR = "#DF405D";
 export const OVERVIEW_TREASURY_COLOR = "#FCC04D";
-export const OVERVIEW_STAKING_COLOR = "#F1AC26";
-export const OVERVIEW_DEMOCRACY_COLOR = "#FFDFA0";
 export const OVERVIEW_ELECTION_COLOR = "#FED077";
-export const OVERVIEW_IDENTITY_COLOR = "#FFEDC9";
 export const OVERVIEW_OTHERS_COLOR = "#CCCCCC";
+export const OVERVIEW_MINTING_COLOR = "#FF3B80";
+export const OVERVIEW_STAKING_REMINDER_COLOR = "#FB6C9F";
+export const OVERVIEW_STAKING_COLOR = "#2DE1C5";
+export const OVERVIEW_DEMOCRACY_COLOR = "#6CEAD6";
+export const OVERVIEW_IDENTITY_COLOR = "#96F0E2";
 
 export const TipStatus = {
   Tipping: "Tipping",

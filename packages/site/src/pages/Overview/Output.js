@@ -6,9 +6,10 @@ import {
   OVERVIEW_TIPS_COLOR,
   OVERVIEW_BOUNTIES_COLOR,
   OVERVIEW_BURNT_COLOR,
+  OVERVIEW_OTHERS_COLOR,
 } from "../../constants";
 
-const Output = ({ proposals, tips, bounties, burnt }) => {
+const Output = ({ proposals, tips, bounties, burnt, others }) => {
   const [outputData, setOutputData] = useState({
     icon: "circle",
     labels: [],
@@ -27,6 +28,9 @@ const Output = ({ proposals, tips, bounties, burnt }) => {
       },
       {
         name: "Burnt",
+      },
+      {
+        name: "Others",
       },
     ],
   });
@@ -55,9 +59,14 @@ const Output = ({ proposals, tips, bounties, burnt }) => {
           value: burnt,
           color: OVERVIEW_BURNT_COLOR,
         },
+        {
+          name: "Others",
+          value: others,
+          color: OVERVIEW_OTHERS_COLOR,
+        },
       ],
     });
-  }, [proposals, tips, bounties, burnt]);
+  }, [proposals, tips, bounties, burnt, others]);
 
   const clickEvent = (name) => {
     const obj = Object.assign({}, outputStatus);
