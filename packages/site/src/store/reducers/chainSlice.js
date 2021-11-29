@@ -1,13 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getApi,
-  estimateBlocksTime,
-} from "../../services/chainApi";
-import { CHAINS } from "../../constants";
+import { getApi, estimateBlocksTime } from "../../services/chainApi";
 import { networkFromSymbol } from "../../utils";
 
-const chainStorageKey = "dotreasury-current-chain";
-const chain = localStorage.getItem(chainStorageKey) || CHAINS.POLKADOT;
+const chain = "edg";
 
 const chainSlice = createSlice({
   name: "chain",
@@ -24,15 +19,7 @@ const chainSlice = createSlice({
     },
   },
   reducers: {
-    setChain(state, { payload }) {
-      if (![CHAINS.KUSAMA, CHAINS.POLKADOT].includes(payload)) {
-        return;
-      }
-      state.chain = payload;
-      console.log(payload, state.chain);
-
-      localStorage.setItem(chainStorageKey, payload);
-    },
+    setChain(state, { payload }) {},
     setCurrentBlockHeight(state, { payload }) {
       state.currentBlockHeight = payload;
     },

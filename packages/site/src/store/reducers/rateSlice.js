@@ -38,62 +38,53 @@ const rateSlice = createSlice({
 
 export const { setRateStats, setRates, setLoading } = rateSlice.actions;
 
-export const addRate = (
-  chain,
-  type,
-  index,
-  grade,
-  comment,
-  version,
-  timestamp,
-  address
-) => async (dispatch) => {
-  const data = {
-    chain,
-    type: type === "proposal" ? "treasury_proposal" : type,
-    index,
-    grade,
-    comment,
-    timestamp,
-    version,
+export const addRate =
+  (chain, type, index, grade, comment, version, timestamp, address) =>
+  async (dispatch) => {
+    const data = {
+      chain,
+      type: type === "proposal" ? "treasury_proposal" : type,
+      index,
+      grade,
+      comment,
+      timestamp,
+      version,
+    };
+
+    try {
+      dispatch(setLoading(true));
+      const signature = await signMessage(JSON.stringify(data), address);
+
+      const { error } = await api.fetch(
+        `/rates`,
+        {},
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data, address, signature }),
+        }
+      );
+
+      if (error) {
+        dispatch(
+          addToast({
+            type: "error",
+            message: error.message,
+          })
+        );
+      }
+      dispatch(setLoading(false));
+    } catch (error) {
+      dispatch(setLoading(false));
+    }
+
+    dispatch(fetchRateStats(chain, type, index));
   };
 
-  try {
-    dispatch(setLoading(true));
-    const signature = await signMessage(JSON.stringify(data), address);
-
-    const { error } = await api.fetch(
-      `/rates`,
-      {},
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data, address, signature }),
-      }
-    );
-
-    if (error) {
-      dispatch(
-        addToast({
-          type: "error",
-          message: error.message,
-        })
-      );
-    }
-    dispatch(setLoading(false));
-  } catch (error) {
-    dispatch(setLoading(false));
-  }
-
-  dispatch(fetchRateStats(chain, type, index));
-};
-
 export const fetchRateStats = (chain, type, index) => async (dispatch) => {
-  const { result } = await api.fetch(
-    `/${chain}/${pluralize(type)}/${index}/ratestats`
-  );
+  const { result } = await api.fetch(`/${pluralize(type)}/${index}/ratestats`);
   dispatch(
     setRateStats(
       result || {
@@ -107,24 +98,23 @@ export const fetchRateStats = (chain, type, index) => async (dispatch) => {
   );
 };
 
-export const fetchRates = (chain, type, index, page, pageSize) => async (
-  dispatch
-) => {
-  const { result } = await api.maybeAuthFetch(
-    `/${chain}/${pluralize(type)}/${index}/rates`,
-    { page, pageSize }
-  );
-  dispatch(
-    setRates(
-      result || {
-        items: [],
-        page: 0,
-        pageSize: 10,
-        total: 0,
-      }
-    )
-  );
-};
+export const fetchRates =
+  (chain, type, index, page, pageSize) => async (dispatch) => {
+    const { result } = await api.maybeAuthFetch(
+      `/${pluralize(type)}/${index}/rates`,
+      { page, pageSize }
+    );
+    dispatch(
+      setRates(
+        result || {
+          items: [],
+          page: 0,
+          pageSize: 10,
+          total: 0,
+        }
+      )
+    );
+  };
 
 export const setRateThumbUp = (rateId) => async (dispatch) => {
   return await api.authFetch(

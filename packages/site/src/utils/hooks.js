@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState, useEffect, useRef } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
 
@@ -8,7 +8,6 @@ import { setShowMenuTabs } from "../store/reducers/menuSlice";
 import {
   chainSelector,
   chainSymbolSelector,
-  setChain,
 } from "../store/reducers/chainSlice";
 
 export const useWindowSize = () => {
@@ -125,20 +124,21 @@ export const useMenuTab = () => {
 };
 
 export function useChainRoute() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
-  const symbol = useSelector(chainSymbolSelector).toLowerCase();
-  const { symbol: paramSymbol } = useParams();
-  const urlSymbol = paramSymbol?.toLowerCase();
-  useEffect(() => {
-    if (!urlSymbol) {
-      return history.push(`/${symbol}${location.pathname}`);
-    } else if (urlSymbol !== symbol) {
-      dispatch(setChain(urlSymbol));
-      window.location.reload();
-    }
-  }, [dispatch, history, location, symbol, urlSymbol]);
+  return;
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  // const location = useLocation();
+  // const symbol = useSelector(chainSymbolSelector).toLowerCase();
+  // const { symbol: paramSymbol } = useParams();
+  // const urlSymbol = paramSymbol?.toLowerCase();
+  // useEffect(() => {
+  //   if (!urlSymbol) {
+  //     return history.push(`/${symbol}${location.pathname}`);
+  //   } else if (urlSymbol !== symbol) {
+  //     dispatch(setChain(urlSymbol));
+  //     window.location.reload();
+  //   }
+  // }, [dispatch, history, location, symbol, urlSymbol]);
 }
 
 export function useOutsideClick(ref, cb) {
