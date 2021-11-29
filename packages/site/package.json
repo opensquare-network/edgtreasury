@@ -1,8 +1,8 @@
 {
-  "name": "@dotreasury/site",
+  "name": "@edgtreasury/site",
   "version": "0.1.0",
   "license": "Apache-2.0",
-  "homepage": "https://www.dotreasury.com",
+  "homepage": "https://www.edgtreasury.com",
   "dependencies": {
     "@polkadot/api": "6.8.2-4",
     "@polkadot/extension-dapp": "0.41.1",
