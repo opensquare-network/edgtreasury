@@ -169,7 +169,7 @@ const Income = ({
       status={incomeStatus}
       clickEvent={clickEvent}
     >
-      <NavLink to={`/${symbol}/income`}>
+      <NavLink to={`/income`}>
         <LinkButton>
           Detail
           <GrayImage src="/imgs/caret-right.svg" width={24} />

@@ -140,10 +140,10 @@ const MainHeader = () => {
           onClick={menuClick}
           ref={menuWrap}
         >
-          <NavLink to={`/${symbol}/income`}>
+          <NavLink to={`/income`}>
             <MenuSwitch menuTabsName="Income" />
           </NavLink>
-          <NavLink to={`/${symbol}/projects`}>
+          <NavLink to={`/projects`}>
             <MenuSwitch menuTabsName="Projects" />
           </NavLink>
         </Right>

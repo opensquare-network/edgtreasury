@@ -114,9 +114,9 @@ export const useMenuTab = () => {
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
   const { pathname } = useLocation();
   useEffect(() => {
-    const menuTabsName = pathname.startsWith(`/${symbol}/income`)
+    const menuTabsName = pathname.startsWith(`/income`)
       ? "Income"
-      : pathname.startsWith(`/${symbol}/projects`)
+      : pathname.startsWith(`/projects`)
       ? "Projects"
       : "Home";
     dispatch(setShowMenuTabs(menuTabsName));
@@ -133,7 +133,7 @@ export function useChainRoute() {
   // const urlSymbol = paramSymbol?.toLowerCase();
   // useEffect(() => {
   //   if (!urlSymbol) {
-  //     return history.push(`/${symbol}${location.pathname}`);
+  //     return history.push(`${location.pathname}`);
   //   } else if (urlSymbol !== symbol) {
   //     dispatch(setChain(urlSymbol));
   //     window.location.reload();
