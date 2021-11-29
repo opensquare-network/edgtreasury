@@ -22,16 +22,30 @@ const ImgShortWrapper = styled.div`
   }
 `;
 
+const Divider = styled.div`
+  background: #525252;
+  margin: 0 12px;
+  width: 1px;
+  height: 12px;
+`;
+
+const Label = styled.div`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  color: #ffffff;
+`;
+
 const Logo = ({ symbol }) => (
   <Wrapper>
     <ImgFullWrapper>
-      <Image
-        src={symbol === "ksm" ? `/imgs/logo-white.svg` : `/imgs/logo-black.svg`}
-      />
+      <Image src="/imgs/logotype-edgeware.svg" />
     </ImgFullWrapper>
     <ImgShortWrapper>
-      <Image src="/imgs/logo.svg" width={32} />
+      <Image src="/imgs/logo-edgeware.svg" height={32} />
     </ImgShortWrapper>
+    <Divider />
+    <Label>Treasury</Label>
   </Wrapper>
 );
 

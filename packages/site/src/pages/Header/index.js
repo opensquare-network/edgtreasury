@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import Container from "../../components/Container";
 import MainHeader from "./MainHeader";
 import SubHeader from "./SubHeader";
-import { chainSymbolSelector } from "../../store/reducers/chainSlice";
 
 const Wrapper = styled.header`
-  background: ${(p) => (p.symbol === "ksm" ? "#000" : "#fff")};
+  background-image: url("/imgs/bg-edgewa.png");
   max-height: 136px;
+  margin-bottom: -43px;
+  padding-bottom: 43px;
 `;
 
 const Header = () => {
@@ -25,14 +25,11 @@ const Header = () => {
       "/verifyemail",
       "/useragreement",
       "/privacy",
-    ].includes(location.pathname) ||
-    location.pathname.includes("/settings");
-
-  const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
+    ].includes(location.pathname) || location.pathname.includes("/settings");
 
   return (
     <>
-      <Wrapper symbol={symbol}>
+      <Wrapper>
         <Container>
           <MainHeader />
         </Container>

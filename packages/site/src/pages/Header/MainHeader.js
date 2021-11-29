@@ -5,7 +5,6 @@ import { Image } from "semantic-ui-react";
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
 import ScanHeight from "./ScanHeight";
-import UserLogin from "./UserLogin";
 import MenuSwitch from "./MenuSwitch";
 import { useMenuTab } from "../../utils/hooks";
 import { useSelector } from "react-redux";
@@ -98,7 +97,8 @@ const MenuIcon = styled.div`
   width: 24px;
   height: 24px;
   display: none !important;
-  margin-left: 0.5rem;
+  margin-right: 12px;
+  flex-shrink: 0;
   @media screen and (max-width: 850px) {
     display: flex !important;
     cursor: pointer;
@@ -107,11 +107,7 @@ const MenuIcon = styled.div`
   }
 `;
 
-const ScanHeightWrapper = styled.div`
-  margin-left: 24px;
-`;
-
-const HeaderExamplePage = () => {
+const MainHeader = () => {
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
   const [menuShow, setMenuShow] = useState(false);
   useMenuTab();
@@ -131,10 +127,10 @@ const HeaderExamplePage = () => {
         : "/imgs/menu-icon-close.svg";
   }
   return (
-    <Wrapper symbol={symbol}>
+    <Wrapper>
       <Left>
         <NavLink to="/">
-          <Logo symbol={symbol} />
+          <Logo />
         </NavLink>
       </Left>
       <FlexWrapper>
@@ -150,17 +146,14 @@ const HeaderExamplePage = () => {
           <NavLink to={`/${symbol}/projects`}>
             <MenuSwitch menuTabsName="Projects" />
           </NavLink>
-          <UserLogin symbol={symbol} />
         </Right>
-        <ScanHeightWrapper>
-          <ScanHeight />
-        </ScanHeightWrapper>
         <MenuIcon onClick={() => setMenuShow(!menuShow)}>
           <Image src={menuIconSrc} />
         </MenuIcon>
+        <ScanHeight />
       </FlexWrapper>
     </Wrapper>
   );
 };
 
-export default HeaderExamplePage;
+export default MainHeader;

@@ -82,14 +82,6 @@ const ImageLogoWrapper = styled.div`
   }
 `;
 
-const FlexWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  > :not(:first-child) {
-    margin-left: 8px;
-  }
-`;
-
 const Footer = () => {
   return (
     <Wrapper>
@@ -97,7 +89,7 @@ const Footer = () => {
         <FooterWrapper>
           <ImageLogoWrapper>
             <TextMinor>
-              doTreasury © {new Date().getFullYear()} - Powered By
+              Edgeware Treasury © {new Date().getFullYear()} - Powered By
             </TextMinor>
             <a
               href="https://www.opensquare.network/"
@@ -106,25 +98,6 @@ const Footer = () => {
             >
               <Image src="/imgs/opensquare-logo.svg" />
             </a>
-          </ImageLogoWrapper>
-          <ImageLogoWrapper>
-            <TextMinor>Funded by</TextMinor>
-            <FlexWrapper>
-              <a
-                href="https://kusama.network/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src="/imgs/kusama-treasury-logo.svg" />
-              </a>
-              <a
-                href="https://polkadot.network/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src="/imgs/polkadot-treasury-logo.svg" />
-              </a>
-            </FlexWrapper>
           </ImageLogoWrapper>
           <IconList>
             <a

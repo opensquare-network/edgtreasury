@@ -44,7 +44,6 @@ const WrapperBackground = styled.div`
   height: 42px;
   width: 100%;
   z-index: -1;
-  background: ${(p) => (p.symbol === "ksm" ? "#000" : "#fff")};
 `;
 
 const TabWrapper = styled(Tab)`
