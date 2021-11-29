@@ -1,9 +1,15 @@
 {
   "name": "edgtreasury",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": [
+      "**/@polkadot",
+      "**/@polkadot/**",
+      "**/react",
+      "**/react/**"
+    ]
+  },
   "repository": "git@github.com:opensquare-network/edgtreasury.git",
   "author": "OpenSquare <https://www.opensquare.network/>",
   "license": "Apache-2.0",

@@ -1,9 +1,14 @@
+import React from "react";
 import styled from "styled-components";
 import ReviewItem from "./ReviewItem";
 import Pagination from "../../pages/Comment/ResponsivePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { chainSelector } from "../../store/reducers/chainSlice";
-import { fetchRates, ratesSelector, rateStatsSelector } from "../../store/reducers/rateSlice";
+import {
+  fetchRates,
+  ratesSelector,
+  rateStatsSelector,
+} from "../../store/reducers/rateSlice";
 import { useEffect, useState } from "react";
 import { loggedInUserSelector } from "../../store/reducers/userSlice";
 

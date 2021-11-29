@@ -1,9 +1,13 @@
+import React from "react";
 import styled from "styled-components";
 
 import Stars from "./Stars";
 import Progress from "./Progress";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRateStats, rateStatsSelector } from "../../store/reducers/rateSlice";
+import {
+  fetchRateStats,
+  rateStatsSelector,
+} from "../../store/reducers/rateSlice";
 import { useEffect } from "react";
 import { chainSelector } from "../../store/reducers/chainSlice";
 

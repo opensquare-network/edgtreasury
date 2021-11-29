@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import ExternalLink from "../ExternalLink";
 
@@ -16,15 +17,12 @@ const DataIconDisabled = styled.div`
   background: url("/imgs/ipfs-data.svg");
 `;
 
-
 export default function IpfsData({ url }) {
-  return (
-    !url
-    ? <DataIconDisabled />
-    : (
-      <ExternalLink href={url}>
-        <DataIcon />
-      </ExternalLink>
-    )
-  )
+  return !url ? (
+    <DataIconDisabled />
+  ) : (
+    <ExternalLink href={url}>
+      <DataIcon />
+    </ExternalLink>
+  );
 }

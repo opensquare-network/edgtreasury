@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css } from "styled-components";
 import { mrgap } from "../../styles";
 import { Image } from "semantic-ui-react";
