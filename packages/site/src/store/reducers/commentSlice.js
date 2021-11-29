@@ -41,66 +41,63 @@ export const {
   setCurrentPage,
 } = commentSlice.actions;
 
-export const fetchComments = (chain, type, index, page, pageSize) => async (
-  dispatch
-) => {
-  const { result } = await api.maybeAuthFetch(
-    `/${chain}/${pluralize(type)}/${index}/comments`,
-    {
-      page,
-      pageSize,
-    }
-  );
-  dispatch(
-    setComments(
-      result || {
-        items: [],
-        page: 0,
-        pageSize: 10,
-        total: 0,
+export const fetchComments =
+  (chain, type, index, page, pageSize) => async (dispatch) => {
+    const { result } = await api.maybeAuthFetch(
+      `/${pluralize(type)}/${index}/comments`,
+      {
+        page,
+        pageSize,
       }
-    )
-  );
-};
+    );
+    dispatch(
+      setComments(
+        result || {
+          items: [],
+          page: 0,
+          pageSize: 10,
+          total: 0,
+        }
+      )
+    );
+  };
 
-export const postComment = (chain, type, index, content) => async (
-  dispatch
-) => {
-  const { result } = await api.authFetch(
-    `/${chain}/${pluralize(type)}/${index}/comments`,
-    {},
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content }),
+export const postComment =
+  (chain, type, index, content) => async (dispatch) => {
+    const { result } = await api.authFetch(
+      `/${pluralize(type)}/${index}/comments`,
+      {},
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content }),
+      }
+    );
+
+    if (result) {
+      dispatch(setClearComment(true));
+      dispatch(setLastNewPost(result));
     }
-  );
+  };
 
-  if (result) {
-    dispatch(setClearComment(true));
-    dispatch(setLastNewPost(result));
-  }
-};
+export const updateComment =
+  (chain, type, index, commentId, content) => async (dispatch) => {
+    await api.authFetch(
+      `/comments/${commentId}`,
+      {},
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content }),
+      }
+    );
 
-export const updateComment = (chain, type, index, commentId, content) => async (
-  dispatch
-) => {
-  await api.authFetch(
-    `/comments/${commentId}`,
-    {},
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content }),
-    }
-  );
-
-  dispatch(fetchComments(chain, type, index));
-};
+    dispatch(fetchComments(chain, type, index));
+  };
 
 export const removeComment = (commentId) => async (dispatch) => {
   await api.authFetch(

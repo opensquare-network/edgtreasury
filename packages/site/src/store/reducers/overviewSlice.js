@@ -62,7 +62,7 @@ const overviewSlice = createSlice({
 export const { setOverview, setStatsHistory } = overviewSlice.actions;
 
 export const fetchStatsHistory = (chain) => async (dispatch) => {
-  const { result } = await api.fetch(`/${chain}/stats/weekly`);
+  const { result } = await api.fetch(`/stats/weekly`);
   dispatch(setStatsHistory(result || []));
 };
 

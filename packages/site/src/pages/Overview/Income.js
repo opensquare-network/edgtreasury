@@ -6,17 +6,14 @@ import { NavLink } from "react-router-dom";
 import DoughnutCard from "./DoughnutCard";
 import TextMinor from "../../components/TextMinor";
 import {
-  OVERVIEW_INFLATION_COLOR,
-  OVERVIEW_TREASURY_COLOR,
   OVERVIEW_STAKING_COLOR,
   OVERVIEW_DEMOCRACY_COLOR,
-  OVERVIEW_ELECTION_COLOR,
   OVERVIEW_IDENTITY_COLOR,
   OVERVIEW_OTHERS_COLOR,
+  OVERVIEW_MINTING_COLOR,
+  OVERVIEW_STAKING_REMINDER_COLOR,
   TEXT_DARK_MAJOR,
 } from "../../constants";
-import { useSelector } from "react-redux";
-import { chainSymbolSelector } from "../../store/reducers/chainSlice";
 
 const LinkButton = styled(TextMinor)`
   display: flex;
@@ -34,15 +31,13 @@ const LinkButton = styled(TextMinor)`
 `;
 
 const Income = ({
-  inflation,
-  slashTreasury,
-  slashDemocracy,
+  minting,
+  stakingReminder,
   slashStaking,
-  slashElection,
+  slashDemocracy,
   slashIdentity,
   others,
 }) => {
-  const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
   const [incomeData, setIncomeData] = useState({
     icon: "circle",
     labels: [],
@@ -50,19 +45,16 @@ const Income = ({
   const [incomeStatus, setIncomeStatus] = useState({
     labels: [
       {
-        name: "Inflation",
+        name: "Minting",
+      },
+      {
+        name: "Staking Reminder",
       },
       {
         name: "Slashes",
         children: [
           {
             name: "Staking",
-          },
-          {
-            name: "Treasury",
-          },
-          {
-            name: "Election",
           },
           {
             name: "Democracy",
@@ -83,9 +75,14 @@ const Income = ({
       icon: "circle",
       labels: [
         {
-          name: "Inflation",
-          value: inflation,
-          color: OVERVIEW_INFLATION_COLOR,
+          name: "Minting",
+          value: minting,
+          color: OVERVIEW_MINTING_COLOR,
+        },
+        {
+          name: "Staking Reminder",
+          value: stakingReminder,
+          color: OVERVIEW_STAKING_REMINDER_COLOR,
         },
         {
           name: "Slashes",
@@ -94,16 +91,6 @@ const Income = ({
               name: "Staking",
               value: slashStaking,
               color: OVERVIEW_STAKING_COLOR,
-            },
-            {
-              name: "Treasury",
-              value: slashTreasury,
-              color: OVERVIEW_TREASURY_COLOR,
-            },
-            {
-              name: "Election",
-              value: slashElection,
-              color: OVERVIEW_ELECTION_COLOR,
             },
             {
               name: "Democracy",
@@ -125,11 +112,10 @@ const Income = ({
       ],
     });
   }, [
-    inflation,
-    slashTreasury,
-    slashDemocracy,
+    minting,
+    stakingReminder,
     slashStaking,
-    slashElection,
+    slashDemocracy,
     slashIdentity,
     others,
   ]);
@@ -169,7 +155,7 @@ const Income = ({
       status={incomeStatus}
       clickEvent={clickEvent}
     >
-      <NavLink to={`/${symbol}/income`}>
+      <NavLink to={`/income`}>
         <LinkButton>
           Detail
           <GrayImage src="/imgs/caret-right.svg" width={24} />

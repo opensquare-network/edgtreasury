@@ -19,6 +19,7 @@ const StyledButton = styled(Button)`
   padding-left: 0 !important;
   padding-right: 0 !important;
   font-weight: 500 !important;
+  color: #ffffff !important;
   ${(p) =>
     p.active &&
     css`

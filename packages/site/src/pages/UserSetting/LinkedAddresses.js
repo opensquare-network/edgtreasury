@@ -115,7 +115,7 @@ const LinkedAddress = () => {
     const address = account[`${chain}Address`];
 
     const { error, result } = await api.authFetch(
-      `/user/linkaddr/${chain}/${address}`,
+      `/user/linkaddr/${address}`,
       {},
       {
         method: "DELETE",
@@ -145,25 +145,21 @@ const LinkedAddress = () => {
   const linkAddress = async (chain, account) => {
     const address = account[`${chain}Address`];
 
-    const { result, error } = await api.authFetch(
-      `/user/linkaddr/${chain}/${address}`
-    );
+    const { result, error } = await api.authFetch(`/user/linkaddr/${address}`);
     if (result) {
       const signature = await signMessage(result?.challenge, account.address);
-      const {
-        error: confirmError,
-        result: confirmResult,
-      } = await api.authFetch(
-        `/user/linkaddr/${result?.attemptId}`,
-        {},
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ challengeAnswer: signature }),
-        }
-      );
+      const { error: confirmError, result: confirmResult } =
+        await api.authFetch(
+          `/user/linkaddr/${result?.attemptId}`,
+          {},
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ challengeAnswer: signature }),
+          }
+        );
 
       dispatch(fetchUserProfile());
       if (confirmResult) {

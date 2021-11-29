@@ -21,7 +21,7 @@ export const fetchDescription =
   (chain, type = "", index) =>
   async (dispatch) => {
     const { result } = await api.fetch(
-      `/${chain}/${pluralize(type)}/${index}/description`
+      `/${pluralize(type)}/${index}/description`
     );
     dispatch(setDescription(result || {}));
   };
@@ -39,7 +39,7 @@ export const putDescription =
     );
 
     await api.fetch(
-      `/${chain}/${pluralize(type)}/${index}/description`,
+      `/${pluralize(type)}/${index}/description`,
       {},
       {
         method: "PUT",
