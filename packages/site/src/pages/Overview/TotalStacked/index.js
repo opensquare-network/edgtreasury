@@ -93,37 +93,40 @@ const TotalStacked = () => {
     icon: "square",
     labels: [
       {
-        name: "Inflation",
+        name: "Minting",
         value: 0,
+        color: "#FF3B80",
+      },
+      {
+        name: "Staking Remainder",
+        value: 0,
+        color: "#FF3B80",
       },
       {
         name: "Slashes",
+        color: "#FF3B80",
         children: [
           {
             name: "Staking",
             value: 0,
-          },
-          {
-            name: "Treasury",
-            value: 0,
-          },
-          {
-            name: "Election",
-            value: 0,
+            color: "transparent",
           },
           {
             name: "Democracy",
             value: 0,
+            color: "transparent",
           },
           {
             name: "Identity",
             value: 0,
+            color: "transparent",
           },
         ],
       },
       {
         name: "Others",
         value: 0,
+        color: "#FF3B80",
       },
     ],
   });
@@ -134,28 +137,33 @@ const TotalStacked = () => {
       {
         name: "Proposal",
         value: 0,
+        color: "#2DE1C5",
       },
       {
         name: "Tips",
         value: 0,
+        color: "#2DE1C5",
       },
       {
         name: "Bounties",
         value: 0,
+        color: "#2DE1C5",
       },
       {
         name: "Burnt",
         value: 0,
+        color: "#2DE1C5",
       },
     ],
   });
   const [treasuryData, setTreasuryData] = useState({
     title: "Treasury",
-    icon: "square",
+    icon: "bar",
     labels: [
       {
         name: "Balance",
         value: 0,
+        color: "#11CAF0",
       },
     ],
   });
@@ -178,7 +186,8 @@ const TotalStacked = () => {
 
     const incomeHistory = statsHistory
       .map((statsItem) =>
-        bnToBn(statsItem.income.inflation)
+        bnToBn(statsItem.income.minting)
+          .add(bnToBn(statsItem.income.stakingRemainder))
           .add(bnToBn(statsItem.income.slash))
           .add(bnToBn(statsItem.income.others))
       )
@@ -211,11 +220,22 @@ const TotalStacked = () => {
         icon: "square",
         labels: [
           {
-            name: "Inflation",
-            value: toPrecision(statsData.income.inflation, precision, false),
+            name: "Minting",
+            value: toPrecision(statsData.income.minting, precision, false),
+            color: "#FF3B80",
+          },
+          {
+            name: "Staking Remainder",
+            value: toPrecision(
+              statsData.income.stakingRemainder,
+              precision,
+              false
+            ),
+            color: "#FF3B80",
           },
           {
             name: "Slashes",
+            color: "#FF3B80",
             children: [
               {
                 name: "Staking",
@@ -224,22 +244,7 @@ const TotalStacked = () => {
                   precision,
                   false
                 ),
-              },
-              {
-                name: "Treasury",
-                value: toPrecision(
-                  statsData.income.slashSeats.treasury,
-                  precision,
-                  false
-                ),
-              },
-              {
-                name: "Election",
-                value: toPrecision(
-                  statsData.income.slashSeats.election,
-                  precision,
-                  false
-                ),
+                color: "transparent",
               },
               {
                 name: "Democracy",
@@ -248,6 +253,7 @@ const TotalStacked = () => {
                   precision,
                   false
                 ),
+                color: "transparent",
               },
               {
                 name: "Identity",
@@ -256,12 +262,14 @@ const TotalStacked = () => {
                   precision,
                   false
                 ),
+                color: "transparent",
               },
             ],
           },
           {
             name: "Others",
             value: toPrecision(statsData.income.others, precision, false),
+            color: "#FF3B80",
           },
         ],
       });
@@ -274,18 +282,22 @@ const TotalStacked = () => {
           {
             name: "Proposal",
             value: toPrecision(statsData.output.proposal, precision, false),
+            color: "#2DE1C5",
           },
           {
             name: "Tips",
             value: toPrecision(statsData.output.tip, precision, false),
+            color: "#2DE1C5",
           },
           {
             name: "Bounties",
             value: toPrecision(statsData.output.bounty, precision, false),
+            color: "#2DE1C5",
           },
           {
             name: "Burnt",
             value: toPrecision(statsData.output.burnt, precision, false),
+            color: "#2DE1C5",
           },
         ],
       });
@@ -293,11 +305,12 @@ const TotalStacked = () => {
       setTreasuryData({
         title: "Treasury",
         date: dayjs(dateLabels?.[index]).format("YYYY-MM-DD hh:mm"),
-        icon: "square",
+        icon: "bar",
         labels: [
           {
             name: "Balance",
             value: toPrecision(statsData.treasuryBalance, precision, false),
+            color: "#11CAF0",
           },
         ],
       });
@@ -353,7 +366,7 @@ const TotalStacked = () => {
           </SecondListWrapper>
         </ListWrapper>
         <ChartWrapper>
-          <Chart data={chartData} onHover={onHover} />
+          {/* <Chart data={chartData} onHover={onHover} /> */}
         </ChartWrapper>
       </ContentWrapper>
     </CardWrapper>

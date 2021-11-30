@@ -39,7 +39,6 @@ const Icon = styled.div`
       width: 8px;
       height: 8px;
       background: ${p.color ?? "#EEEEEE"};
-      border-radius: 1px;
     `}
   ${(p) =>
     p.icon === "circle" &&
@@ -49,6 +48,13 @@ const Icon = styled.div`
       border: 3px solid
         ${(p) => (p.disabled ? "rgba(29, 37, 60, 0.24)" : p.color ?? "#EEEEEE")};
       border-radius: 50%;
+    `}
+    ${(p) =>
+    p.icon === "bar" &&
+    css`
+      width: 12px;
+      height: 3px;
+      background: ${p.color ?? "#EEEEEE"};
     `}
 `;
 

@@ -37,7 +37,7 @@ const Wrapper = styled(Card)`
     display: flex;
     justify-content: space-between;
   }
-  padding: 31px;
+  padding: 20px 24px;
   margin-bottom: 24px;
   @media screen and (max-width: 600px) {
     border-radius: 0;

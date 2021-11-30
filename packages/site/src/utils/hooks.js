@@ -5,10 +5,7 @@ import queryString from "query-string";
 
 import { fetchIdentity as getIdentity } from "../services/identity";
 import { setShowMenuTabs } from "../store/reducers/menuSlice";
-import {
-  chainSelector,
-  chainSymbolSelector,
-} from "../store/reducers/chainSlice";
+import { chainSymbolSelector } from "../store/reducers/chainSlice";
 
 export const useWindowSize = () => {
   const [size, setSize] = useState([0, 0]);
@@ -28,7 +25,6 @@ const displayCache = new Map();
 export const useIdentity = (address, map) => {
   const [name, setName] = useState(null);
   const [badgeData, setBadgeData] = useState(null);
-  const chain = useSelector(chainSelector);
   useEffect(() => {
     let isMounted = true;
     const fetchIdentity = async () => {
@@ -36,7 +32,7 @@ export const useIdentity = (address, map) => {
       if (displayCache.has(`identity_${address}`)) {
         identity = displayCache.get(`identity_${address}`);
       } else {
-        identity = await getIdentity(chain, address);
+        identity = await getIdentity("edgeware", address);
         displayCache.set(`identity_${address}`, identity);
       }
       if (isMounted && identity) {
@@ -52,7 +48,7 @@ export const useIdentity = (address, map) => {
     return () => {
       isMounted = false;
     };
-  }, [address, chain]);
+  }, [address]);
   return { name, badgeData };
 };
 

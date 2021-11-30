@@ -11,7 +11,7 @@ import {
   OVERVIEW_IDENTITY_COLOR,
   OVERVIEW_OTHERS_COLOR,
   OVERVIEW_MINTING_COLOR,
-  OVERVIEW_STAKING_REMINDER_COLOR,
+  OVERVIEW_STAKING_REMAINDER_COLOR,
   TEXT_DARK_MAJOR,
 } from "../../constants";
 
@@ -32,7 +32,7 @@ const LinkButton = styled(TextMinor)`
 
 const Income = ({
   minting,
-  stakingReminder,
+  stakingRemainder,
   slashStaking,
   slashDemocracy,
   slashIdentity,
@@ -81,8 +81,8 @@ const Income = ({
         },
         {
           name: "Staking Reminder",
-          value: stakingReminder,
-          color: OVERVIEW_STAKING_REMINDER_COLOR,
+          value: stakingRemainder,
+          color: OVERVIEW_STAKING_REMAINDER_COLOR,
         },
         {
           name: "Slashes",
@@ -113,7 +113,7 @@ const Income = ({
     });
   }, [
     minting,
-    stakingReminder,
+    stakingRemainder,
     slashStaking,
     slashDemocracy,
     slashIdentity,

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Image } from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
 
 import Container from "../../components/Container";
 import TextMinor from "../../components/TextMinor";
@@ -54,6 +54,10 @@ const FooterWrapper = styled.div`
 const IconList = styled.div`
   margin-left: auto !important;
   display: inline-flex;
+  align-items: center;
+  > a {
+    height: 24px;
+  }
   > :not(:first-child) {
     margin-left: 16px;
   }
@@ -82,6 +86,11 @@ const ImageLogoWrapper = styled.div`
   }
 `;
 
+const Icon = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
 const Footer = () => {
   return (
     <Wrapper>
@@ -101,25 +110,18 @@ const Footer = () => {
           </ImageLogoWrapper>
           <IconList>
             <a
-              href="mailto:yongfeng@opensquare.network"
+              href="https://edgewa.re/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="mail" />
+              <Icon src="/imgs/icon-edgeware.svg" />
             </a>
             <a
               href="https://github.com/opensquare-network"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="github" />
-            </a>
-            <a
-              href="https://t.me/dotreasury"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon name="telegram plane" />
+              <Icon src="/imgs/icon-github.svg" />
             </a>
           </IconList>
         </FooterWrapper>
