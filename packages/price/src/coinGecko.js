@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const AbortController = require("abort-controller");
 
-async function getKlines(symbol, startTime = '1582329600') {
+async function getKlines(startTime = '1582329600') {
   const url = new URL("/api/v3/coins/edgeware/market_chart/range", "https://api.coingecko.com");
   url.searchParams.set("vs_currency", `usd`);
   url.searchParams.set("from", `${startTime}`);
