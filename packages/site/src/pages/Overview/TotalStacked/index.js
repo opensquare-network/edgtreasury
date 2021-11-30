@@ -177,7 +177,6 @@ const TotalStacked = () => {
   }, [dispatch, chain]);
 
   const statsHistory = useSelector(statsHistorySelector);
-  console.log({ precision, statsHistory });
 
   useEffect(() => {
     const dateLabels = statsHistory.map(

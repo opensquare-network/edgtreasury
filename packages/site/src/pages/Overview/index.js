@@ -58,7 +58,6 @@ const Overview = () => {
   const tipSpent = toPrecision(overview.output.tip || 0, precision, false);
   const burntTotal = toPrecision(overview.output.burnt || 0, precision, false);
 
-  console.log(overview.income);
   const minting = toPrecision(overview.income.minting || 0, precision, false);
   const stakingRemainder = toPrecision(
     overview.income.stakingRemainder || 0,
