@@ -212,7 +212,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                       </Table.Cell>
                       <Table.Cell className="link-cell hidden">
                         <NavLink
-                          to={`/${symbol.toLowerCase()}/proposals/${
+                          to={`/proposals/${
                             item.proposalIndex
                           }`}
                         >

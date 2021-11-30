@@ -120,7 +120,7 @@ const Summary = () => {
             <ValueWrapper>
               <TextBold>{overview.count.proposal.unFinished}</TextBold>
               <TextMinorBold>/</TextMinorBold>
-              <StyledLink to={`/${symbolLowerCase}/proposals`}>
+              <StyledLink to={`/proposals`}>
                 <TextMinorBold>{overview.count.proposal.all}</TextMinorBold>
               </StyledLink>
             </ValueWrapper>
