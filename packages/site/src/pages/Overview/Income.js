@@ -86,6 +86,7 @@ const Income = ({
         },
         {
           name: "Slashes",
+          color: "transparent",
           children: [
             {
               name: "Staking",

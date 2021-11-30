@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { bnToBn } from "@polkadot/util";
 import dayjs from "dayjs";
 
 import Text from "../../../components/Text";
@@ -184,24 +183,22 @@ const TotalStacked = () => {
     );
     setDateLabels(dateLabels);
 
-    const incomeHistory = statsHistory
-      .map((statsItem) =>
-        bnToBn(statsItem.income.minting)
-          .add(bnToBn(statsItem.income.stakingRemainder))
-          .add(bnToBn(statsItem.income.slash))
-          .add(bnToBn(statsItem.income.others))
-      )
-      .map((bn) => toPrecision(bn, precision, false));
+    const incomeHistory = statsHistory.map(
+      (statsItem) =>
+        toPrecision(statsItem.income.minting, precision, false) +
+        toPrecision(statsItem.income.stakingRemainder, precision, false) +
+        toPrecision(statsItem.income.slash, precision, false) +
+        toPrecision(statsItem.income.others, precision, false)
+    );
     setIncomeHistory(incomeHistory);
 
-    const outputHistory = statsHistory
-      .map((statsItem) =>
-        bnToBn(statsItem.output.tip)
-          .add(bnToBn(statsItem.output.proposal))
-          .add(bnToBn(statsItem.output.bounty))
-          .add(bnToBn(statsItem.output.burnt))
-      )
-      .map((bn) => toPrecision(bn, precision, false));
+    const outputHistory = statsHistory.map(
+      (statsItem) =>
+        toPrecision(statsItem.output.tip, precision, false) +
+        toPrecision(statsItem.output.proposal, precision, false) +
+        toPrecision(statsItem.output.bounty, precision, false) +
+        toPrecision(statsItem.output.burnt, precision, false)
+    );
     setOutputHistory(outputHistory);
 
     const treasuryHistory = statsHistory.map((statsItem) =>
@@ -322,8 +319,8 @@ const TotalStacked = () => {
     values: [
       {
         label: "Income",
-        primaryColor: "#DF405D",
-        secondaryColor: "#FFEEF1",
+        primaryColor: "#FFA4C5",
+        secondaryColor: "#FBEAF0",
         data: incomeHistory,
         fill: true,
         icon: "square",
@@ -331,8 +328,8 @@ const TotalStacked = () => {
       },
       {
         label: "Output",
-        primaryColor: "#FED077",
-        secondaryColor: "#FFEDC9",
+        primaryColor: "#96F0E2",
+        secondaryColor: "#EAFCF9",
         data: outputHistory,
         fill: true,
         icon: "square",
@@ -340,8 +337,8 @@ const TotalStacked = () => {
       },
       {
         label: "Treasury",
-        primaryColor: "#FBA06E",
-        secondaryColor: "#FBA06E",
+        primaryColor: "#11CAF0",
+        secondaryColor: "#11CAF0",
         data: treasuryHistory,
         fill: false,
         icon: "bar",
@@ -366,7 +363,7 @@ const TotalStacked = () => {
           </SecondListWrapper>
         </ListWrapper>
         <ChartWrapper>
-          {/* <Chart data={chartData} onHover={onHover} /> */}
+          <Chart data={chartData} onHover={onHover} />
         </ChartWrapper>
       </ContentWrapper>
     </CardWrapper>

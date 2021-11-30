@@ -46,7 +46,12 @@ const Icon = styled.div`
       width: 10px;
       height: 10px;
       border: 3px solid
-        ${(p) => (p.disabled ? "rgba(29, 37, 60, 0.24)" : p.color ?? "#EEEEEE")};
+        ${(p) =>
+          p.disabled
+            ? p.color === "transparent"
+              ? "transparent"
+              : "rgba(29, 37, 60, 0.24)"
+            : p.color ?? "#EEEEEE"};
       border-radius: 50%;
     `}
     ${(p) =>
@@ -113,7 +118,7 @@ const Label = ({ data, icon, status, clickEvent }) => {
         }}
       >
         <IconWrapper>
-          {!children && <Icon icon={icon} color={color} disabled={disabled} />}
+          <Icon icon={icon} color={color} disabled={disabled} />
         </IconWrapper>
         <Title disabled={disabled}>{name}</Title>
         <Popup
