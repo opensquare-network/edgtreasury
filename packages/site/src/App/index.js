@@ -43,14 +43,11 @@ import TransfersSlash from "../pages/TransfersSlash";
 import AdminLogin from "../pages/AdminLogin";
 
 import { usePreload } from "../utils/hooks";
-import { useSelector } from "react-redux";
-import { chainSelector } from "../store/reducers/chainSlice";
 
 export default function App() {
-  const chain = useSelector(chainSelector);
   usePreload();
 
-  connect(chain);
+  connect();
 
   return (
     <Router>

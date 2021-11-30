@@ -20,6 +20,10 @@ export function getPrecision(chainSymbol) {
     return 10;
   }
 
+  if (strEqualIgnoreCase(CHAINS.EDGEWARE, chainSymbol)) {
+    return 18;
+  }
+
   return 12;
 }
 
@@ -163,6 +167,8 @@ export function networkFromSymbol(symbol) {
     return "kusama";
   } else if (symbol.toLowerCase() === CHAINS.POLKADOT) {
     return "polkadot";
+  } else if (symbol.toLowerCase() === CHAINS.EDGEWARE) {
+    return "edgeware";
   } else {
     return null;
   }
@@ -173,6 +179,8 @@ export function symbolFromNetwork(network) {
     return CHAINS.KUSAMA;
   } else if (network === "polkadot") {
     return CHAINS.POLKADOT;
+  } else if (network === "edgeware") {
+    return CHAINS.EDGEWARE;
   } else {
     return null;
   }
