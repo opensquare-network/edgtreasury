@@ -6,13 +6,13 @@
     "node": ">=15.0.0"
   },
   "scripts": {
-    "deploy:edg": "pm2 start ecosystem.config.js --only edg-price-tracker"
+    "deploy:priceEdg": "pm2 start ecosystem.config.js --only edg-price-tracker",
+    "deploy:priceSync": "pm2 start ecosystem.config.js --only edg-price-sync"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
     "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
-    "minimist": "^1.2.5",
     "mongodb": "^4.1.3",
     "node-fetch": "^2.6.1"
   }

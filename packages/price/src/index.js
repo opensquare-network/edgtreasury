@@ -1,20 +1,11 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const minimist = require("minimist");
 const dayjs = require("dayjs");
 const {getKlines} = require("./coinGecko");
 const {getEdgUsdtCollection} = require("./mongo");
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-function getCollection(symbol) {
-  if (symbol === "EDG") {
-    return getEdgUsdtCollection();
-  } else {
-    throw new Error("Unsupport symbol " + symbol);
-  }
-}
 
 async function saveKlines(col, klines) {
 
@@ -36,8 +27,8 @@ async function saveKlines(col, klines) {
   }
 }
 
-async function tick(symbol) {
-  const col = await getCollection(symbol);
+async function tick() {
+  const col = await getEdgUsdtCollection();
 
   const latestItem = (
     await col.find({}).sort({openTime: -1}).limit(1).toArray()
@@ -45,10 +36,10 @@ async function tick(symbol) {
   let klines;
   if (latestItem) {
     const nextStartTime = ((latestItem.openTime + 1000) / 1000).toFixed(0);
-    klines = await getKlines(symbol, nextStartTime);
+    klines = await getKlines(nextStartTime);
     console.log('get kline points', klines?.prices?.length ?? 0);
   } else {
-    klines = await getKlines(symbol);
+    klines = await getKlines();
   }
 
   await saveKlines(col, klines);
@@ -57,26 +48,14 @@ async function tick(symbol) {
 }
 
 async function main() {
-  const args = minimist(process.argv.slice(2));
-
-  if (!args.symbol) {
-    console.log("Must specify symbol with argument --symbol=[EDG]");
-    return;
-  }
-
-  if (!["EDG"].includes(args.symbol)) {
-    console.log(`Unknown symbol "${args.symbol}"`);
-    return;
-  }
-
   while (true) {
     let latestOpenTime = null;
 
     try {
-      latestOpenTime = await tick(args.symbol);
+      latestOpenTime = await tick();
       console.log(latestOpenTime)
       console.log(
-        `${args.symbol} price saved: ${dayjs(latestOpenTime).format(
+        `EDG price saved: ${dayjs(latestOpenTime).format(
           "YYYY-MM-DD HH:mm:ss"
         )}`
       );

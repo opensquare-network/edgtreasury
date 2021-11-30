@@ -4,12 +4,7 @@ dotenv.config();
 const DB = require("./output-scan");
 const { getPrice } = require("./price");
 
-const mongoUrl = process.env.MONGO_URL;
-if (!mongoUrl) {
-  console.log("MONGO_URL not set");
-  process.exit(1);
-}
-
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost:27017";
 const outDbName = process.env.MONGO_DB_OUTPUT_DB_NAME;
 if (!outDbName) {
   console.log("MONGO_DB_OUTPUT_DB_NAME not set");
@@ -56,7 +51,7 @@ async function main() {
   const bountyCol = await getBountyCollection();
   await savePrice(bountyCol);
 
-  console.log("Update price successful:", dbName);
+  console.log("Update price successful:", outDbName);
 }
 
 main().catch(console.error).then(() => process.exit(0));
