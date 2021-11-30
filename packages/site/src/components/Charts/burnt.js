@@ -44,6 +44,7 @@ const Title = styled(Text)`
 `;
 
 function Burnt({ chartData, symbol }) {
+  return null;
   if (!chartData) {
     return null;
   }

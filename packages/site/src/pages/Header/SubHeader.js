@@ -211,17 +211,17 @@ const TabExampleSecondaryPointing = () => {
               active: `/burnt` === pathname || pathname.indexOf(`/burnt`) === 0,
             },
           },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "transfersTab",
-              content: <TransfersMenu />,
-              to: `/transfers`,
-              exact: true,
-              key: "transfers",
-              active: `/transfers` === pathname,
-            },
-          },
+          // {
+          //   menuItem: {
+          //     as: NavLink,
+          //     id: "transfersTab",
+          //     content: <TransfersMenu />,
+          //     to: `/transfers`,
+          //     exact: true,
+          //     key: "transfers",
+          //     active: `/transfers` === pathname,
+          //   },
+          // },
         ]
       : showMenuTabs === "Income"
       ? [
@@ -249,58 +249,58 @@ const TabExampleSecondaryPointing = () => {
                 pathname.indexOf(`${symbol}/income/slash/staking`) === 0,
             },
           },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "treasurySlashTab",
-              content: <TreasurySlashMenu />,
-              to: `/income/slash/treasury`,
-              exact: true,
-              key: "treasurySlash",
-              active:
-                `/income/slash/treasury` === pathname ||
-                pathname.indexOf(`/income/slash/treasury`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "electionPhragmenSlashTab",
-              content: <ElectionPhragmenSlashMenu />,
-              to: `/income/slash/electionphragmen`,
-              exact: true,
-              key: "electionPhragmenSlash",
-              active:
-                `/income/slash/electionphragmen` === pathname ||
-                pathname.indexOf(`/income/slash/electionphragmen`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "democracySlashTab",
-              content: <DemocracySlashMenu />,
-              to: `/income/slash/democracy`,
-              exact: true,
-              key: "democracySlash",
-              active:
-                `/income/slash/democracy` === pathname ||
-                pathname.indexOf(`/income/slash/democracy`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "identitySlashTab",
-              content: <IdentitySlashMenu />,
-              to: `/income/slash/identity`,
-              exact: true,
-              key: "identitySlash",
-              active:
-                `/income/slash/identity` === pathname ||
-                pathname.indexOf(`/income/slash/identity`) === 0,
-            },
-          },
+          // {
+          //   menuItem: {
+          //     as: NavLink,
+          //     id: "treasurySlashTab",
+          //     content: <TreasurySlashMenu />,
+          //     to: `/income/slash/treasury`,
+          //     exact: true,
+          //     key: "treasurySlash",
+          //     active:
+          //       `/income/slash/treasury` === pathname ||
+          //       pathname.indexOf(`/income/slash/treasury`) === 0,
+          //   },
+          // },
+          // {
+          //   menuItem: {
+          //     as: NavLink,
+          //     id: "electionPhragmenSlashTab",
+          //     content: <ElectionPhragmenSlashMenu />,
+          //     to: `/income/slash/electionphragmen`,
+          //     exact: true,
+          //     key: "electionPhragmenSlash",
+          //     active:
+          //       `/income/slash/electionphragmen` === pathname ||
+          //       pathname.indexOf(`/income/slash/electionphragmen`) === 0,
+          //   },
+          // },
+          // {
+          //   menuItem: {
+          //     as: NavLink,
+          //     id: "democracySlashTab",
+          //     content: <DemocracySlashMenu />,
+          //     to: `/income/slash/democracy`,
+          //     exact: true,
+          //     key: "democracySlash",
+          //     active:
+          //       `/income/slash/democracy` === pathname ||
+          //       pathname.indexOf(`/income/slash/democracy`) === 0,
+          //   },
+          // },
+          // {
+          //   menuItem: {
+          //     as: NavLink,
+          //     id: "identitySlashTab",
+          //     content: <IdentitySlashMenu />,
+          //     to: `/income/slash/identity`,
+          //     exact: true,
+          //     key: "identitySlash",
+          //     active:
+          //       `/income/slash/identity` === pathname ||
+          //       pathname.indexOf(`/income/slash/identity`) === 0,
+          //   },
+          // },
           {
             menuItem: {
               as: NavLink,
