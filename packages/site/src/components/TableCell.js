@@ -26,11 +26,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const TableCell = ({ title, children }) => {
+const TableCell = ({ title, children, justify = "end" }) => {
   return (
     <Wrapper>
       <div>{title}</div>
-      <div>{children}</div>
+      <div style={{justifyContent: justify}}>{children}</div>
     </Wrapper>
   );
 };

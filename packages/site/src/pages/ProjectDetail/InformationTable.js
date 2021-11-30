@@ -67,7 +67,7 @@ const InformationTable = ({data,  projectData }) => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <TableCell title={"Expense"}>
+                <TableCell title={"Expense"} justify={"start"}>
                   <ProjectExpense
                     expenseDot={expenseDot}
                     expenseKsm={expenseKsm}
