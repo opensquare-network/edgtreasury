@@ -13,7 +13,6 @@ import { chainSelector } from "../../store/reducers/chainSlice";
 
 import InformationTable from "./InformationTable";
 import Timeline from "../Timeline";
-import Comment from "../Comment";
 import RelatedLinks from "../RelatedLinks";
 import User from "../../components/User";
 import Balance from "../../components/Balance";
@@ -168,7 +167,6 @@ const TipDetail = () => {
       </DetailTableWrapper>
       <TimelineCommentWrapper>
         <Timeline data={timelineData} loading={loadingTipDetail} />
-        <Comment type="tip" index={getTipIndex(tipDetail)} />
       </TimelineCommentWrapper>
     </>
   );

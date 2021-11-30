@@ -5,10 +5,7 @@ import ExternalLink from "./ExternalLink";
 
 export default function ExplorerLink({ href, base, children }) {
   const chain = useSelector(chainSelector);
-  const defaultExplorerSite =
-    chain === "kusama"
-      ? "https://kusama.subscan.io/"
-      : "https://polkadot.subscan.io/";
+  const defaultExplorerSite = `https://${chain}.subscan.io/`;
   const baseHref = base ?? defaultExplorerSite;
   return (
     <ExternalLink href={new URL(href, baseHref).href}>{children}</ExternalLink>
