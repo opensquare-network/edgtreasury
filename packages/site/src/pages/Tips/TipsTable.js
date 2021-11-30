@@ -132,7 +132,7 @@ const TipsTable = ({ data, loading, header, footer }) => {
                       </Table.Cell>
                       <Table.Cell className="link-cell hidden">
                         <NavLink
-                          to={`/${symbol.toLowerCase()}/tips/${
+                          to={`/tips/${
                             item.proposeAtBlockHeight
                           }_${item.hash}`}
                         >

@@ -46,23 +46,7 @@ const ButtonList = ({ extrinsicIndexer, eventIndexer, polkassembly }) => {
   return (
     <Wrapper>
       <ExplorerLink
-        base={
-          chain === "kusama"
-            ? "https://polkascan.io/kusama/"
-            : "https://polkascan.io/polkadot/"
-        }
-        href={`${isExtrinsic ? "transaction" : "event"}/${blockHeight}-${
-          isExtrinsic ? extrinsicIndex : eventSort
-        }`}
-      >
-        <ImageButton src={"/imgs/polkascan-logo.svg"} />
-      </ExplorerLink>
-      <ExplorerLink
-        base={
-          chain === "kusama"
-            ? "https://kusama.subscan.io/"
-            : "https://polkadot.subscan.io/"
-        }
+        base={`https://${chain}.subscan.io/`}
         href={subscanLink}
       >
         <ImageButton src={"/imgs/subscan-logo.svg"} />
