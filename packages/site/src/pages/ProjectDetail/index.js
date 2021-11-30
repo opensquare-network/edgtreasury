@@ -13,7 +13,7 @@ import {
 } from "../../store/reducers/projectSlice";
 import { chainSelector } from "../../store/reducers/chainSlice";
 import { useChainRoute } from "../../utils/hooks";
-import styled from "styled-components";
+import InformationTable from "./InformationTable";
 
 
 const ProjectDetail = () => {
@@ -55,7 +55,8 @@ const ProjectDetail = () => {
   return (
     <>
       <DetailGoBack />
-      <Detail data={detailData} projectData={projectDetail} />
+      <Detail data={detailData} />
+      <InformationTable data={detailData} projectData={projectDetail} />
       <RelatedLinks data={projectDetail.relatedLinks} />
       <Proposals data={projectDetail.proposals} />
     </>

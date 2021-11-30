@@ -65,15 +65,15 @@ const TipsTable = ({ data, loading, header, footer }) => {
             <StyledTable unstackable>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Name</Table.HeaderCell>
+                  <Table.HeaderCell style={{width:200}}>Name</Table.HeaderCell>
                   <Table.HeaderCell>Description</Table.HeaderCell>
-                  <Table.HeaderCell textAlign={"right"}>
+                  <Table.HeaderCell style={{width:120}} textAlign={"right"}>
                     Proposals
                   </Table.HeaderCell>
-                  <Table.HeaderCell textAlign={"right"}>
+                  <Table.HeaderCell  style={{width:240}} textAlign={"right"}>
                     Expense
                   </Table.HeaderCell>
-                  <Table.HeaderCell textAlign={"right"}>Start</Table.HeaderCell>
+                  <Table.HeaderCell  style={{width:200}} textAlign={"right"}>Start</Table.HeaderCell>
                   {/* <Table.HeaderCell textAlign={"right"}>End</Table.HeaderCell> */}
                   <Table.HeaderCell className="hidden" />
                 </Table.Row>

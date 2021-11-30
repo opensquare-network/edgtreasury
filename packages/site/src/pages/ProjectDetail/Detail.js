@@ -80,14 +80,8 @@ const ExpenseContentWrapper = styled.div`
   }
 `;
 
-const Detail = ({ data, projectData }) => {
-  const { name, logo, description, dollar } = data;
-  const {
-    expenseDot,
-    expenseKsm,
-    dotProposalsCount,
-    ksmProposalsCount,
-  } = projectData;
+const Detail = ({ data }) => {
+  const { name, logo, description } = data;
 
   return (
     <Wrapper>
@@ -102,21 +96,6 @@ const Detail = ({ data, projectData }) => {
         </NameWrapper>
         <NameContent>{description}</NameContent>
       </NameContentWrapper>
-      <ProposalWrapper>
-        <CustomTextMinor>Proposals</CustomTextMinor>
-        <ProjectProposals
-          dotProposalsCount={dotProposalsCount}
-          ksmProposalsCount={ksmProposalsCount}
-        />
-      </ProposalWrapper>
-      <ExpenseContentWrapper>
-        <CustomTextMinor>Expense</CustomTextMinor>
-        <ProjectExpense
-          expenseDot={expenseDot}
-          expenseKsm={expenseKsm}
-          dollar={dollar}
-        />
-      </ExpenseContentWrapper>
     </Wrapper>
   );
 };
