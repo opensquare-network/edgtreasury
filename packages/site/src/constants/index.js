@@ -79,4 +79,5 @@ export const DEFAULT_POLKADOT_NODES = [
 export const CHAINS = {
   POLKADOT: "dot",
   KUSAMA: "ksm",
+  EDGEWARE: "edg",
 };

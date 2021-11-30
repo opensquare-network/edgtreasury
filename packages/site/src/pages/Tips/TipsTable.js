@@ -55,7 +55,7 @@ const TipsTable = ({ data, loading, header, footer }) => {
   const onClickRow = (height, hash) => {
     if (height && hash) {
       if (window.innerWidth < 1140) {
-        history.push(`/${symbol.toLowerCase()}/tips/${height}_${hash}`);
+        history.push(`/tips/${height}_${hash}`);
       }
     }
   };
