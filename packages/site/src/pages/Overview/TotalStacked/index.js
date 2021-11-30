@@ -353,7 +353,7 @@ const TotalStacked = () => {
           </SecondListWrapper>
         </ListWrapper>
         <ChartWrapper>
-          <Chart data={chartData} onHover={onHover} />
+          {/* <Chart data={chartData} onHover={onHover} /> */}
         </ChartWrapper>
       </ContentWrapper>
     </CardWrapper>
