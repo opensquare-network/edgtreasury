@@ -8,6 +8,8 @@ import {
   DEFAULT_KUSAMA_NODES,
   DEFAULT_POLKADOT_NODE_URL,
   DEFAULT_POLKADOT_NODES,
+  DEFAULT_EDGEWARE_NODE_URL,
+  DEFAULT_EDGEWARE_NODES,
 } from "../constants";
 
 const apiInstanceMap = new Map();
@@ -26,6 +28,9 @@ let nodeUrl = (() => {
     polkadot:
       DEFAULT_POLKADOT_NODES.find((item) => item.url === localNodeUrl?.polkadot)
         ?.url || DEFAULT_POLKADOT_NODE_URL,
+    edgeware:
+      DEFAULT_EDGEWARE_NODES.find((item) => item.url === localNodeUrl?.kusama)
+        ?.url || DEFAULT_EDGEWARE_NODE_URL,
   };
 })();
 
@@ -34,6 +39,7 @@ export const getNodeUrl = () => nodeUrl;
 export const getNodes = () => ({
   kusama: DEFAULT_KUSAMA_NODES,
   polkadot: DEFAULT_POLKADOT_NODES,
+  edgeware: DEFAULT_EDGEWARE_NODES,
 });
 
 export const getApi = async (chain, queryUrl) => {
@@ -94,9 +100,10 @@ export const getBlockTime = async (chain, number) => {
 };
 
 export const estimateBlocksTime = async (chain, blocks) => {
-  const api = await getApi(chain);
-  const nsPerBlock = api.consts.babe.expectedBlockTime.toNumber();
-  return nsPerBlock * blocks;
+  return;
+  // const api = await getApi(chain);
+  // const nsPerBlock = api.consts.babe.expectedBlockTime.toNumber();
+  // return nsPerBlock * blocks;
 };
 
 export const encodeKusamaAddress = (address) => {
