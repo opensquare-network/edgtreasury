@@ -11,8 +11,8 @@ import { getPrecision, toPrecision } from "../../utils";
 import TotalStacked from "./TotalStacked";
 import Income from "./Income";
 import Output from "./Output";
-import { chainSymbolSelector } from "../../store/reducers/chainSlice";
 import { useChainRoute } from "../../utils/hooks";
+import { CHAINS } from "../../constants";
 
 const DoughnutWrapper = styled.div`
   display: grid;
@@ -40,11 +40,10 @@ const TableWrapper = styled.div`
 
 const Overview = () => {
   const overview = useSelector(overviewSelector);
-  const symbol = useSelector(chainSymbolSelector);
 
   useChainRoute();
 
-  const precision = getPrecision(symbol);
+  const precision = getPrecision(CHAINS.EDGEWARE);
 
   const bountySpent = toPrecision(
     overview.output.bounty || 0,
@@ -59,13 +58,10 @@ const Overview = () => {
   const tipSpent = toPrecision(overview.output.tip || 0, precision, false);
   const burntTotal = toPrecision(overview.output.burnt || 0, precision, false);
 
-  const inflation = toPrecision(
-    overview.income.inflation || 0,
-    precision,
-    false
-  );
-  const slashTreasury = toPrecision(
-    overview.income.slashSeats.treasury || 0,
+  console.log(overview.income);
+  const minting = toPrecision(overview.income.minting || 0, precision, false);
+  const stakingRemainder = toPrecision(
+    overview.income.stakingRemainder || 0,
     precision,
     false
   );
@@ -76,11 +72,6 @@ const Overview = () => {
   );
   const slashStaking = toPrecision(
     overview.income.slashSeats.staking || 0,
-    precision,
-    false
-  );
-  const slashElection = toPrecision(
-    overview.income.slashSeats.electionsPhragmen || 0,
     precision,
     false
   );
@@ -98,11 +89,10 @@ const Overview = () => {
       <Summary />
       <DoughnutWrapper>
         <Income
-          inflation={inflation}
-          slashTreasury={slashTreasury}
-          slashDemocracy={slashDemocracy}
+          minting={minting}
+          stakingRemainder={stakingRemainder}
           slashStaking={slashStaking}
-          slashElection={slashElection}
+          slashDemocracy={slashDemocracy}
           slashIdentity={slashIdentity}
           others={others}
         />
