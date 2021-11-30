@@ -11,7 +11,6 @@ import {
 
 import InformationTable from "./InformationTable";
 import Timeline from "../Timeline";
-import Comment from "../Comment";
 import RelatedLinks from "../RelatedLinks";
 import BountyLifeCycleTable from "./BountyLifeCycleTable";
 import User from "../../components/User";
@@ -273,7 +272,6 @@ const BountyDetail = () => {
       </DetailTableWrapper>
       <TimelineCommentWrapper>
         <Timeline data={timelineData} loading={loadingBountyDetail} />
-        <Comment type="bounty" index={parseInt(bountyIndex)} />
       </TimelineCommentWrapper>
     </>
   );

@@ -69,7 +69,7 @@ const BountiesTable = ({ data, loading, header, footer }) => {
 
   const onClickRow = (bountyIndex) => {
     if (window.innerWidth < 1140) {
-      history.push(`/${symbol.toLowerCase()}/bounties/${bountyIndex}`);
+      history.push(`/bounties/${bountyIndex}`);
     }
   };
 
@@ -136,7 +136,7 @@ const BountiesTable = ({ data, loading, header, footer }) => {
                       </Table.Cell>
                       <Table.Cell className="link-cell hidden">
                         <NavLink
-                          to={`/${symbol.toLowerCase()}/bounties/${
+                          to={`/bounties/${
                             item.bountyIndex
                           }`}
                         >
