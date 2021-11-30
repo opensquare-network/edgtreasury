@@ -93,7 +93,11 @@ const TotalStacked = () => {
     icon: "square",
     labels: [
       {
-        name: "Inflation",
+        name: "Minting",
+        value: 0,
+      },
+      {
+        name: "Staking Remainder",
         value: 0,
       },
       {
@@ -101,14 +105,6 @@ const TotalStacked = () => {
         children: [
           {
             name: "Staking",
-            value: 0,
-          },
-          {
-            name: "Treasury",
-            value: 0,
-          },
-          {
-            name: "Election",
             value: 0,
           },
           {
@@ -169,6 +165,7 @@ const TotalStacked = () => {
   }, [dispatch, chain]);
 
   const statsHistory = useSelector(statsHistorySelector);
+  console.log({ precision, statsHistory });
 
   useEffect(() => {
     const dateLabels = statsHistory.map(
@@ -178,7 +175,8 @@ const TotalStacked = () => {
 
     const incomeHistory = statsHistory
       .map((statsItem) =>
-        bnToBn(statsItem.income.inflation)
+        bnToBn(statsItem.income.minting)
+          .add(bnToBn(statsItem.income.stakingRemainder))
           .add(bnToBn(statsItem.income.slash))
           .add(bnToBn(statsItem.income.others))
       )
@@ -211,8 +209,16 @@ const TotalStacked = () => {
         icon: "square",
         labels: [
           {
-            name: "Inflation",
-            value: toPrecision(statsData.income.inflation, precision, false),
+            name: "Minting",
+            value: toPrecision(statsData.income.minting, precision, false),
+          },
+          {
+            name: "Staking Remainder",
+            value: toPrecision(
+              statsData.income.stakingRemainder,
+              precision,
+              false
+            ),
           },
           {
             name: "Slashes",
@@ -221,22 +227,6 @@ const TotalStacked = () => {
                 name: "Staking",
                 value: toPrecision(
                   statsData.income.slashSeats.staking,
-                  precision,
-                  false
-                ),
-              },
-              {
-                name: "Treasury",
-                value: toPrecision(
-                  statsData.income.slashSeats.treasury,
-                  precision,
-                  false
-                ),
-              },
-              {
-                name: "Election",
-                value: toPrecision(
-                  statsData.income.slashSeats.election,
                   precision,
                   false
                 ),
