@@ -76,6 +76,19 @@ export const DEFAULT_POLKADOT_NODES = [
   },
 ];
 
+export const DEFAULT_EDGEWARE_NODE_URL =
+  "wss://edgeware.api.onfinality.io/public-ws";
+export const DEFAULT_EDGEWARE_NODES = [
+  {
+    name: "onFinality",
+    url: "wss://edgeware.api.onfinality.io/public-ws",
+  },
+  {
+    name: "Commonwealth",
+    url: "wss://mainnet1.edgewa.re",
+  },
+];
+
 export const CHAINS = {
   POLKADOT: "dot",
   KUSAMA: "ksm",
