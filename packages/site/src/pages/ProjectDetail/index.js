@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import DetailGoBack from "../components/DetailGoBack";
-import Comment from "../Comment";
 import RelatedLinks from "./RelatedLinks";
 import Detail from "./Detail";
 import Proposals from "./Proposals";
@@ -16,11 +15,6 @@ import { chainSelector } from "../../store/reducers/chainSlice";
 import { useChainRoute } from "../../utils/hooks";
 import styled from "styled-components";
 
-const CommentWrapper = styled.div`
-> :not(:first-child) {
-  margin-top: 24px;
-}
-`;
 
 const ProjectDetail = () => {
   useChainRoute();

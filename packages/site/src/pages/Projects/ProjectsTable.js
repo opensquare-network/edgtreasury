@@ -52,7 +52,7 @@ const TipsTable = ({ data, loading, header, footer }) => {
 
   const onClickRow = (id) => {
     if (window.innerWidth < 1140) {
-      history.push(`/${symbol.toLowerCase()}/projects/${id}`);
+      history.push(`/projects/${id}`);
     }
   };
 
@@ -107,7 +107,7 @@ const TipsTable = ({ data, loading, header, footer }) => {
                       </Table.Cell>
                       <Table.Cell className="link-cell hidden">
                         <NavLink
-                          to={`/${symbol.toLowerCase()}/projects/${item.id}`}
+                          to={`/projects/${item.id}`}
                         >
                           <RightButton />
                         </NavLink>

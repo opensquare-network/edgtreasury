@@ -14,7 +14,6 @@ import { fetchDescription } from "../../store/reducers/descriptionSlice";
 
 import InformationTable from "./InformationTable";
 import Timeline from "../Timeline";
-import Comment from "../Comment";
 import RelatedLinks from "../RelatedLinks";
 import ProposalLifeCycleTable from "./ProposalLifeCycleTable";
 import User from "../../components/User";

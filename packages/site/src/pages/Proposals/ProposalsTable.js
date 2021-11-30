@@ -104,7 +104,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
 
   const onClickRow = (proposalIndex) => {
     if (window.innerWidth < 1140) {
-      history.push(`/${symbol.toLowerCase()}/proposals/${proposalIndex}`);
+      history.push(`/proposals/${proposalIndex}`);
     }
   };
 
