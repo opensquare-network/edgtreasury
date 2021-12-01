@@ -7,14 +7,9 @@ function sum(arr) {
 
 function calc(projects) {
   projects.forEach((project) => {
-    const ksmProposals =
-      project.proposals?.filter((p) => p.token === "ksm") || [];
-    const dotProposals =
-      project.proposals?.filter((p) => p.token === "dot") || [];
-    project.ksmProposalsCount = ksmProposals.length;
-    project.dotProposalsCount = dotProposals.length;
-    project.expenseKsm = sum(ksmProposals.map((p) => p.amount));
-    project.expenseDot = sum(dotProposals.map((p) => p.amount));
+    const proposals = project.proposals ?? [];
+    project.proposalsCount = proposals.length;
+    project.expense = sum(proposals.map((p) => p.amount));
     project.dollar = sum(
       (project.proposals || []).map(
         (p) => (p.amount ?? 0) * (p.proposeTimePrice ?? 0)
@@ -49,11 +44,9 @@ class ProjectController {
           description: item.description,
           startTime: item.startTime,
           endTime: item.endTime,
-          proposals: item.proposals?.length,
-          ksmProposalsCount: item.ksmProposalsCount,
-          dotProposalsCount: item.dotProposalsCount,
-          expenseKsm: item.expenseKsm,
-          expenseDot: item.expenseDot,
+          proposals: item.proposals?.length ?? 0,
+          proposalsCount: item.proposalsCount,
+          expense: item.expense,
           dollar: item.dollar,
         })),
       page,
