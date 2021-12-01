@@ -18,7 +18,7 @@ const descriptionSlice = createSlice({
 export const { setDescription } = descriptionSlice.actions;
 
 export const fetchDescription =
-  (chain, type = "", index) =>
+  (type = "", index) =>
   async (dispatch) => {
     const { result } = await api.fetch(
       `/${pluralize(type)}/${index}/description`
@@ -27,10 +27,9 @@ export const fetchDescription =
   };
 
 export const putDescription =
-  (chain, type, index, description, address) => async (dispatch) => {
+  (type, index, description, address) => async (dispatch) => {
     const signature = await signMessage(
       JSON.stringify({
-        chain,
         type,
         index,
         description,
@@ -50,7 +49,7 @@ export const putDescription =
         body: JSON.stringify({ description }),
       }
     );
-    dispatch(fetchDescription(chain, type, index));
+    dispatch(fetchDescription(type, index));
   };
 
 export const descriptionSelector = (state) => state.description.description;

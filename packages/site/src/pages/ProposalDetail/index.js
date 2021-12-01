@@ -247,11 +247,11 @@ const ProposalDetail = () => {
   }, [dispatch, chain, proposalIndex]);
 
   useEffect(() => {
-    dispatch(fetchDescription(chain, "proposal", proposalIndex));
+    dispatch(fetchDescription("proposal", proposalIndex));
     return () => {
       dispatch(fetchDescription());
     };
-  }, [dispatch, chain, proposalIndex]);
+  }, [dispatch, proposalIndex]);
 
   const loadingProposalDetail = useSelector(loadingProposalDetailSelector);
   const proposalDetail = useSelector(proposalDetailSelector);
@@ -267,7 +267,6 @@ const ProposalDetail = () => {
       <DetailTableWrapper title="Proposal" desc={`#${proposalIndex}`}>
         <InformationTable
           loading={loadingProposalDetail}
-          chain={chain}
           proposalIndex={proposalIndex}
         />
         <ProposalLifeCycleTable loading={loadingProposalDetail} />
