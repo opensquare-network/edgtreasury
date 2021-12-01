@@ -4,6 +4,10 @@ import styled from "styled-components";
 
 import { PRIMARY_THEME_COLOR } from "../constants";
 import { SECONDARY_THEME_COLOR } from "../constants";
+import PrevIcon from "./pagination/leftAngel";
+import PrevIconGrey from "./pagination/leftAngleGrey";
+import NextIcon from "./pagination/rightAngle";
+import NextIconGrey from "./pagination/rightAngleGrey";
 
 const Wrapper = styled.div`
   /* margin: 10px 0; */
@@ -13,6 +17,7 @@ const Wrapper = styled.div`
   a {
     font-family: "Inter" !important;
     outline: none !important;
+
     &.active {
       color: ${PRIMARY_THEME_COLOR} !important;
       background: ${SECONDARY_THEME_COLOR} !important;
@@ -26,6 +31,7 @@ const Wrapper = styled.div`
     min-height: 32px !important;
     border: 0 !important;
     box-shadow: none;
+
     > a {
       width: 32px !important;
       height: 32px !important;
@@ -36,9 +42,11 @@ const Wrapper = styled.div`
       justify-content: center;
       border: 0 !important;
       border-radius: 4px !important;
+
       ::before {
         display: none;
       }
+
       :not(:first-child) {
         margin-left: 8px !important;
       }
@@ -49,19 +57,21 @@ const Wrapper = styled.div`
 const CustomPagination = (props) => {
   const totalPages = props.totalPages;
   if (!totalPages) return null;
+  const Prev = props.activePage === 1 ? PrevIconGrey : PrevIcon;
+  const Next = props.activePage === props.totalPages ? NextIconGrey : NextIcon;
   return (
     <Wrapper>
       <Pagination
         boundaryRange={1}
         siblingRange={1}
         ellipsisItem={{
-          content: <Icon name="ellipsis horizontal" />,
+          content: <Icon name="ellipsis horizontal"/>,
           icon: true,
         }}
-        firstItem={{ content: <Icon name="angle double left" />, icon: true }}
-        lastItem={{ content: <Icon name="angle double right" />, icon: true }}
-        prevItem={{ content: <Icon name="angle left" />, icon: true }}
-        nextItem={{ content: <Icon name="angle right" />, icon: true }}
+        firstItem={null}
+        lastItem={null}
+        prevItem={{content: <Prev />, icon: true}}
+        nextItem={{content: <Next />, icon: true}}
         {...props}
       />
     </Wrapper>

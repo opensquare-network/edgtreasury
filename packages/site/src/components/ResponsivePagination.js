@@ -55,7 +55,6 @@ const CustomDropdown = styled(Dropdown)`
   height: 24px !important;
   min-height: 24px !important;
   min-width: 72px !important;
-  border-left: 0 !important;
   border: 1px solid #dddddd !important;
   padding: 3px 8px !important;
 
