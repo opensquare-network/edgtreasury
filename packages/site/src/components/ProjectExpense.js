@@ -34,14 +34,12 @@ const DollarWrapper = styled.div`
   text-align: right;
 `;
 
-export default function ProjectExpense({ expenseDot, expenseKsm, dollar }) {
+export default function ProjectExpense({ expense, dollar }) {
   const numberDollar = Number(dollar);
   return (
     <div>
       <ExpenseWrapper>
-        {expenseDot > 0 && <div>{`${expenseDot.toLocaleString()} DOT`}</div>}
-        <PlusWrapper>+</PlusWrapper>
-        {expenseKsm > 0 && <div>{`${expenseKsm.toLocaleString()} KSM`}</div>}
+        {expense > 0 && <div>{`${expense.toLocaleString()} EDG`}</div>}
       </ExpenseWrapper>
       {!isNaN(numberDollar) && (
         <DollarWrapper>

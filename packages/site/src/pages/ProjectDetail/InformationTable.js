@@ -32,13 +32,11 @@ const StyledTable = styled(Table)`
 `;
 
 const InformationTable = ({data,  projectData }) => {
-  const { name, logo, description, dollar } = data;
+  const { dollar } = data;
 
   const {
-    expenseDot,
-    expenseKsm,
-    dotProposalsCount,
-    ksmProposalsCount,
+    expense,
+    proposalsCount,
   } = projectData;
 
 
@@ -58,21 +56,14 @@ const InformationTable = ({data,  projectData }) => {
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Proposal"}>
-                  <ProjectProposals
-                    dotProposalsCount={dotProposalsCount}
-                    ksmProposalsCount={ksmProposalsCount}
-                  />
+                  <ProjectProposals proposalsCount={proposalsCount} />
                 </TableCell>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Expense"} justify={"start"}>
-                  <ProjectExpense
-                    expenseDot={expenseDot}
-                    expenseKsm={expenseKsm}
-                    dollar={dollar}
-                  />
+                  <ProjectExpense expense={expense} dollar={dollar} />
                 </TableCell>
               </Table.Cell>
             </Table.Row>

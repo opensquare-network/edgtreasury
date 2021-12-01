@@ -33,23 +33,13 @@ const Item = styled.div`
   }
 `;
 
-export default function ProjectProposals({
-  dotProposalsCount,
-  ksmProposalsCount,
-}) {
+export default function ProjectProposals({proposalsCount}) {
   return (
     <Wrapper>
-      {dotProposalsCount > 0 && (
+      {proposalsCount > 0 && (
         <Item>
-          {dotProposalsCount}
-          <Image src="/imgs/logo-polkadot.svg" />
-        </Item>
-      )}
-      <PlusWrapper>+</PlusWrapper>
-      {ksmProposalsCount > 0 && (
-        <Item>
-          {ksmProposalsCount}
-          <Image src="/imgs/logo-kusama.svg" />
+          {proposalsCount}
+          {/*<Image src="/imgs/logo-kusama.svg" />*/}
         </Item>
       )}
     </Wrapper>
