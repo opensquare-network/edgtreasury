@@ -7,6 +7,7 @@ import List from "./CustomList";
 import Total from "./Total";
 
 import Text from "../../components/Text";
+import { abbreviateBigNumber } from "../../utils";
 
 const Title = styled(Text)`
   font-size: 16px;
@@ -71,9 +72,9 @@ const DoughnutCard = ({ title, data, status, clickEvent, children }) => {
     <CardWrapper>
       <Title>{title}</Title>
       <ContentWrapper>
-        <List data={data} status={status} clickEvent={clickEvent}></List>
+        <List data={data} status={status} clickEvent={clickEvent}/>
         <CanvasWrapper>
-          <Total total={total}>
+          <Total total={abbreviateBigNumber(total)}>
             <DoughnutWrapper>
               <Doughnut data={data} status={status} />
             </DoughnutWrapper>
