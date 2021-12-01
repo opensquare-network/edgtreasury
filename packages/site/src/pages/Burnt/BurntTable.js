@@ -13,7 +13,6 @@ import PolygonLabel from "../../components/PolygonLabel";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../../store/reducers/chainSlice";
 import Card from "../../components/Card";
-import Burnt from "../../components/Charts/burnt";
 
 const CardWrapper = styled(Card)`
   overflow-x: hidden;
@@ -77,7 +76,6 @@ const BurntTable = ({ data, chartData, loading, footer }) => {
 
   return (
     <CardWrapper>
-      <Burnt symbol={symbol} chartData={chartData} />
       <Wrapper>
         <TableWrapper>
           <TableLoading loading={loading}>
