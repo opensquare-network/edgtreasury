@@ -37,7 +37,6 @@ import Inflation from "../pages/Inflation";
 import OthersIncome from "../pages/OthersIncome";
 import UserAgreement from "../pages/UserAgreement";
 import Privacy from "../pages/Privacy";
-import Transfers from "../pages/Transfers";
 import TransfersSlash from "../pages/TransfersSlash";
 import AdminLogin from "../pages/AdminLogin";
 
@@ -60,7 +59,6 @@ export default function App() {
               <Route exact path="/tips" component={Tips} />
               <Route exact path="/proposals" component={Proposals} />
               <Route exact path="/bounties" component={Bounties} />
-              <Route exact path="/transfers" component={Transfers} />
               <Route exact path="/tips/:tipId" component={TipDetail} />
               <Route
                 exact

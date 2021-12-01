@@ -13,7 +13,6 @@ import ElectionPhragmenSlashMenu from "./ElectionPhragmenSlashMenu";
 import InflationMenu from "./InflationMenu";
 import OthersIncomeMenu from "./OthersIncomeMenu";
 import ProjectsMenu from "./ProjectsMenu";
-import TransfersMenu from "./TransfersMenu";
 import TansfersSlashMenu from "./TansfersSlashMenu";
 import { fetchIncomeCount } from "../../store/reducers/incomeSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -197,17 +196,6 @@ const TabExampleSecondaryPointing = () => {
               key: "bounties",
               active:
                 `/bounties` === pathname || pathname.indexOf(`/bounties`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "transfersTab",
-              content: <TransfersMenu />,
-              to: `/transfers`,
-              exact: true,
-              key: "transfers",
-              active: `/transfers` === pathname,
             },
           },
         ]
