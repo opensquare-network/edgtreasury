@@ -15,7 +15,6 @@ import Footer from "../pages/Footer";
 import Tips from "../pages/Tips";
 import Proposals from "../pages/Proposals";
 import Bounties from "../pages/Bounties";
-import Burnt from "../pages/Burnt";
 import TipDetail from "../pages/TipDetail";
 import ProposalDetail from "../pages/ProposalDetail";
 import BountyDetail from "../pages/BountyDetail";
@@ -73,7 +72,6 @@ export default function App() {
                 path="/bounties/:bountyIndex"
                 component={BountyDetail}
               />
-              <Route exact path="/burnt" component={Burnt} />
               <Route exact path="/projects" component={Projects} />
               <Route
                 exact
