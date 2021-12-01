@@ -29,7 +29,7 @@ const StyledTable = styled(Table)`
   table-layout: fixed;
 `;
 
-const InformationTable = ({ loading, chain, proposalIndex }) => {
+const InformationTable = ({ loading, proposalIndex }) => {
   const dispatch = useDispatch();
   const isAdmin = useIsAdmin();
   const proposalDetail = useSelector(proposalDetailSelector);
@@ -45,7 +45,6 @@ const InformationTable = ({ loading, chain, proposalIndex }) => {
   const addDes = () => {
     dispatch(
       putDescription(
-        chain,
         "proposal",
         parseInt(proposalIndex),
         description,

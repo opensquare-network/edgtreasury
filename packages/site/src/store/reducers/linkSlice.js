@@ -33,16 +33,15 @@ export class TipIndex {
   }
 }
 
-export const fetchLinks = (chain, type, index) => async (dispatch) => {
+export const fetchLinks = (type, index) => async (dispatch) => {
   const { result } = await api.fetch(`/${pluralize(type)}/${index}/links`);
   dispatch(setLinks(result || []));
 };
 
 export const addLink =
-  (chain, type, index, link, description, address) => async (dispatch) => {
+  (type, index, link, description, address) => async (dispatch) => {
     const signature = await signMessage(
       JSON.stringify({
-        chain,
         type,
         index,
         link,
@@ -63,14 +62,13 @@ export const addLink =
         body: JSON.stringify({ link, description }),
       }
     );
-    dispatch(fetchLinks(chain, type, index));
+    dispatch(fetchLinks(type, index));
   };
 
 export const removeLink =
-  (chain, type, index, linkIndex, address) => async (dispatch) => {
+  (type, index, linkIndex, address) => async (dispatch) => {
     const signature = await signMessage(
       JSON.stringify({
-        chain,
         type,
         index,
         linkIndex,
@@ -88,7 +86,7 @@ export const removeLink =
         },
       }
     );
-    dispatch(fetchLinks(chain, type, index));
+    dispatch(fetchLinks(type, index));
   };
 
 export const linksSelector = (state) => state.links.links;
