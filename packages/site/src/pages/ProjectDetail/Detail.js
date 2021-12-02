@@ -5,8 +5,6 @@ import { Image } from "semantic-ui-react";
 import Card from "../../components/Card";
 import Title from "../../components/Title";
 import TextMinor from "../../components/TextMinor";
-import ProjectProposals from "../../components/ProjectProposals";
-import ProjectExpense from "../../components/ProjectExpense";
 
 const Wrapper = styled(Card)`
   padding: 24px 32px;
@@ -42,42 +40,6 @@ const NameTitle = styled(Title)`
 
 const NameContent = styled(TextMinor)`
   text-align: justify;
-`;
-
-const ProposalWrapper = styled.div`
-  flex-basis: 160px;
-  > :last-child > * {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: right;
-    color: rgba(0, 0, 0, 0.9);
-  }
-  @media screen and (max-width: 481px) {
-    > :last-child {
-      justify-content: flex-start;
-    }
-  }
-`;
-
-const CustomTextMinor = styled(TextMinor)`
-  padding-top: 6px;
-  text-align: right;
-`;
-
-const ExpenseContentWrapper = styled.div`
-  margin-left: 32px;
-  flex-basis: 160px;
-  > :last-child > :first-child {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    color: rgba(0, 0, 0, 0.9);
-  }
-  @media screen and (max-width: 481px) {
-    margin-left: 0;
-    margin-right: 32px;
-  }
 `;
 
 const Detail = ({ data }) => {

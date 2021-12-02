@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import {
-  setProposalDetail,
   fetchProposalDetail,
   loadingProposalDetailSelector,
   proposalDetailSelector,
+  setProposalDetail,
 } from "../../store/reducers/proposalSlice";
-import { scanHeightSelector } from "../../store/reducers/chainSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
+import { chainSelector, scanHeightSelector } from "../../store/reducers/chainSlice";
 import { fetchDescription } from "../../store/reducers/descriptionSlice";
 
 import InformationTable from "./InformationTable";
@@ -22,7 +21,6 @@ import Voter from "../../components/Voter";
 import Proposer from "../../components/Proposer";
 import BlocksTime from "../../components/BlocksTime";
 import TimelineCommentWrapper from "../../components/TimelineCommentWrapper";
-import DetailGoBack from "../components/DetailGoBack";
 import { useChainRoute } from "../../utils/hooks";
 import DetailTableWrapper from "../../components/DetailTableWrapper";
 

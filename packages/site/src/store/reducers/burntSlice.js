@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import api from "../../services/scanApi";
 import { getApi } from "../../services/chainApi";
 import { TreasuryAccount } from "../../constants";
 import { getPrecision, symbolFromNetwork, toPrecision } from "../../utils";

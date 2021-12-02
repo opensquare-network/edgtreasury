@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Label, Menu, Tab } from "semantic-ui-react";
+import { Menu, Tab } from "semantic-ui-react";
 import { NavLink, useLocation } from "react-router-dom";
 import TipsMenu from "./TipsMenu";
 import ProposalsMenu from "./ProposalsMenu";
@@ -13,21 +13,13 @@ import OthersIncomeMenu from "./OthersIncomeMenu";
 import ProjectsMenu from "./ProjectsMenu";
 import TansfersSlashMenu from "./TansfersSlashMenu";
 import { fetchIncomeCount } from "../../store/reducers/incomeSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showMenuTabsSelector } from "../../store/reducers/menuSlice";
-import {
-  chainSelector,
-  chainSymbolSelector,
-} from "../../store/reducers/chainSlice";
+import { chainSelector, chainSymbolSelector, } from "../../store/reducers/chainSlice";
 import Card from "../../components/Card";
 import Container from "../../components/Container";
 
-import {
-  PRIMARY_THEME_COLOR,
-  SECONDARY_THEME_COLOR,
-  TEXT_DARK_MAJOR,
-  TEXT_DARK_MINOR,
-} from "../../constants";
+import { PRIMARY_THEME_COLOR, SECONDARY_THEME_COLOR, TEXT_DARK_MAJOR, TEXT_DARK_MINOR, } from "../../constants";
 
 const Wrapper = styled.div`
   position: relative;
