@@ -5,22 +5,9 @@ import { Image } from "semantic-ui-react";
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: start;
 `;
 
-const PlusWrapper = styled.div`
-  font-size: 14px !important;
-  line-height: 22px !important;
-  color: rgba(0, 0, 0, 0.3) !important;
-  margin: 0 4px !important;
-  font-weight: 400 !important;
-  :first-child {
-    display: none;
-  }
-  :last-child {
-    display: none;
-  }
-`;
 
 const Item = styled.div`
   font-size: 14px;

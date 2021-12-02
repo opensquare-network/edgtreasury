@@ -5,25 +5,11 @@ import { toLocaleStringWithFixed } from "../utils";
 const ExpenseWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: start;
   font-size: 14px;
   line-height: 22px;
   color: rgba(0, 0, 0, 0.65);
   white-space: nowrap;
-`;
-
-const PlusWrapper = styled.div`
-  font-size: 14px !important;
-  line-height: 22px !important;
-  color: rgba(0, 0, 0, 0.3);
-  margin: 0 4px;
-  font-weight: 400 !important;
-  :first-child {
-    display: none;
-  }
-  :last-child {
-    display: none;
-  }
 `;
 
 const DollarWrapper = styled.div`
@@ -31,7 +17,7 @@ const DollarWrapper = styled.div`
   line-height: 18px;
   color: rgba(0, 0, 0, 0.3);
   white-space: nowrap;
-  text-align: right;
+  text-align: left;
 `;
 
 export default function ProjectExpense({ expense, dollar }) {
