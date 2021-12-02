@@ -55,6 +55,32 @@ function timelineItemHeight(timelineItem) {
   return timelineItem.indexer?.blockHeight;
 }
 
+function normalizeReferendumTimelineItem(referendum, scanHeight) {
+  return {
+    index: referendum.index,
+    defaultUnfold: !referendum.info.Finished,
+    subTimeline:  (referendum.timeline || []).map((item) => ({
+      name: item.method === "Started" ? `Referendum #${referendum.index}` : item.method,
+      extrinsicIndexer: item.type === "extrinsic" ? item.indexer : undefined,
+      eventIndexer: item.type === "event" ? item.indexer : undefined,
+      fields: (() => {
+        if (item.method === "Started") {
+          const { voteThreshold } = item.args;
+          return [
+            { title: "Vote threshold", value: voteThreshold },
+          ];
+        } else if (item.method === "Passed") {
+          return [];
+        } else if (item.method === "NotPassed") {
+          return [];
+        } else if (item.method === "Executed") {
+          return [];
+        }
+      })(),
+    })),
+  };
+}
+
 function normalizeMotionTimelineItem(motion, scanHeight) {
   return {
     index: motion.index,
@@ -214,17 +240,24 @@ function constructProposalProcessItem(item, proposalDetail) {
 }
 
 function processTimeline(proposalDetail, scanHeight) {
-  const { timeline, motions } = proposalDetail;
+  const { timeline, motions, referendums } = proposalDetail;
   if (!timeline) {
     return [];
   }
 
-  const allItems = [...timeline, ...motions];
+  const allItems = [
+    ...timeline,
+    ...motions.map(m => ({...m, isMotion: true})),
+    ...referendums.map(r => ({...r, isReferendum: true}))
+  ];
   allItems.sort((a, b) => timelineItemHeight(a) - timelineItemHeight(b));
 
   return allItems.map((item) => {
-    if (isMotion(item)) {
+    if (item.isMotion) {
       return normalizeMotionTimelineItem(item, scanHeight);
+    }
+    else if (item.isReferendum) {
+      return normalizeReferendumTimelineItem(item, scanHeight);
     }
 
     return constructProposalProcessItem(item, proposalDetail);
