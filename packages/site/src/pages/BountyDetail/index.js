@@ -27,7 +27,6 @@ import {
   chainSymbolSelector,
   scanHeightSelector,
 } from "../../store/reducers/chainSlice";
-import DetailGoBack from "../components/DetailGoBack";
 import { useChainRoute } from "../../utils/hooks";
 
 const ValueWrapper = styled.span`
@@ -264,7 +263,6 @@ const BountyDetail = () => {
 
   return (
     <>
-      <DetailGoBack />
       <DetailTableWrapper title="Bounty" desc={`#${bountyIndex}`}>
         <InformationTable loading={loadingBountyDetail} />
         <BountyLifeCycleTable loading={loadingBountyDetail} />

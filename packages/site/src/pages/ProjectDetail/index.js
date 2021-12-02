@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-import DetailGoBack from "../components/DetailGoBack";
 import RelatedLinks from "./RelatedLinks";
 import Detail from "./Detail";
 import Proposals from "./Proposals";
@@ -54,7 +53,6 @@ const ProjectDetail = () => {
 
   return (
     <>
-      <DetailGoBack />
       <Detail data={detailData} />
       <InformationTable data={detailData} projectData={projectDetail} />
       <RelatedLinks data={projectDetail.relatedLinks} />

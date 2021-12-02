@@ -20,7 +20,6 @@ import TipLifeCycleTable from "./TipLifeCycleTable";
 import Funder from "./Funder";
 import ClickableLink from "../../components/ClickableLink";
 import TimelineCommentWrapper from "../../components/TimelineCommentWrapper";
-import DetailGoBack from "../components/DetailGoBack";
 import { useChainRoute } from "../../utils/hooks";
 import DetailTableWrapper from "../../components/DetailTableWrapper";
 
@@ -159,7 +158,6 @@ const TipDetail = () => {
 
   return (
     <>
-      <DetailGoBack />
       <DetailTableWrapper title="Tip" desc={getShortTipId(tipDetail)}>
         <InformationTable loading={loadingTipDetail} />
         <TipLifeCycleTable loading={loadingTipDetail} />
