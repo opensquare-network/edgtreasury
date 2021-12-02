@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Image } from "semantic-ui-react";
@@ -13,19 +13,14 @@ import BlocksTime from "../../components/BlocksTime";
 import { TEXT_DARK_MAJOR, TEXT_DARK_MINOR } from "../../constants";
 import { overviewSelector } from "../../store/reducers/overviewSlice";
 import {
+  chainSelector,
+  chainSymbolSelector,
   fetchSpendPeriod,
   spendPeriodSelector,
 } from "../../store/reducers/chainSlice";
-import {
-  fetchTreasury,
-  treasurySelector,
-} from "../../store/reducers/burntSlice";
-import {
-  chainSelector,
-  chainSymbolSelector,
-} from "../../store/reducers/chainSlice";
+import { fetchTreasury, treasurySelector, } from "../../store/reducers/burntSlice";
 import { mrgap } from "../../styles";
-import { toLocaleStringWithFixed } from "../../utils";
+import { abbreviateBigNumber, } from "../../utils";
 
 const Wrapper = styled(Card)`
   @media screen and (max-width: 1320px) {
@@ -107,6 +102,7 @@ const Summary = () => {
   const overview = useSelector(overviewSelector);
   const spendPeriod = useSelector(spendPeriodSelector);
   const treasury = useSelector(treasurySelector);
+  console.log('treasury', treasury)
   const symbol = useSelector(chainSymbolSelector);
   const symbolLowerCase = symbol?.toLowerCase();
 
@@ -170,7 +166,7 @@ const Summary = () => {
           <div>
             <Title>Available</Title>
             <ValueWrapper>
-              <TextBold>{toLocaleStringWithFixed(treasury.free, 0)}</TextBold>
+              <TextBold>{abbreviateBigNumber(treasury.free, 2)}</TextBold>
               <TextMinorBold>{symbol}</TextMinorBold>
             </ValueWrapper>
           </div>
@@ -183,7 +179,7 @@ const Summary = () => {
             <Title>Next burn</Title>
             <ValueWrapper>
               <TextBold>
-                {toLocaleStringWithFixed(
+                {abbreviateBigNumber(
                   treasury.burnPercent * treasury.free,
                   4
                 )}

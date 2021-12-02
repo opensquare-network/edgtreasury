@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
@@ -9,21 +9,15 @@ import BlocksTime from "../../components/BlocksTime";
 import { mrgap } from "../../styles";
 import Card from "../../components/Card";
 
-import {
-  fetchProposalsSummary,
-  proposalSummarySelector,
-} from "../../store/reducers/proposalSlice";
+import { fetchProposalsSummary, proposalSummarySelector, } from "../../store/reducers/proposalSlice";
 import {
   chainSelector,
   chainSymbolSelector,
   fetchSpendPeriod,
   spendPeriodSelector,
 } from "../../store/reducers/chainSlice";
-import {
-  fetchTreasury,
-  treasurySelector,
-} from "../../store/reducers/burntSlice";
-import { toLocaleStringWithFixed } from "../../utils";
+import { fetchTreasury, treasurySelector, } from "../../store/reducers/burntSlice";
+import { abbreviateBigNumber } from "../../utils";
 
 const Wrapper = styled(Card)`
   padding: 16px 20px 8px;
@@ -148,7 +142,7 @@ const Summary = () => {
       <Item className="right available">
         <Title>Available</Title>
         <ValueWrapper>
-          <Value>{toLocaleStringWithFixed(treasury.free, 0)}</Value>
+          <Value>{abbreviateBigNumber(treasury.free, 2)}</Value>
           <Unit>{symbol}</Unit>
         </ValueWrapper>
       </Item>
@@ -156,7 +150,7 @@ const Summary = () => {
         <Title>Next burn</Title>
         <ValueWrapper>
           <Value>
-            {toLocaleStringWithFixed(treasury.burnPercent * treasury.free, 4)}
+            {abbreviateBigNumber(treasury.burnPercent * treasury.free, 4)}
           </Value>
           <Unit>{symbol}</Unit>
         </ValueWrapper>

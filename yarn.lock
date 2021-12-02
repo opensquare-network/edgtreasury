@@ -1687,7 +1687,7 @@
 
 "@polkadot/api-derive@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/api-derive/-/api-derive-6.8.2-4.tgz#1749a7896b5f3ff3dddf80ccc7cf4a7e091e9e87"
+  resolved "https://registry.npmjs.org/@polkadot/api-derive/-/api-derive-6.8.2-4.tgz#1749a7896b5f3ff3dddf80ccc7cf4a7e091e9e87"
   integrity sha512-8dLZt8qwpo7LFNR7ZZueKd5aky6ycQgYxbQ5D3gNDU9fV3o8aI63bgsfKlLCvkiYwewcVt+b/EJxYPUPRi6ziQ==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -1719,7 +1719,7 @@
 
 "@polkadot/api@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/api/-/api-6.8.2-4.tgz#014ab68c1c5fb85f9c0d4001c348b6b0f5c5059d"
+  resolved "https://registry.npmjs.org/@polkadot/api/-/api-6.8.2-4.tgz#014ab68c1c5fb85f9c0d4001c348b6b0f5c5059d"
   integrity sha512-X3TNeD7UyD/JyxlzgXc8vF4TpxXsZ4U6UapebD2UMey7i7c1CRRzvq2tjhkxqNlk+O7LNbmLqKo2ig6FtghXaw==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -1833,7 +1833,7 @@
 
 "@polkadot/rpc-core@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/rpc-core/-/rpc-core-6.8.2-4.tgz#d131ecff1a09d6492eed07561b5203abfc187e5e"
+  resolved "https://registry.npmjs.org/@polkadot/rpc-core/-/rpc-core-6.8.2-4.tgz#d131ecff1a09d6492eed07561b5203abfc187e5e"
   integrity sha512-vtj9y3s9wbC+O4uIUBwUFhfajvXjYxFusq1ULw0OhTW70i7SyY+NWrI8ymfLKUVrViN6wenL5otHp3G4FmftAA==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -1859,7 +1859,7 @@
 
 "@polkadot/rpc-provider@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/rpc-provider/-/rpc-provider-6.8.2-4.tgz#a96c259fdbab101500249e52c634d5b485def1b0"
+  resolved "https://registry.npmjs.org/@polkadot/rpc-provider/-/rpc-provider-6.8.2-4.tgz#a96c259fdbab101500249e52c634d5b485def1b0"
   integrity sha512-bDrQ96QI3VQaa5Oa0I5Q9svwhzjcnSpyP6d+Ki0rN+JtM4ajcS/Dc6oZIJre3YXwOD3ZjQiyzCz5LIv/7Adw3Q==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -1884,7 +1884,7 @@
 
 "@polkadot/types-known@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/types-known/-/types-known-6.8.2-4.tgz#93e1d3894a17213729e7a0ff1b4cccf1b09f7a41"
+  resolved "https://registry.npmjs.org/@polkadot/types-known/-/types-known-6.8.2-4.tgz#93e1d3894a17213729e7a0ff1b4cccf1b09f7a41"
   integrity sha512-wp6e90m9Lioe0xYwcoKxhjpSgg93uudaAnBsLdIAMefK5UT8ro7gwZnQbUptZNapXMzefqEUwnMNV/kMKE6+2Q==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -1907,7 +1907,7 @@
 
 "@polkadot/types@6.8.2-4":
   version "6.8.2-4"
-  resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-6.8.2-4.tgz#f0af81746522c791d53d368f008740b1eeb25bd5"
+  resolved "https://registry.npmjs.org/@polkadot/types/-/types-6.8.2-4.tgz#f0af81746522c791d53d368f008740b1eeb25bd5"
   integrity sha512-d1rJRn6iObEmIxvymrYDXrxUthBbJVkMk5MQqNQwja3LmU/M8sIJBoqsPHuvDZPV7VKLKusk2as6QB8gDH14xA==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -2098,7 +2098,7 @@
 
 "@polkadot/x-fetch@^7.8.2":
   version "7.9.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/x-fetch/-/x-fetch-7.9.2.tgz#fe943be5854f7355630388b1b5d2bb52f1a3afb2"
+  resolved "https://registry.npmjs.org/@polkadot/x-fetch/-/x-fetch-7.9.2.tgz#fe943be5854f7355630388b1b5d2bb52f1a3afb2"
   integrity sha512-zutLkFJVaLVpY3cIGYJD0AReLfAnPr2J82Ca4pvy/BxqwwGYuGLcn36A4m6nliGBP2lcH4oYY+mcCqIwoPWQUQ==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -2221,7 +2221,7 @@
 
 "@polkadot/x-ws@^7.8.2":
   version "7.9.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/x-ws/-/x-ws-7.9.2.tgz#016df26fa829b74f8b1e31a1dcd6e34256c1231f"
+  resolved "https://registry.npmjs.org/@polkadot/x-ws/-/x-ws-7.9.2.tgz#016df26fa829b74f8b1e31a1dcd6e34256c1231f"
   integrity sha512-+yppMsZtvDztVOSmkqAQuhR6TfV1Axa6ergAsWb52DrfXvFP5geqtARsI6ZdDgMsE3qHSVQTcJz8vgNOr5+ztQ==
   dependencies:
     "@babel/runtime" "^7.16.3"
@@ -12169,7 +12169,7 @@ rxjs@^6.6.3, rxjs@^6.6.6:
 
 rxjs@^7.4.0:
   version "7.4.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.4.0.tgz#a12a44d7eebf016f5ff2441b87f28c9a51cebc68"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.4.0.tgz#a12a44d7eebf016f5ff2441b87f28c9a51cebc68"
   integrity sha512-7SQDi7xeTMCJpqViXh8gL/lebcwlp3d831F05+9B44A4B0WfsEwUQHR64gsH1kvJ+Ep/J9K2+n1hVl1CsGN23w==
   dependencies:
     tslib "~2.1.0"
@@ -13495,7 +13495,7 @@ tslib@^2.0.1, tslib@^2.0.3, tslib@^2.3.0, tslib@^2.3.1:
 
 tslib@~2.1.0:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
 
 tsscmp@1.0.6:

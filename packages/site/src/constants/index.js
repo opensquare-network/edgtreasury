@@ -39,7 +39,7 @@ export const ProposalStatus = {
 };
 
 export const TreasuryAccount =
-  "F3opxRbN5ZbjJNU511Kj2TLuzFcDq9BGduA9TgiECafpg29";
+  "jz77v8cHXwEWbPnbfQScXnU9Qy5VkHnDLfpDsuDYUZ7ELae";
 
 export const REACTION_THUMBUP = 1;
 export const REACTION_THUMBDOWN = 2;

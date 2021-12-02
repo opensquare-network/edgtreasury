@@ -2,6 +2,7 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 import { isWeb3Injected, web3FromAddress } from "@polkadot/extension-dapp";
 import { stringToHex } from "@polkadot/util";
 import { encodeAddress } from "@polkadot/keyring";
+import { spec } from "@edgeware/node-types";
 
 import {
   DEFAULT_KUSAMA_NODE_URL,
@@ -47,7 +48,7 @@ export const getApi = async (chain, queryUrl) => {
   if (!apiInstanceMap.has(url)) {
     apiInstanceMap.set(
       url,
-      ApiPromise.create({ provider: new WsProvider(url) })
+      ApiPromise.create({ provider: new WsProvider(url), typesBundle: spec.typesBundle })
     );
   }
   return apiInstanceMap.get(url);
