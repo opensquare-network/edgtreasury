@@ -39,7 +39,6 @@ export default function ProjectProposals({proposalsCount}) {
       {proposalsCount > 0 && (
         <Item>
           {proposalsCount}
-          {/*<Image src="/imgs/logo-kusama.svg" />*/}
         </Item>
       )}
     </Wrapper>
