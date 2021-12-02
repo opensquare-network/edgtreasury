@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 
 import ImageButton from "./ImageButton";
 import ExplorerLink from "../../components/ExplorerLink";
-import ExternalLink from "../../components/ExternalLink";
-import { useIsMounted } from "../../utils/hooks";
 import { mrgap } from "../../styles";
-import polkassemblyApi from "../../services/polkassembly";
 import { useSelector } from "react-redux";
 import { chainSelector } from "../../store/reducers/chainSlice";
 
@@ -19,23 +16,11 @@ const Wrapper = styled.div`
 `;
 
 const ButtonList = ({ extrinsicIndexer, eventIndexer, polkassembly }) => {
-  const [motionUrl, setMotionUrl] = useState(null);
-  const isMounted = useIsMounted();
   const chain = useSelector(chainSelector);
 
-  useEffect(() => {
-    (async () => {
-      if (polkassembly !== undefined) {
-        const url = await polkassemblyApi.getMotionUrl(polkassembly);
-        if (isMounted.current) {
-          setMotionUrl(url);
-        }
-      }
-    })();
-  }, [polkassembly, isMounted]);
-
   const blockHeight = (extrinsicIndexer || eventIndexer)?.blockHeight;
-  const extrinsicIndex = (extrinsicIndexer || eventIndexer)?.extrinsicIndex || 0;
+  const extrinsicIndex =
+    (extrinsicIndexer || eventIndexer)?.extrinsicIndex || 0;
   const eventSort = eventIndexer?.eventIndex;
 
   const isExtrinsic = !!extrinsicIndexer;
@@ -45,17 +30,9 @@ const ButtonList = ({ extrinsicIndexer, eventIndexer, polkassembly }) => {
 
   return (
     <Wrapper>
-      <ExplorerLink
-        base={`https://${chain}.subscan.io/`}
-        href={subscanLink}
-      >
+      <ExplorerLink base={`https://${chain}.subscan.io/`} href={subscanLink}>
         <ImageButton src={"/imgs/subscan-logo.svg"} />
       </ExplorerLink>
-      {motionUrl && (
-        <ExternalLink href={motionUrl}>
-          <ImageButton src={"/imgs/polkassembly-logo.svg"} />
-        </ExternalLink>
-      )}
     </Wrapper>
   );
 };

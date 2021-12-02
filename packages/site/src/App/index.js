@@ -31,7 +31,6 @@ import Toast from "../pages/Toast";
 import DemocracySlash from "../pages/DemocracySlash";
 import IdentitySlash from "../pages/IdentitySlash";
 import StakingSlash from "../pages/StakingSlash";
-import ElectionPhragmenSlash from "../pages/ElectionPhragmenSlash";
 import Inflation from "../pages/Inflation";
 import OthersIncome from "../pages/OthersIncome";
 import UserAgreement from "../pages/UserAgreement";
