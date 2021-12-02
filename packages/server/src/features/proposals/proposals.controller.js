@@ -1,4 +1,8 @@
-const { getProposalCollection, getMotionCollection } = require("../../mongo");
+const {
+  getProposalCollection,
+  getMotionCollection,
+  getDemocracyReferendumCollection
+} = require("../../mongo");
 const { extractPage } = require("../../utils");
 const linkService = require("../../services/link.service");
 const descriptionService = require("../../services/description.service");
@@ -86,7 +90,14 @@ class ProposalsController {
         motionInfo,
         ...targetMotion,
       }
-    })
+    });
+
+    const referndumCol = await getDemocracyReferendumCollection();
+    const referendums = await referndumCol.find({
+      index: {
+        $in: (proposal.referendums || []).map(info => info.referendumIndex),
+      }
+    }).sort({ index: 1 }).toArray();
 
     ctx.body = {
       indexer: proposal.indexer,
@@ -100,6 +111,7 @@ class ProposalsController {
       latestState: proposal.state,
       motions,
       timeline: proposal.timeline,
+      referendums,
     };
   }
 
