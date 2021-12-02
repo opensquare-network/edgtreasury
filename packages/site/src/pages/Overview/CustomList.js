@@ -26,7 +26,7 @@ const TitleWrapper = styled.div`
   display: flex;
 `;
 
-const List = ({ data, status, clickEvent }) => {
+const List = ({ data, status, clickEvent, fixed }) => {
   const { title, date, icon, labels } = data;
   return (
     <Wrapper>
@@ -43,6 +43,7 @@ const List = ({ data, status, clickEvent }) => {
           status={status?.labels[index]}
           icon={icon}
           clickEvent={clickEvent}
+          fixed={fixed}
         />
       ))}
     </Wrapper>

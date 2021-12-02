@@ -4,6 +4,7 @@ import { Line } from "react-chartjs-2";
 import dayjs from "dayjs";
 
 import Text from "../../../components/Text";
+import { abbreviateBigNumber } from "../../../utils";
 
 const LegendWrapper = styled.div`
   display: flex;
@@ -61,6 +62,9 @@ const LineChart = ({ data, onHover }) => {
           position: "right",
           ticks: {
             stepSize: 100000000,
+            callback: function (label) {
+              return abbreviateBigNumber(label, 0);
+            },
           },
         },
       ],
@@ -90,8 +94,11 @@ const LineChart = ({ data, onHover }) => {
         },
         label: function (tooltipItem, data) {
           return `${data.datasets[tooltipItem.datasetIndex].label} ${
-            Math.round(tooltipItem.value) === tooltipItem.value ? "" : "≈"
-          } ${parseInt(tooltipItem.value)}`;
+            Math.round(tooltipItem.value) === tooltipItem.value &&
+            tooltipItem.value < 1000
+              ? ""
+              : "≈ "
+          } ${abbreviateBigNumber(tooltipItem.value)}`;
         },
       },
       itemSort: function (a, b) {

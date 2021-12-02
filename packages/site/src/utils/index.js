@@ -195,7 +195,7 @@ export function toLocaleStringWithFixed(num = 0, fixed = 2) {
   return num.toLocaleString(undefined, { minimumFractionDigits: fixed });
 }
 
-export function abbreviateBigNumber(x) {
+export function abbreviateBigNumber(x, fixed = 2) {
   const n = new BigNumber(x);
   const fmt = {
     decimalSeparator: ".",
@@ -217,5 +217,5 @@ export function abbreviateBigNumber(x) {
     }
   });
   BigNumber.config({ FORMAT: fmt });
-  return new BigNumber(n.dividedBy(divideBy).toFixed(0)).toFormat();
+  return new BigNumber(n.dividedBy(divideBy).toFixed(fixed)).toFormat();
 }
