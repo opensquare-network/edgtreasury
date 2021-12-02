@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { Image } from "semantic-ui-react";
 
 import { PRIMARY_THEME_COLOR } from "../../constants";
 import Text from "../../components/Text";
@@ -146,14 +145,6 @@ const Proposals = ({ data }) => {
               <VerticalWrapper>
                 <FlexWrapper>
                   <TextWrapper>
-                    <Image
-                      width={24}
-                      src={
-                        item.token === "ksm"
-                          ? "/imgs/logo-kusama.svg"
-                          : "/imgs/logo-polkadot.svg"
-                      }
-                    />
                     <NavLink to={`/${item.token}/proposals/${item.proposalId}`}>
                       <NumberText>{`#${item.proposalId}`}</NumberText>
                     </NavLink>
