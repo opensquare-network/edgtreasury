@@ -14,7 +14,7 @@ const Wrapper = styled.header`
 `;
 
 const Header = () => {
-  const location = useLocation();
+  const {pathname} = useLocation();
   const hideSubHeader =
     [
       "/login",
@@ -25,7 +25,7 @@ const Header = () => {
       "/verifyemail",
       "/useragreement",
       "/privacy",
-    ].includes(location.pathname) || location.pathname.includes("/settings");
+    ].includes(pathname) || pathname.includes("/settings");
 
   return (
     <>

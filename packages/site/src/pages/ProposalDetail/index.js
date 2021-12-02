@@ -296,7 +296,6 @@ const ProposalDetail = () => {
 
   return (
     <>
-      <DetailGoBack />
       <DetailTableWrapper title="Proposal" desc={`#${proposalIndex}`}>
         <InformationTable
           loading={loadingProposalDetail}
