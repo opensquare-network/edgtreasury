@@ -96,7 +96,7 @@ const CustomCard = styled(Card)`
 const TopWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 46px;
+  height: 43px;
   padding: 11px 0;
   border-bottom: 1px solid #f4f4f4;
   > a {
