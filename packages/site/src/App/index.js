@@ -28,11 +28,9 @@ import ForgetPassword from "../pages/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword";
 import VerifyEmail from "../pages/VerifyEmail";
 import Toast from "../pages/Toast";
-import TreasurySlash from "../pages/TreasurySlash";
 import DemocracySlash from "../pages/DemocracySlash";
 import IdentitySlash from "../pages/IdentitySlash";
 import StakingSlash from "../pages/StakingSlash";
-import ElectionPhragmenSlash from "../pages/ElectionPhragmenSlash";
 import Inflation from "../pages/Inflation";
 import OthersIncome from "../pages/OthersIncome";
 import UserAgreement from "../pages/UserAgreement";
@@ -79,11 +77,6 @@ export default function App() {
               <Route exact path="/income" component={Inflation} />
               <Route
                 exact
-                path="/income/slash/treasury"
-                component={TreasurySlash}
-              />
-              <Route
-                exact
                 path="/income/slash/democracy"
                 component={DemocracySlash}
               />
@@ -97,12 +90,6 @@ export default function App() {
                 path="/income/slash/staking"
                 component={StakingSlash}
               />
-              <Route
-                exact
-                path="/income/slash/electionphragmen"
-                component={ElectionPhragmenSlash}
-              />
-              TransfersSlash
               <Route
                 exact
                 path="/income/transfers"

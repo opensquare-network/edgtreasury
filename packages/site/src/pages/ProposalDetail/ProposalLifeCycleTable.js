@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
@@ -8,10 +8,7 @@ import TableCell from "../../components/TableCell";
 import DateShow from "../../components/DateShow";
 import PolygonLabel from "../../components/PolygonLabel";
 import ExplorerLink from "../../components/ExplorerLink";
-import RelatedLinks from "../../components/RelatedLinks";
 
-import { useIsMounted } from "../../utils/hooks";
-import polkaassemblyApi from "../../services/polkassembly";
 import { proposalDetailSelector } from "../../store/reducers/proposalSlice";
 
 const FlexWrapper = styled.div`
@@ -24,23 +21,6 @@ const FlexWrapper = styled.div`
 
 const ProposalLifeCycleTable = ({ loading }) => {
   const proposalDetail = useSelector(proposalDetailSelector);
-  const [proposalUrl, setProposalUrl] = useState(null);
-  const isMounted = useIsMounted();
-
-  useEffect(() => {
-    (async () => {
-      if (proposalDetail) {
-        const url = await polkaassemblyApi.getProposalUrl(
-          proposalDetail.proposalIndex
-        );
-        if (isMounted.current) {
-          setProposalUrl(url);
-        }
-      } else {
-        setProposalUrl(null);
-      }
-    })();
-  }, [proposalDetail, isMounted]);
 
   return (
     <TableLoading loading={loading}>
@@ -71,30 +51,14 @@ const ProposalLifeCycleTable = ({ loading }) => {
             <Table.Cell>
               <TableCell title="Status">
                 <FlexWrapper>
-                  <div>{
-                    proposalDetail.latestState?.state ||
-                    proposalDetail.latestState?.name
-                  }</div>
+                  <div>
+                    {proposalDetail.latestState?.state ||
+                      proposalDetail.latestState?.name}
+                  </div>
                 </FlexWrapper>
               </TableCell>
             </Table.Cell>
           </Table.Row>
-          {proposalUrl && (
-            <Table.Row>
-              <Table.Cell>
-                <TableCell title="Proposal Page">
-                  <RelatedLinks
-                    links={[
-                      {
-                        link: proposalUrl,
-                        description: "Treasury proposal discusssion",
-                      },
-                    ]}
-                  />
-                </TableCell>
-              </Table.Cell>
-            </Table.Row>
-          )}
         </Table.Body>
       </Table>
     </TableLoading>
