@@ -37,7 +37,7 @@ const Wrapper = styled(Card)`
     display: flex;
     justify-content: space-between;
   }
-  padding: 20px 24px;
+  padding: 19px 24px;
   margin-bottom: 24px;
   @media screen and (max-width: 600px) {
     border-radius: 0;
@@ -54,6 +54,11 @@ const ItemWrapper = styled.div`
   align-items: center;
   & > *:first-child {
     margin-right: 20px;
+  }
+  @media screen and (max-width: 600px) {
+    img, .icon{
+      display: none !important;
+    }
   }
 `;
 

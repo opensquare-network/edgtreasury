@@ -74,7 +74,7 @@ const CountDown = ({ percent = 0 }) => {
   }
   const overHalf = percentInt > 50;
   return (
-    <CircleWrapper>
+    <CircleWrapper className="icon">
       <BackCircle />
       <InnerCircleWrapper>
         <InnerCircleLeft turn={turn} overHalf={overHalf} />
