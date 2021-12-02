@@ -104,6 +104,9 @@ const CustomCard = styled(Card)`
 `;
 
 const TopWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 46px;
   padding: 11px 0;
   border-bottom: 1px solid #f4f4f4;
   > a {
@@ -113,6 +116,8 @@ const TopWrapper = styled.div`
     :hover {
       color: ${TEXT_DARK_MINOR};
     }
+    
+    text-transform: capitalize;
   }
 `;
 
@@ -137,12 +142,53 @@ const Overview = () => {
   );
 };
 
+const Caret = <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7.875 5.625L11.25 9L7.875 12.375" stroke="black" strokeOpacity="0.15" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>;
+
+
 const TabExampleSecondaryPointing = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const showMenuTabs = useSelector(showMenuTabsSelector);
   const chain = useSelector(chainSelector);
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
+  let breadCrumbs = null;
+
+  const topCategories = [`/proposals`, `/projects`, '/income', '/tips', '/bounties'];
+
+  if( topCategories.indexOf(pathname) >-1 ) {
+    breadCrumbs = <>
+      {Caret}
+      <NavLink to={pathname}>{pathname.slice(1)}</NavLink>
+    </>;
+  }
+  if(pathname.includes(`/proposals/`)
+    || pathname.includes(`/bounties/`)
+    || pathname.includes(`/tips/`)) {
+    breadCrumbs = <>
+      {Caret}
+      <NavLink to={pathname}>{pathname.slice(1).replace("/", " #")}</NavLink>
+    </>;
+  }
+  if(pathname.includes(`/projects/`)) {
+    breadCrumbs = <>
+      {Caret}
+      <NavLink to={`/projects`}>Projects</NavLink>
+      {Caret}
+      <NavLink to={pathname}>{pathname.slice(10)}</NavLink>
+    </>;
+  }
+  if(pathname.includes(`/income/`)) {
+    breadCrumbs = <>
+      {Caret}
+      <NavLink to={`/income`}>Income</NavLink>
+      {Caret}
+      <NavLink
+        to={pathname}>{pathname.includes(`/income/slash/`) && `Slash `}{pathname.slice(pathname.includes(`/income/slash/`) ? 14 : 8)}</NavLink>
+    </>;
+  }
+
 
   useEffect(() => {
     dispatch(fetchIncomeCount(chain));
@@ -328,6 +374,7 @@ const TabExampleSecondaryPointing = () => {
         <CustomCard>
           <TopWrapper>
             <NavLink to={``}>Home</NavLink>
+            {breadCrumbs}
           </TopWrapper>
           <TabWrapper
             menu={{ secondary: true, pointing: true }}
