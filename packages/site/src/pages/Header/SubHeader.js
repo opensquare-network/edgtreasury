@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Tab } from "semantic-ui-react";
+import { Label, Menu, Tab } from "semantic-ui-react";
 import { NavLink, useLocation } from "react-router-dom";
 import TipsMenu from "./TipsMenu";
 import ProposalsMenu from "./ProposalsMenu";
@@ -223,7 +223,7 @@ const TabExampleSecondaryPointing = () => {
     dispatch(fetchIncomeCount(chain));
   }, [dispatch, chain]);
 
-  const panes =
+  let panes =
     showMenuTabs === "Home"
       ? [
           {
@@ -369,6 +369,26 @@ const TabExampleSecondaryPointing = () => {
           },
         ]
       : [];
+  if(pathname.includes('/proposals/')
+    ||pathname.includes('/projects/')
+    ||pathname.includes('/bounties/')
+    ||pathname.includes('/tips/')){
+    panes = [
+      {
+        menuItem: {
+          as: NavLink,
+          id: "detailTab",
+          content: <Menu.Item key="Detail">
+            Detail
+          </Menu.Item>,
+          to: `#`,
+          exact: true,
+          key: "detail",
+          active:true,
+        },
+      },
+    ];
+  }
 
   return (
     <Wrapper>
