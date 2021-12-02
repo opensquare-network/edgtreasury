@@ -5,11 +5,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import TipsMenu from "./TipsMenu";
 import ProposalsMenu from "./ProposalsMenu";
 import BountiesMenu from "./BountiesMenu";
-import TreasurySlashMenu from "./TreasurySlashMenu";
 import DemocracySlashMenu from "./DemocracySlashMenu";
 import StakingSlashMenu from "./StakingSlashMenu";
 import IdentitySlashMenu from "./IdentitySlashMenu";
-import ElectionPhragmenSlashMenu from "./ElectionPhragmenSlashMenu";
 import InflationMenu from "./InflationMenu";
 import OthersIncomeMenu from "./OthersIncomeMenu";
 import ProjectsMenu from "./ProjectsMenu";
@@ -116,7 +114,7 @@ const TopWrapper = styled.div`
     :hover {
       color: ${TEXT_DARK_MINOR};
     }
-    
+
     text-transform: capitalize;
   }
 `;
@@ -142,10 +140,24 @@ const Overview = () => {
   );
 };
 
-const Caret = <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M7.875 5.625L11.25 9L7.875 12.375" stroke="black" strokeOpacity="0.15" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>;
-
+const Caret = (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7.875 5.625L11.25 9L7.875 12.375"
+      stroke="black"
+      strokeOpacity="0.15"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const TabExampleSecondaryPointing = () => {
   const { pathname } = useLocation();
@@ -155,40 +167,57 @@ const TabExampleSecondaryPointing = () => {
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
   let breadCrumbs = null;
 
-  const topCategories = [`/proposals`, `/projects`, '/income', '/tips', '/bounties'];
+  const topCategories = [
+    `/proposals`,
+    `/projects`,
+    "/income",
+    "/tips",
+    "/bounties",
+  ];
 
-  if( topCategories.indexOf(pathname) >-1 ) {
-    breadCrumbs = <>
-      {Caret}
-      <NavLink to={pathname}>{pathname.slice(1)}</NavLink>
-    </>;
+  if (topCategories.indexOf(pathname) > -1) {
+    breadCrumbs = (
+      <>
+        {Caret}
+        <NavLink to={pathname}>{pathname.slice(1)}</NavLink>
+      </>
+    );
   }
-  if(pathname.includes(`/proposals/`)
-    || pathname.includes(`/bounties/`)
-    || pathname.includes(`/tips/`)) {
-    breadCrumbs = <>
-      {Caret}
-      <NavLink to={pathname}>{pathname.slice(1).replace("/", " #")}</NavLink>
-    </>;
+  if (
+    pathname.includes(`/proposals/`) ||
+    pathname.includes(`/bounties/`) ||
+    pathname.includes(`/tips/`)
+  ) {
+    breadCrumbs = (
+      <>
+        {Caret}
+        <NavLink to={pathname}>{pathname.slice(1).replace("/", " #")}</NavLink>
+      </>
+    );
   }
-  if(pathname.includes(`/projects/`)) {
-    breadCrumbs = <>
-      {Caret}
-      <NavLink to={`/projects`}>Projects</NavLink>
-      {Caret}
-      <NavLink to={pathname}>{pathname.slice(10)}</NavLink>
-    </>;
+  if (pathname.includes(`/projects/`)) {
+    breadCrumbs = (
+      <>
+        {Caret}
+        <NavLink to={`/projects`}>Projects</NavLink>
+        {Caret}
+        <NavLink to={pathname}>{pathname.slice(10)}</NavLink>
+      </>
+    );
   }
-  if(pathname.includes(`/income/`)) {
-    breadCrumbs = <>
-      {Caret}
-      <NavLink to={`/income`}>Income</NavLink>
-      {Caret}
-      <NavLink
-        to={pathname}>{pathname.includes(`/income/slash/`) && `Slash `}{pathname.slice(pathname.includes(`/income/slash/`) ? 14 : 8)}</NavLink>
-    </>;
+  if (pathname.includes(`/income/`)) {
+    breadCrumbs = (
+      <>
+        {Caret}
+        <NavLink to={`/income`}>Income</NavLink>
+        {Caret}
+        <NavLink to={pathname}>
+          {pathname.includes(`/income/slash/`) && `Slash `}
+          {pathname.slice(pathname.includes(`/income/slash/`) ? 14 : 8)}
+        </NavLink>
+      </>
+    );
   }
-
 
   useEffect(() => {
     dispatch(fetchIncomeCount(chain));
@@ -269,32 +298,6 @@ const TabExampleSecondaryPointing = () => {
               active:
                 `${symbol}/income/slash/staking` === pathname ||
                 pathname.indexOf(`${symbol}/income/slash/staking`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "treasurySlashTab",
-              content: <TreasurySlashMenu />,
-              to: `/income/slash/treasury`,
-              exact: true,
-              key: "treasurySlash",
-              active:
-                `/income/slash/treasury` === pathname ||
-                pathname.indexOf(`/income/slash/treasury`) === 0,
-            },
-          },
-          {
-            menuItem: {
-              as: NavLink,
-              id: "electionPhragmenSlashTab",
-              content: <ElectionPhragmenSlashMenu />,
-              to: `/income/slash/electionphragmen`,
-              exact: true,
-              key: "electionPhragmenSlash",
-              active:
-                `/income/slash/electionphragmen` === pathname ||
-                pathname.indexOf(`/income/slash/electionphragmen`) === 0,
             },
           },
           {

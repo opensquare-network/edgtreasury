@@ -94,8 +94,8 @@ const LineChart = ({ data, onHover }) => {
         },
         label: function (tooltipItem, data) {
           return `${data.datasets[tooltipItem.datasetIndex].label} ${
-            Math.round(tooltipItem.value) === tooltipItem.value &&
-            tooltipItem.value < 1000
+            Math.round(Number(tooltipItem.value)) ===
+              Number(tooltipItem.value) && Number(tooltipItem.value) < 1000
               ? ""
               : "≈ "
           } ${abbreviateBigNumber(tooltipItem.value)}`;
