@@ -204,6 +204,7 @@ export function abbreviateBigNumber(x) {
   };
   let divideBy = new BigNumber("1");
   const bigNumbers = [
+    { bigNumber: new BigNumber("1000"), abbr: "K" },
     { bigNumber: new BigNumber("1000000"), abbr: "M" },
     { bigNumber: new BigNumber("1000000000"), abbr: "B" },
     { bigNumber: new BigNumber("1000000000000"), abbr: "T" },
