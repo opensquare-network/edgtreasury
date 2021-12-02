@@ -34,6 +34,7 @@ const Title = styled(Text)`
 
 const ContentWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   @media screen and (min-width: 1140px) {
     & > :first-child {
       margin-right: 24px;
@@ -52,16 +53,20 @@ const ChartWrapper = styled.div`
   min-width: 252px;
   flex-grow: 1;
   margin-bottom: 24px;
+  max-width: calc(50% - 24px);
+  @media screen and (max-width: 1140px) {
+    max-width: none;
+  }
 `;
 
 const ListWrapper = styled.div`
   display: flex;
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 650px) {
     & > :first-child {
       margin-right: 24px;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 650px) {
     flex-direction: column;
     & > :first-child {
       margin-bottom: 24px;
@@ -73,7 +78,7 @@ const SecondListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 650px) {
     & > :first-child {
       margin-bottom: 24px;
     }
@@ -356,10 +361,10 @@ const TotalStacked = () => {
       <Title>Total Stacked</Title>
       <ContentWrapper>
         <ListWrapper>
-          <List data={incomeData}></List>
+          <List data={incomeData} fixed={true}></List>
           <SecondListWrapper>
-            <List data={outputData}></List>
-            <List data={treasuryData}></List>
+            <List data={outputData} fixed={true}></List>
+            <List data={treasuryData} fixed={true}></List>
           </SecondListWrapper>
         </ListWrapper>
         <ChartWrapper>

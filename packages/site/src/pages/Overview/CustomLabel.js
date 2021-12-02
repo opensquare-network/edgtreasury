@@ -6,12 +6,23 @@ import Text from "../../components/Text";
 import TextMinor from "../../components/TextMinor";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../../store/reducers/chainSlice";
+import { abbreviateBigNumber } from "../../utils";
 
 const Wrapper = styled.div`
-  min-width: 224px;
+  min-width: 276px;
   background: #fbfbfb;
   padding: 4px 16px;
   border-radius: 4px;
+  white-space: nowrap;
+  ${(p) =>
+    p.fixed &&
+    css`
+      width: 288px;
+      @media screen and (max-width: 1140px) {
+        width: auto !important;
+        min-width: none;
+      }
+    `}
 `;
 
 const ItemWrapper = styled.div`
@@ -99,7 +110,7 @@ const ValueWrapper = styled.div`
     `}
 `;
 
-const Label = ({ data, icon, status, clickEvent }) => {
+const Label = ({ data, icon, status, clickEvent, fixed }) => {
   const symbol = useSelector(chainSymbolSelector);
   const { name, color, children } = data;
   const disabled = status?.disabled;
@@ -111,7 +122,7 @@ const Label = ({ data, icon, status, clickEvent }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper fixed={fixed}>
       <ItemWrapper
         onClick={() => {
           clickEvent && clickEvent(name);
@@ -127,8 +138,8 @@ const Label = ({ data, icon, status, clickEvent }) => {
           trigger={
             <ValueWrapper disabled={disabled}>
               <TextMinor>{`${
-                Math.round(value) === value ? "" : "≈ "
-              }${Math.round(value).toLocaleString()} ${symbol}`}</TextMinor>
+                Math.round(value) === value && value < 1000 ? "" : "≈ "
+              }${abbreviateBigNumber(value)} ${symbol}`}</TextMinor>
             </ValueWrapper>
           }
         />
@@ -156,10 +167,10 @@ const Label = ({ data, icon, status, clickEvent }) => {
             trigger={
               <ValueWrapper disabled={status?.children[index].disabled}>
                 <TextMinor>{`${
-                  Math.round(item.value) === item.value ? "" : "≈ "
-                }${Math.round(
-                  item.value
-                ).toLocaleString()} ${symbol}`}</TextMinor>
+                  Math.round(item.value) === item.value && item.value < 1000
+                    ? ""
+                    : "≈ "
+                }${abbreviateBigNumber(item.value)} ${symbol}`}</TextMinor>
               </ValueWrapper>
             }
           />

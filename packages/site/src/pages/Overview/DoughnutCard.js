@@ -28,7 +28,7 @@ const ContentWrapper = styled.div`
   /* position: relative; */
   display: flex;
   /* padding: 32px; */
-  @media screen and (max-width: 556px) {
+  @media screen and (max-width: 650px) {
     flex-direction: column;
     & > :first-child {
       margin-bottom: 24px;
@@ -68,11 +68,12 @@ const DoughnutCard = ({ title, data, status, clickEvent, children }) => {
     return acc + (findDisabled(current.name) ? 0 : current.value ?? 0);
   };
   const total = data.labels?.reduce(totalReduce, 0);
+
   return (
     <CardWrapper>
       <Title>{title}</Title>
       <ContentWrapper>
-        <List data={data} status={status} clickEvent={clickEvent}/>
+        <List data={data} status={status} clickEvent={clickEvent} />
         <CanvasWrapper>
           <Total total={abbreviateBigNumber(total)}>
             <DoughnutWrapper>
