@@ -6,32 +6,12 @@ import { getPrecision, symbolFromNetwork, toPrecision } from "../../utils";
 const burntSlice = createSlice({
   name: "burnt",
   initialState: {
-    burntList: {
-      items: [],
-      page: 0,
-      pageSize: 10,
-      total: 0,
-    },
-    loadingBurntList: false,
-    burntListCount: 0,
     treasury: {
       free: 0,
       burnPercent: 0,
     },
   },
   reducers: {
-    setBurntChart(state, { payload }) {
-      state.burntChart = payload;
-    },
-    setBurntList(state, { payload }) {
-      state.burntList = payload;
-    },
-    setLoadingBurntList(state, { payload }) {
-      state.loadingBurntList = payload;
-    },
-    setBurntListCount(state, { payload }) {
-      state.burntListCount = payload;
-    },
     setTreasury(state, { payload }) {
       state.treasury = payload;
     },
@@ -39,10 +19,6 @@ const burntSlice = createSlice({
 });
 
 export const {
-  setBurntChart,
-  setBurntList,
-  setLoadingBurntList,
-  setBurntListCount,
   setTreasury,
 } = burntSlice.actions;
 

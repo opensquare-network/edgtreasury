@@ -13,7 +13,6 @@ import menuReducer from "./menuSlice";
 import nodeReducer from "./nodeSlice";
 import projectsReducer from "./projectSlice";
 import toastReducer from "./toastSlice";
-import transferReducer from "./transferSlice";
 import descriptionReducer from "./descriptionSlice";
 
 export default combineReducers({
@@ -31,6 +30,5 @@ export default combineReducers({
   menu: menuReducer,
   node: nodeReducer,
   projects: projectsReducer,
-  transfers: transferReducer,
   description: descriptionReducer,
 });
