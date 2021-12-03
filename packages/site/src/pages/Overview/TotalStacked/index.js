@@ -14,7 +14,6 @@ import {
   statsHistorySelector,
 } from "../../../store/reducers/overviewSlice";
 import {
-  chainSelector,
   chainSymbolSelector,
 } from "../../../store/reducers/chainSlice";
 
@@ -172,13 +171,12 @@ const TotalStacked = () => {
     ],
   });
 
-  const chain = useSelector(chainSelector);
   const symbol = useSelector(chainSymbolSelector);
   const precision = getPrecision(symbol);
 
   useEffect(() => {
-    dispatch(fetchStatsHistory(chain));
-  }, [dispatch, chain]);
+    dispatch(fetchStatsHistory());
+  }, [dispatch]);
 
   const statsHistory = useSelector(statsHistorySelector);
 

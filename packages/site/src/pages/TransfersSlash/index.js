@@ -12,7 +12,6 @@ import {
   transferListSelector,
   transferListLoadingSelector,
 } from "../../store/reducers/incomeSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import Text from "../../components/Text";
 
 const HeaderWrapper = styled.div`
@@ -49,11 +48,10 @@ const Transfers = () => {
   const history = useHistory();
   const { items: transferList, total } = useSelector(transferListSelector);
   const loading = useSelector(transferListLoadingSelector);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchTransferList(chain, tablePage - 1, pageSize));
-  }, [dispatch, chain, tablePage, pageSize]);
+    dispatch(fetchTransferList(tablePage - 1, pageSize));
+  }, [dispatch, tablePage, pageSize]);
 
   const totalPages = Math.ceil(total / pageSize);
 

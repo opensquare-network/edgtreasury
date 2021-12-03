@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getApi } from "../../services/chainApi";
-import { TreasuryAccount } from "../../constants";
-import { getPrecision, symbolFromNetwork, toPrecision } from "../../utils";
+import { CHAINS, TreasuryAccount } from "../../constants";
+import { getPrecision, toPrecision } from "../../utils";
 
 const burntSlice = createSlice({
   name: "burnt",
@@ -23,14 +23,14 @@ export const {
 } = burntSlice.actions;
 
 
-export const fetchTreasury = (chain) => async (dispatch) => {
-  const api = await getApi(chain);
+export const fetchTreasury = () => async (dispatch) => {
+  const api = await getApi();
   const account = (await api.query.system.account(TreasuryAccount)).toJSON();
   const result = {
     free: account
       ? toPrecision(
           account.data.free,
-          getPrecision(symbolFromNetwork(chain)),
+          getPrecision(CHAINS.EDGEWARE),
           false
         )
       : 0,

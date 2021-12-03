@@ -12,7 +12,6 @@ import {
   projectsSelector,
   loadingSelector,
 } from "../../store/reducers/projectSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import Text from "../../components/Text";
 
 const HeaderWrapper = styled.div`
@@ -49,13 +48,12 @@ const Projects = () => {
   const history = useHistory();
   const { items: projects, total } = useSelector(projectsSelector);
   const loading = useSelector(loadingSelector);
-  const chain = useSelector(chainSelector);
 
   const totalPages = Math.ceil(total / pageSize);
 
   useEffect(() => {
-    dispatch(fetchProjects(chain, tablePage - 1, pageSize));
-  }, [dispatch, chain, tablePage, pageSize]);
+    dispatch(fetchProjects(tablePage - 1, pageSize));
+  }, [dispatch, tablePage, pageSize]);
 
   return (
     <>

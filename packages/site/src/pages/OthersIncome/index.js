@@ -12,7 +12,6 @@ import {
   othersIncomeListSelector,
   othersIncomeListLoadingSelector,
 } from "../../store/reducers/incomeSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import Text from "../../components/Text";
 
 const HeaderWrapper = styled.div`
@@ -49,11 +48,10 @@ const OthersIncome = () => {
   const history = useHistory();
   const { items: itemList, total } = useSelector(othersIncomeListSelector);
   const loading = useSelector(othersIncomeListLoadingSelector);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchOthersIncomeList(chain, tablePage - 1, pageSize));
-  }, [dispatch, chain, tablePage, pageSize]);
+    dispatch(fetchOthersIncomeList(tablePage - 1, pageSize));
+  }, [dispatch, tablePage, pageSize]);
 
   const totalPages = Math.ceil(total / pageSize);
 

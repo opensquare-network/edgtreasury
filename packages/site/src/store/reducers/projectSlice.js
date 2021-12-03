@@ -35,7 +35,7 @@ export const {
 } = projectSlice.actions;
 
 export const fetchProjects =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setLoading(true));
 
@@ -50,7 +50,7 @@ export const fetchProjects =
     }
   };
 
-export const fetchProjectDetail = (chain, projectId) => async (dispatch) => {
+export const fetchProjectDetail = (projectId) => async (dispatch) => {
   dispatch(setLoadingProjectDetail(true));
   try {
     const { result } = await api.fetch(`/projects/${projectId}`);

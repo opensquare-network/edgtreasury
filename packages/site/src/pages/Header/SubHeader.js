@@ -15,7 +15,7 @@ import TansfersSlashMenu from "./TansfersSlashMenu";
 import { fetchIncomeCount } from "../../store/reducers/incomeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showMenuTabsSelector } from "../../store/reducers/menuSlice";
-import { chainSelector, chainSymbolSelector, } from "../../store/reducers/chainSlice";
+import { chainSymbolSelector, } from "../../store/reducers/chainSlice";
 import Card from "../../components/Card";
 import Container from "../../components/Container";
 
@@ -155,7 +155,6 @@ const TabExampleSecondaryPointing = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const showMenuTabs = useSelector(showMenuTabsSelector);
-  const chain = useSelector(chainSelector);
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
   let breadCrumbs = null;
 
@@ -212,8 +211,8 @@ const TabExampleSecondaryPointing = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchIncomeCount(chain));
-  }, [dispatch, chain]);
+    dispatch(fetchIncomeCount());
+  }, [dispatch]);
 
   let panes =
     showMenuTabs === "Home"

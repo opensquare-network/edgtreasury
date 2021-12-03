@@ -10,7 +10,6 @@ import {
   fetchProjectDetail,
   projectDetailSelector,
 } from "../../store/reducers/projectSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import { useChainRoute } from "../../utils/hooks";
 import InformationTable from "./InformationTable";
 
@@ -21,14 +20,13 @@ const ProjectDetail = () => {
   const { projectId } = useParams();
 
   const dispatch = useDispatch();
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchProjectDetail(chain, projectId));
+    dispatch(fetchProjectDetail(projectId));
     return () => {
       dispatch(setProjectDetail({}));
     };
-  }, [dispatch, chain, projectId]);
+  }, [dispatch, projectId]);
 
   const projectDetail = useSelector(projectDetailSelector);
 

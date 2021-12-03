@@ -11,7 +11,6 @@ import Card from "../../components/Card";
 
 import { fetchProposalsSummary, proposalSummarySelector, } from "../../store/reducers/proposalSlice";
 import {
-  chainSelector,
   chainSymbolSelector,
   fetchSpendPeriod,
   spendPeriodSelector,
@@ -108,13 +107,12 @@ const ValueWrapper = styled.div`
 
 const Summary = () => {
   const dispatch = useDispatch();
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
     dispatch(fetchProposalsSummary());
-    dispatch(fetchSpendPeriod(chain));
-    dispatch(fetchTreasury(chain));
-  }, [dispatch, chain]);
+    dispatch(fetchSpendPeriod());
+    dispatch(fetchTreasury());
+  }, [dispatch]);
 
   const summary = useSelector(proposalSummarySelector);
   const spendPeriod = useSelector(spendPeriodSelector);
