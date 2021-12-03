@@ -54,7 +54,7 @@ export const getApi = async (chain, queryUrl) => {
   return apiInstanceMap.get(url);
 };
 
-export const getIndentity = async (chain, address) => {
+export const getIdentity = async (chain, address) => {
   const api = await getApi(chain);
   const { identity } = await api.derive.accounts.info(address);
   return identity;
