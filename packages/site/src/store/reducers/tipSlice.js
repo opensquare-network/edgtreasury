@@ -45,7 +45,7 @@ export const {
 } = tipSlice.actions;
 
 export const fetchTips =
-  (chain, page = 0, pageSize = 30, filterData = {}) =>
+  (page = 0, pageSize = 30, filterData = {}) =>
   async (dispatch) => {
     dispatch(setLoading(true));
 
@@ -61,7 +61,7 @@ export const fetchTips =
     }
   };
 
-export const fetchTipDetail = (chain, tipId) => async (dispatch) => {
+export const fetchTipDetail = (tipId) => async (dispatch) => {
   dispatch(setLoadingTipDetail(true));
   try {
     const { result } = await api.fetch(`/tips/${tipId}`);

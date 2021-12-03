@@ -9,7 +9,6 @@ import {
   loadingSelector,
   normalizedTipListSelector,
 } from "../../store/reducers/tipSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import { useChainRoute, useQuery, useLocalStorage } from "../../utils/hooks";
 import { useHistory } from "react-router";
 import Text from "../../components/Text";
@@ -58,11 +57,10 @@ const Tips = () => {
   const { items: tips, total } = useSelector(normalizedTipListSelector);
   const loading = useSelector(loadingSelector);
   const totalPages = Math.ceil(total / pageSize);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchTips(chain, tablePage - 1, pageSize, filterData));
-  }, [dispatch, chain, tablePage, pageSize, filterData]);
+    dispatch(fetchTips(tablePage - 1, pageSize, filterData));
+  }, [dispatch, tablePage, pageSize, filterData]);
 
   const filterQuery = useCallback(
     (data) => {

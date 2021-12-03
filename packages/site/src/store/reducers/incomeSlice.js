@@ -11,13 +11,6 @@ const incomeSlice = createSlice({
       total: 0,
     },
     democracySlashListLoading: false,
-    treasurySlashList: {
-      items: [],
-      page: 0,
-      pageSize: 10,
-      total: 0,
-    },
-    treasurySlashListLoading: false,
     identitySlashList: {
       items: [],
       page: 0,
@@ -25,13 +18,6 @@ const incomeSlice = createSlice({
       total: 0,
     },
     identitySlashListLoading: false,
-    electionPhragmenSlashList: {
-      items: [],
-      page: 0,
-      pageSize: 10,
-      total: 0,
-    },
-    electionPhragmenSlashListLoading: false,
     stakingSlashList: {
       items: [],
       page: 0,
@@ -61,10 +47,8 @@ const incomeSlice = createSlice({
     },
     othersIncomeListLoading: false,
     count: {
-      treasurySlash: 0,
       democracySlash: 0,
       identitySlash: 0,
-      electionPhragmenSlash: 0,
       stakingSlash: 0,
       inflation: 0,
       others: 0,
@@ -81,23 +65,11 @@ const incomeSlice = createSlice({
     setDemocracySlashListLoading(state, { payload }) {
       state.democracySlashListLoading = payload;
     },
-    setTreasurySlashList(state, { payload }) {
-      state.treasurySlashList = payload;
-    },
-    setTreasurySlashListLoading(state, { payload }) {
-      state.treasurySlashListLoading = payload;
-    },
     setIdentitySlashList(state, { payload }) {
       state.identitySlashList = payload;
     },
     setIdentitySlashListLoading(state, { payload }) {
       state.identitySlashListLoading = payload;
-    },
-    setElectionPhragmenSlashList(state, { payload }) {
-      state.electionPhragmenSlashList = payload;
-    },
-    setElectionPhragmenSlashListLoading(state, { payload }) {
-      state.electionPhragmenSlashListLoading = payload;
     },
     setStakingSlashList(state, { payload }) {
       state.stakingSlashList = payload;
@@ -130,12 +102,8 @@ export const {
   setCount,
   setDemocracySlashList,
   setDemocracySlashListLoading,
-  setTreasurySlashList,
-  setTreasurySlashListLoading,
   setIdentitySlashList,
   setIdentitySlashListLoading,
-  setElectionPhragmenSlashList,
-  setElectionPhragmenSlashListLoading,
   setStakingSlashList,
   setStakingSlashListLoading,
   setInflationList,
@@ -151,10 +119,8 @@ export const fetchIncomeCount = (chain) => async (dispatch) => {
   dispatch(
     setCount(
       result || {
-        treasurySlash: 0,
         democracySlash: 0,
         identitySlash: 0,
-        electionPhragmenSlash: 0,
         stakingSlash: 0,
         inflation: 0,
         others: 0,
@@ -164,30 +130,6 @@ export const fetchIncomeCount = (chain) => async (dispatch) => {
   );
 };
 
-export const fetchTreasurySlashList =
-  (chain, page = 0, pageSize = 30) =>
-  async (dispatch) => {
-    dispatch(setTreasurySlashListLoading(true));
-
-    try {
-      const { result } = await api.fetch(`/income/slash/treasury`, {
-        page,
-        pageSize,
-      });
-      dispatch(
-        setTreasurySlashList(
-          result || {
-            items: [],
-            page: 0,
-            pageSize: 10,
-            total: 0,
-          }
-        )
-      );
-    } finally {
-      dispatch(setTreasurySlashListLoading(false));
-    }
-  };
 
 export const fetchDemocracySlashList =
   (chain, page = 0, pageSize = 30) =>
@@ -261,31 +203,6 @@ export const fetchStakingSlashList =
       );
     } finally {
       dispatch(setStakingSlashListLoading(false));
-    }
-  };
-
-export const fetchElectionPhragmenSlashList =
-  (chain, page = 0, pageSize = 30) =>
-  async (dispatch) => {
-    dispatch(setElectionPhragmenSlashListLoading(true));
-
-    try {
-      const { result } = await api.fetch(`/income/slash/electionphragmen`, {
-        page,
-        pageSize,
-      });
-      dispatch(
-        setElectionPhragmenSlashList(
-          result || {
-            items: [],
-            page: 0,
-            pageSize: 10,
-            total: 0,
-          }
-        )
-      );
-    } finally {
-      dispatch(setElectionPhragmenSlashListLoading(false));
     }
   };
 
@@ -369,14 +286,6 @@ export const democracySlashListSelector = (state) =>
   state.income.democracySlashList;
 export const democracySlashListLoadingSelector = (state) =>
   state.income.democracySlashListLoading;
-export const treasurySlashListSelector = (state) =>
-  state.income.treasurySlashList;
-export const treasurySlashListLoadingSelector = (state) =>
-  state.income.treasurySlashListLoading;
-export const electionPhragmenSlashListSelector = (state) =>
-  state.income.electionPhragmenSlashList;
-export const electionPhragmenSlashListLoadingSelector = (state) =>
-  state.income.electionPhragmenSlashListLoading;
 export const identitySlashListSelector = (state) =>
   state.income.identitySlashList;
 export const identitySlashListLoadingSelector = (state) =>

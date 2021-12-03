@@ -48,7 +48,7 @@ export const {
 } = proposalSlice.actions;
 
 export const fetchProposals =
-  (chain, page = 0, pageSize = 30, filterData = {}) =>
+  (page = 0, pageSize = 30, filterData = {}) =>
   async (dispatch) => {
     dispatch(setLoading(true));
 
@@ -65,7 +65,7 @@ export const fetchProposals =
   };
 
 export const fetchProposalDetail =
-  (chain, proposalIndex) => async (dispatch) => {
+  (proposalIndex) => async (dispatch) => {
     dispatch(setLoadingProposalDetail(true));
     try {
       const { result } = await api.fetch(`/proposals/${proposalIndex}`);
@@ -75,7 +75,7 @@ export const fetchProposalDetail =
     }
   };
 
-export const fetchProposalsSummary = (chain) => async (dispatch) => {
+export const fetchProposalsSummary = () => async (dispatch) => {
   const { result } = await api.fetch(`/proposals/summary`);
   const summary = {
     total: 0,

@@ -8,7 +8,7 @@ import {
   proposalDetailSelector,
   setProposalDetail,
 } from "../../store/reducers/proposalSlice";
-import { chainSelector, scanHeightSelector } from "../../store/reducers/chainSlice";
+import { scanHeightSelector } from "../../store/reducers/chainSlice";
 import { fetchDescription } from "../../store/reducers/descriptionSlice";
 
 import InformationTable from "./InformationTable";
@@ -268,14 +268,13 @@ const ProposalDetail = () => {
   const { proposalIndex } = useParams();
   const dispatch = useDispatch();
   const [timelineData, setTimelineData] = useState([]);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchProposalDetail(chain, proposalIndex));
+    dispatch(fetchProposalDetail(proposalIndex));
     return () => {
       dispatch(setProposalDetail({}));
     };
-  }, [dispatch, chain, proposalIndex]);
+  }, [dispatch, proposalIndex]);
 
   useEffect(() => {
     dispatch(fetchDescription("proposal", proposalIndex));

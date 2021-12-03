@@ -38,7 +38,7 @@ export const {
 } = bountySlice.actions;
 
 export const fetchBounties =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setLoading(true));
 
@@ -50,7 +50,7 @@ export const fetchBounties =
     }
   };
 
-export const fetchBountyDetail = (chain, bountyIndex) => async (dispatch) => {
+export const fetchBountyDetail = (bountyIndex) => async (dispatch) => {
   dispatch(setLoadingBountyDetail(true));
   try {
     const { result } = await api.fetch(`/bounties/${bountyIndex}`);

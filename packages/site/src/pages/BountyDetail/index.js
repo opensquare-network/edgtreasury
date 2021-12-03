@@ -23,7 +23,6 @@ import { stringToWords } from "../../utils";
 import DetailTableWrapper from "../../components/DetailTableWrapper";
 
 import {
-  chainSelector,
   chainSymbolSelector,
   scanHeightSelector,
 } from "../../store/reducers/chainSlice";
@@ -244,14 +243,13 @@ const BountyDetail = () => {
   const [timelineData, setTimelineData] = useState([]);
 
   const symbol = useSelector(chainSymbolSelector);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchBountyDetail(chain, bountyIndex));
+    dispatch(fetchBountyDetail(bountyIndex));
     return () => {
       dispatch(setBountyDetail({}));
     };
-  }, [dispatch, chain, bountyIndex]);
+  }, [dispatch, bountyIndex]);
 
   const loadingBountyDetail = useSelector(loadingBountyDetailSelector);
   const bountyDetail = useSelector(bountyDetailSelector);
