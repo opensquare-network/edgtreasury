@@ -21,7 +21,6 @@ import Voter from "../../components/Voter";
 import Proposer from "../../components/Proposer";
 import BlocksTime from "../../components/BlocksTime";
 import TimelineCommentWrapper from "../../components/TimelineCommentWrapper";
-import { useChainRoute } from "../../utils/hooks";
 import DetailTableWrapper from "../../components/DetailTableWrapper";
 
 const ValueWrapper = styled.span`
@@ -263,8 +262,6 @@ function processTimeline(proposalDetail, scanHeight) {
 }
 
 const ProposalDetail = () => {
-  useChainRoute();
-
   const { proposalIndex } = useParams();
   const dispatch = useDispatch();
   const [timelineData, setTimelineData] = useState([]);

@@ -9,7 +9,7 @@ import {
   loadingSelector,
   normalizedTipListSelector,
 } from "../../store/reducers/tipSlice";
-import { useChainRoute, useQuery, useLocalStorage } from "../../utils/hooks";
+import { useQuery, useLocalStorage } from "../../utils/hooks";
 import { useHistory } from "react-router";
 import Text from "../../components/Text";
 
@@ -30,8 +30,6 @@ const DEFAULT_PAGE_SIZE = 20;
 const DEFAULT_QUERY_PAGE = 1;
 
 const Tips = () => {
-  useChainRoute();
-
   const searchPage = parseInt(useQuery().get("page"));
   const queryPage =
     searchPage && !isNaN(searchPage) && searchPage > 0

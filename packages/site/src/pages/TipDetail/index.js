@@ -19,7 +19,6 @@ import TipLifeCycleTable from "./TipLifeCycleTable";
 import Funder from "./Funder";
 import ClickableLink from "../../components/ClickableLink";
 import TimelineCommentWrapper from "../../components/TimelineCommentWrapper";
-import { useChainRoute } from "../../utils/hooks";
 import DetailTableWrapper from "../../components/DetailTableWrapper";
 
 function processTimeline(tipDetail, links) {
@@ -118,8 +117,6 @@ function processTimeline(tipDetail, links) {
 }
 
 const TipDetail = () => {
-  useChainRoute();
-
   const { tipId } = useParams();
   const dispatch = useDispatch();
   const [timelineData, setTimelineData] = useState([]);

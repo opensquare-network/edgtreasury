@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getNodeUrl, getNodes } from "../../services/chainApi";
-import { symbolFromNetwork } from "../../utils";
 
 const nodeSlice = createSlice({
   name: "node",
@@ -32,7 +31,7 @@ const nodeSlice = createSlice({
       state.currentNode = nodeUrl;
 
       if (refresh) {
-        window.location.href = `/${symbolFromNetwork(chain).toLowerCase()}`;
+        window.location.href = `/`;
       }
     },
     setNodesDelay(state, { payload }) {
