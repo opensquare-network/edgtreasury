@@ -9,7 +9,6 @@ import {
   tipDetailSelector,
 } from "../../store/reducers/tipSlice";
 import { linksSelector, TipIndex } from "../../store/reducers/linkSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 
 import InformationTable from "./InformationTable";
 import Timeline from "../Timeline";
@@ -124,15 +123,14 @@ const TipDetail = () => {
   const { tipId } = useParams();
   const dispatch = useDispatch();
   const [timelineData, setTimelineData] = useState([]);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
     dispatch(fetchTipDetail(tipId));
-    dispatch(fetchTipCountdown(chain));
+    dispatch(fetchTipCountdown());
     return () => {
       dispatch(setTipDetail({}));
     };
-  }, [dispatch, chain, tipId]);
+  }, [dispatch, tipId]);
 
   const tipDetail = useSelector(tipDetailSelector);
   const loadingTipDetail = useSelector(loadingTipDetailSelector);

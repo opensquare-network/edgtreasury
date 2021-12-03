@@ -114,7 +114,7 @@ export const {
   setTransferListLoading,
 } = incomeSlice.actions;
 
-export const fetchIncomeCount = (chain) => async (dispatch) => {
+export const fetchIncomeCount = () => async (dispatch) => {
   const { result } = await api.fetch(`/income/count`);
   dispatch(
     setCount(
@@ -132,7 +132,7 @@ export const fetchIncomeCount = (chain) => async (dispatch) => {
 
 
 export const fetchDemocracySlashList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setDemocracySlashListLoading(true));
 
@@ -157,7 +157,7 @@ export const fetchDemocracySlashList =
   };
 
 export const fetchIdentitySlashList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setIdentitySlashListLoading(true));
 
@@ -182,7 +182,7 @@ export const fetchIdentitySlashList =
   };
 
 export const fetchStakingSlashList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setStakingSlashListLoading(true));
 
@@ -207,7 +207,7 @@ export const fetchStakingSlashList =
   };
 
 export const fetchInflationList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setInflationListLoading(true));
 
@@ -232,7 +232,7 @@ export const fetchInflationList =
   };
 
 export const fetchTransferList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setTransferListLoading(true));
 
@@ -257,7 +257,7 @@ export const fetchTransferList =
   };
 
 export const fetchOthersIncomeList =
-  (chain, page = 0, pageSize = 30) =>
+  (page = 0, pageSize = 30) =>
   async (dispatch) => {
     dispatch(setOthersIncomeListLoading(true));
 

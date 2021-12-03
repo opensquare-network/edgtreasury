@@ -12,14 +12,6 @@ function strEqualIgnoreCase(str1 = "", str2 = "") {
 }
 
 export function getPrecision(chainSymbol) {
-  if (strEqualIgnoreCase(CHAINS.KUSAMA, chainSymbol)) {
-    return 12;
-  }
-
-  if (strEqualIgnoreCase(CHAINS.POLKADOT, chainSymbol)) {
-    return 10;
-  }
-
   if (strEqualIgnoreCase(CHAINS.EDGEWARE, chainSymbol)) {
     return 18;
   }
@@ -163,11 +155,7 @@ export const getGravatarSrc = (email) => {
 };
 
 export function networkFromSymbol(symbol) {
-  if (symbol.toLowerCase() === CHAINS.KUSAMA) {
-    return "kusama";
-  } else if (symbol.toLowerCase() === CHAINS.POLKADOT) {
-    return "polkadot";
-  } else if (symbol.toLowerCase() === CHAINS.EDGEWARE) {
+  if (symbol.toLowerCase() === CHAINS.EDGEWARE) {
     return "edgeware";
   } else {
     return null;
@@ -175,11 +163,7 @@ export function networkFromSymbol(symbol) {
 }
 
 export function symbolFromNetwork(network) {
-  if (network === "kusama") {
-    return CHAINS.KUSAMA;
-  } else if (network === "polkadot") {
-    return CHAINS.POLKADOT;
-  } else if (network === "edgeware") {
+  if (network === "edgeware") {
     return CHAINS.EDGEWARE;
   } else {
     return null;

@@ -12,7 +12,6 @@ import {
   identitySlashListSelector,
   identitySlashListLoadingSelector,
 } from "../../store/reducers/incomeSlice";
-import { chainSelector } from "../../store/reducers/chainSlice";
 import Text from "../../components/Text";
 
 const HeaderWrapper = styled.div`
@@ -49,11 +48,10 @@ const IdentitySlash = () => {
   const history = useHistory();
   const { items: itemList, total } = useSelector(identitySlashListSelector);
   const loading = useSelector(identitySlashListLoadingSelector);
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchIdentitySlashList(chain, tablePage - 1, pageSize));
-  }, [dispatch, chain, tablePage, pageSize]);
+    dispatch(fetchIdentitySlashList(tablePage - 1, pageSize));
+  }, [dispatch, tablePage, pageSize]);
 
   const totalPages = Math.ceil(total / pageSize);
 

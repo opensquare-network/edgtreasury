@@ -39,17 +39,17 @@ export const {
   setSpendPeriod,
 } = chainSlice.actions;
 
-export const fetchSpendPeriod = (chain) => async (dispatch) => {
-  const api = await getApi(chain);
+export const fetchSpendPeriod = () => async (dispatch) => {
+  const api = await getApi();
   const bestNumber = await api.derive.chain.bestNumber();
   const spendPeriod = api.consts.treasury.spendPeriod;
   const goneBlocks = bestNumber.mod(spendPeriod);
   dispatch(
     setSpendPeriod({
       blockNumber: spendPeriod.toNumber(),
-      periodTime: await estimateBlocksTime(chain, spendPeriod),
+      periodTime: await estimateBlocksTime(spendPeriod),
       restBlocks: spendPeriod.sub(goneBlocks).toNumber(),
-      restTime: await estimateBlocksTime(chain, spendPeriod.sub(goneBlocks)),
+      restTime: await estimateBlocksTime(spendPeriod.sub(goneBlocks)),
       progress: goneBlocks.muln(100).div(spendPeriod).toNumber(),
     })
   );

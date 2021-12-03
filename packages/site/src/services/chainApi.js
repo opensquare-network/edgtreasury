@@ -5,10 +5,6 @@ import { encodeAddress } from "@polkadot/keyring";
 import { spec } from "@edgeware/node-types";
 
 import {
-  DEFAULT_KUSAMA_NODE_URL,
-  DEFAULT_KUSAMA_NODES,
-  DEFAULT_POLKADOT_NODE_URL,
-  DEFAULT_POLKADOT_NODES,
   DEFAULT_EDGEWARE_NODE_URL,
   DEFAULT_EDGEWARE_NODES,
 } from "../constants";
@@ -23,14 +19,8 @@ let nodeUrl = (() => {
     // ignore parse error
   }
   return {
-    kusama:
-      DEFAULT_KUSAMA_NODES.find((item) => item.url === localNodeUrl?.kusama)
-        ?.url || DEFAULT_KUSAMA_NODE_URL,
-    polkadot:
-      DEFAULT_POLKADOT_NODES.find((item) => item.url === localNodeUrl?.polkadot)
-        ?.url || DEFAULT_POLKADOT_NODE_URL,
     edgeware:
-      DEFAULT_EDGEWARE_NODES.find((item) => item.url === localNodeUrl?.kusama)
+      DEFAULT_EDGEWARE_NODES.find((item) => item.url === localNodeUrl?.edgeware)
         ?.url || DEFAULT_EDGEWARE_NODE_URL,
   };
 })();
@@ -38,13 +28,11 @@ let nodeUrl = (() => {
 export const getNodeUrl = () => nodeUrl;
 
 export const getNodes = () => ({
-  kusama: DEFAULT_KUSAMA_NODES,
-  polkadot: DEFAULT_POLKADOT_NODES,
   edgeware: DEFAULT_EDGEWARE_NODES,
 });
 
-export const getApi = async (chain, queryUrl) => {
-  const url = queryUrl || nodeUrl?.[chain];
+export const getApi = async (queryUrl) => {
+  const url = queryUrl || nodeUrl?.edgeware;
   if (!apiInstanceMap.has(url)) {
     apiInstanceMap.set(
       url,
@@ -54,14 +42,8 @@ export const getApi = async (chain, queryUrl) => {
   return apiInstanceMap.get(url);
 };
 
-export const getIndentity = async (chain, address) => {
-  const api = await getApi(chain);
-  const { identity } = await api.derive.accounts.info(address);
-  return identity;
-};
-
-export const getTipCountdown = async (chain) => {
-  const api = await getApi(chain);
+export const getTipCountdown = async () => {
+  const api = await getApi();
   return api.consts.tips.tipCountdown.toNumber();
 };
 
@@ -92,17 +74,17 @@ const extractBlockTime = (extrinsics) => {
   }
 };
 
-export const getBlockTime = async (chain, number) => {
-  const api = await getApi(chain);
+export const getBlockTime = async (number) => {
+  const api = await getApi();
   const hash = await api.rpc.chain.getBlockHash(number);
   const block = await api.rpc.chain.getBlock(hash);
   const time = extractBlockTime(block.block.extrinsics);
   return time;
 };
 
-export const estimateBlocksTime = async (chain, blocks) => {
+export const estimateBlocksTime = async (blocks) => {
   return;
-  // const api = await getApi(chain);
+  // const api = await getApi();
   // const nsPerBlock = api.consts.babe.expectedBlockTime.toNumber();
   // return nsPerBlock * blocks;
 };

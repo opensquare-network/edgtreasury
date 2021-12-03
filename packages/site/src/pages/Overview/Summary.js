@@ -13,7 +13,6 @@ import BlocksTime from "../../components/BlocksTime";
 import { TEXT_DARK_MAJOR, TEXT_DARK_MINOR } from "../../constants";
 import { overviewSelector } from "../../store/reducers/overviewSlice";
 import {
-  chainSelector,
   chainSymbolSelector,
   fetchSpendPeriod,
   spendPeriodSelector,
@@ -101,12 +100,11 @@ const StyledLinkMajor = styled(Link)`
 
 const Summary = () => {
   const dispatch = useDispatch();
-  const chain = useSelector(chainSelector);
 
   useEffect(() => {
-    dispatch(fetchSpendPeriod(chain));
-    dispatch(fetchTreasury(chain));
-  }, [dispatch, chain]);
+    dispatch(fetchSpendPeriod());
+    dispatch(fetchTreasury());
+  }, [dispatch]);
 
   const overview = useSelector(overviewSelector);
   const spendPeriod = useSelector(spendPeriodSelector);

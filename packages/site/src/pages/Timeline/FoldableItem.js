@@ -7,8 +7,6 @@ import Item from "./Item";
 import { PRIMARY_THEME_COLOR } from "../../constants";
 import { getBlockTime } from "../../services/chainApi";
 import { useIsMounted } from "../../utils/hooks";
-import { useSelector } from "react-redux";
-import { chainSelector } from "../../store/reducers/chainSlice"
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,20 +68,19 @@ const ItemWrapper = styled.div`
 const FoldableItem = ({ data, defaultUnfold, expired, end }) => {
   const [isUnfold, setIsUnfold] = useState(defaultUnfold || false);
   const [expiredTime, setExpiredTime] = useState(0);
-  const chain = useSelector(chainSelector);
   const isMounted = useIsMounted();
 
   useEffect(() => {
     if (expired && end) {
       const getTime = async () => {
-        const time = await getBlockTime(chain, end);
+        const time = await getBlockTime(end);
         if (isMounted.current) {
           setExpiredTime(time);
         }
       };
       getTime();
     }
-  }, [chain, expired, end, isMounted]);
+  }, [expired, end, isMounted]);
 
   if (!data || data.length === 0) return null;
 

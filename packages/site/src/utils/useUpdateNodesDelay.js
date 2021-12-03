@@ -42,7 +42,7 @@ const useUpdateNodesDelay = () => {
   useEffect(() => {
     const updateNodeDelay = async (url) => {
       try {
-        const api = await getApi(chain, url);
+        const api = await getApi(url);
         const delay = await testNet(api);
         return delay;
       } catch {
