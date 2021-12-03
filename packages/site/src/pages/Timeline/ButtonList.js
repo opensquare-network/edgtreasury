@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   `}
 `;
 
-const ButtonList = ({ extrinsicIndexer, eventIndexer, polkassembly }) => {
+const ButtonList = ({ extrinsicIndexer, eventIndexer }) => {
   const chain = useSelector(chainSelector);
 
   const blockHeight = (extrinsicIndexer || eventIndexer)?.blockHeight;

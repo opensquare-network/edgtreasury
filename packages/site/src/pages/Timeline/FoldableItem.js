@@ -67,7 +67,7 @@ const ItemWrapper = styled.div`
     `}
 `;
 
-const FoldableItem = ({ data, polkassembly, defaultUnfold, expired, end }) => {
+const FoldableItem = ({ data, defaultUnfold, expired, end }) => {
   const [isUnfold, setIsUnfold] = useState(defaultUnfold || false);
   const [expiredTime, setExpiredTime] = useState(0);
   const chain = useSelector(chainSelector);
@@ -107,7 +107,6 @@ const FoldableItem = ({ data, polkassembly, defaultUnfold, expired, end }) => {
           <Item
             key={index}
             data={item}
-            polkassembly={index === 0 ? polkassembly : undefined}
             onUnfoldBtnClick={onUnfoldBtnClick}
             isUnfold={isUnfold}
           />

@@ -65,7 +65,6 @@ const TextMinorWrapper = styled(TextMinor)`
 
 const Item = ({
   data,
-  polkassembly,
   onUnfoldBtnClick,
   isUnfold,
   hideButtonList = false,
@@ -104,7 +103,6 @@ const Item = ({
               <ButtonList
                 extrinsicIndexer={data.extrinsicIndexer}
                 eventIndexer={data.eventIndexer}
-                polkassembly={polkassembly}
               />
             )}
           </CardWrapper>

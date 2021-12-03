@@ -42,7 +42,6 @@ const Timeline = ({ data, loading }) => {
                 <FoldableItem
                   key={item.index}
                   data={item.subTimeline}
-                  polkassembly={item.index}
                   defaultUnfold={item.defaultUnfold}
                   expired={item.expired}
                   end={item.end}
