@@ -18,9 +18,12 @@ import {
   fetchSpendPeriod,
   spendPeriodSelector,
 } from "../../store/reducers/chainSlice";
-import { fetchTreasury, treasurySelector, } from "../../store/reducers/burntSlice";
+import {
+  fetchTreasury,
+  treasurySelector,
+} from "../../store/reducers/burntSlice";
 import { mrgap } from "../../styles";
-import { abbreviateBigNumber, } from "../../utils";
+import { abbreviateBigNumber } from "../../utils";
 
 const Wrapper = styled(Card)`
   @media screen and (max-width: 1320px) {
@@ -51,7 +54,8 @@ const ItemWrapper = styled.div`
     margin-right: 20px;
   }
   @media screen and (max-width: 600px) {
-    img, .icon{
+    img,
+    .icon {
       display: none !important;
     }
   }
@@ -107,7 +111,6 @@ const Summary = () => {
   const overview = useSelector(overviewSelector);
   const spendPeriod = useSelector(spendPeriodSelector);
   const treasury = useSelector(treasurySelector);
-  console.log('treasury', treasury)
   const symbol = useSelector(chainSymbolSelector);
   const symbolLowerCase = symbol?.toLowerCase();
 
@@ -184,10 +187,7 @@ const Summary = () => {
             <Title>Next burn</Title>
             <ValueWrapper>
               <TextBold>
-                {abbreviateBigNumber(
-                  treasury.burnPercent * treasury.free,
-                  4
-                )}
+                {abbreviateBigNumber(treasury.burnPercent * treasury.free, 4)}
               </TextBold>
               <TextMinorBold>{symbol}</TextMinorBold>
             </ValueWrapper>

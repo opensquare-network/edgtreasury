@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Image } from "semantic-ui-react";
 
 import Logo from "./Logo";
@@ -38,20 +38,21 @@ const Right = styled.div`
   button.ui {
     background-color: transparent !important;
   }
-  ${(p) =>
-    p.symbol === "ksm" &&
-    css`
-      a > div > button {
-        @media screen and (min-width: 850px) {
-          color: #fff !important;
-        }
-      }
-      a > button {
-        @media screen and (min-width: 850px) {
-          color: #fff !important;
-        }
-      }
-    `}
+
+  a > div > button {
+    @media screen and (min-width: 850px) {
+      color: #fff !important;
+    }
+  }
+  a > button {
+    @media screen and (min-width: 850px) {
+      color: #fff !important;
+    }
+  }
+  > a {
+    margin-right: 40px !important;
+  }
+
   @media screen and (max-width: 850px) {
     box-shadow: 0px 4px 12px rgba(29, 37, 60, 0.08);
     display: none;
@@ -87,6 +88,9 @@ const Right = styled.div`
     > div {
       margin-right: 0 !important;
     }
+    > a {
+      margin-right: 0 !important;
+    }
   }
   @media screen and (max-width: 600px) {
     left: 0;
@@ -97,7 +101,7 @@ const MenuIcon = styled.div`
   width: 24px;
   height: 24px;
   display: none !important;
-  margin-right: 12px;
+  margin-left: 12px;
   flex-shrink: 0;
   @media screen and (max-width: 850px) {
     display: flex !important;
@@ -118,13 +122,9 @@ const MainHeader = () => {
       setMenuShow(false);
     }
   };
-  let menuIconSrc =
-    symbol === "ksm" ? "/imgs/icon-ham-white.svg" : "/imgs/icon-ham-black.svg";
+  let menuIconSrc = "/imgs/icon-ham-white.svg";
   if (menuShow) {
-    menuIconSrc =
-      symbol === "ksm"
-        ? "/imgs/menu-icon-close-white.svg"
-        : "/imgs/menu-icon-close.svg";
+    menuIconSrc = "/imgs/menu-icon-close-white.svg";
   }
   return (
     <Wrapper>
@@ -147,10 +147,10 @@ const MainHeader = () => {
             <MenuSwitch menuTabsName="Projects" />
           </NavLink>
         </Right>
+        <ScanHeight />
         <MenuIcon onClick={() => setMenuShow(!menuShow)}>
           <Image src={menuIconSrc} />
         </MenuIcon>
-        <ScanHeight />
       </FlexWrapper>
     </Wrapper>
   );

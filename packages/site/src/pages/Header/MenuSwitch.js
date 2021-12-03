@@ -8,9 +8,7 @@ import {
 } from "../../store/reducers/menuSlice";
 import { PRIMARY_THEME_COLOR } from "../../constants";
 
-const Wrapper = styled.div`
-  margin-right: 32px;
-`;
+const Wrapper = styled.div``;
 
 const StyledButton = styled(Button)`
   display: flex !important;
@@ -19,7 +17,6 @@ const StyledButton = styled(Button)`
   padding-left: 0 !important;
   padding-right: 0 !important;
   font-weight: 500 !important;
-  color: #ffffff !important;
   ${(p) =>
     p.active &&
     css`
