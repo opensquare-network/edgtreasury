@@ -95,12 +95,14 @@ const CustomCard = styled(Card)`
 `;
 
 const TopWrapper = styled.div`
-  display: flex;
-  align-items: center;
+  &, > div {
+    display: flex;
+    align-items: center;
+  }
   height: 43px;
   padding: 11px 0;
   border-bottom: 1px solid #f4f4f4;
-  > a {
+  a {
     font-size: 13px;
     line-height: 18px;
     color: rgba(0, 0, 0, 0.3);
