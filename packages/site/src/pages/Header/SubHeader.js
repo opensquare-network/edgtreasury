@@ -20,6 +20,7 @@ import Card from "../../components/Card";
 import Container from "../../components/Container";
 
 import { PRIMARY_THEME_COLOR, SECONDARY_THEME_COLOR, TEXT_DARK_MAJOR, TEXT_DARK_MINOR, } from "../../constants";
+import BreadCrumbs from "./BreadCrumbs";
 
 const Wrapper = styled.div`
   position: relative;
@@ -132,82 +133,45 @@ const Overview = () => {
   );
 };
 
-const Caret = (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 18 18"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7.875 5.625L11.25 9L7.875 12.375"
-      stroke="black"
-      strokeOpacity="0.15"
-      strokeWidth="1.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+const Singularize = (plural)=> {
+  if(plural.includes('ies')){
+    return plural.replace('ies', 'y');
+  }
+  return plural.slice(0, -1);
+}
+
+
 
 const TabExampleSecondaryPointing = () => {
   const { pathname } = useLocation();
+  const paths = pathname.split('/');
   const dispatch = useDispatch();
   const showMenuTabs = useSelector(showMenuTabsSelector);
   const symbol = useSelector(chainSymbolSelector)?.toLowerCase();
-  let breadCrumbs = null;
+  const breadCrumbs = [];
 
-  const topCategories = [
-    `/proposals`,
-    `/projects`,
-    "/income",
-    "/tips",
-    "/bounties",
-  ];
-
-  if (topCategories.indexOf(pathname) > -1) {
-    breadCrumbs = (
-      <>
-        {Caret}
-        <NavLink to={pathname}>{pathname.slice(1)}</NavLink>
-      </>
-    );
+  const topCategories = [`proposals`, `projects`, "income", "tips", "bounties",];
+  if (topCategories.includes(paths[1])) {
+    breadCrumbs.push({name:paths[1], to:`/${paths[1]}`})
   }
-  if (
-    pathname.includes(`/proposals/`) ||
-    pathname.includes(`/bounties/`) ||
-    pathname.includes(`/tips/`)
-  ) {
-    breadCrumbs = (
-      <>
-        {Caret}
-        <NavLink to={pathname}>{pathname.slice(1).replace("/", " #")}</NavLink>
-      </>
-    );
-  }
-  if (pathname.includes(`/projects/`)) {
-    breadCrumbs = (
-      <>
-        {Caret}
-        <NavLink to={`/projects`}>Projects</NavLink>
-        {Caret}
-        <NavLink to={pathname}>{pathname.slice(10)}</NavLink>
-      </>
-    );
-  }
-  if (pathname.includes(`/income/`)) {
-    breadCrumbs = (
-      <>
-        {Caret}
-        <NavLink to={`/income`}>Income</NavLink>
-        {Caret}
-        <NavLink to={pathname}>
-          {pathname.includes(`/income/slash/`) && `Slash `}
-          {pathname.slice(pathname.includes(`/income/slash/`) ? 14 : 8)}
-        </NavLink>
-      </>
-    );
+  if(paths.length > 2) {
+    if (paths[1] === `proposals` || paths[1] === `bounties` || paths[1] === `tips`) {
+      let index = paths[2];
+      if (paths[1] === 'tips') {
+        const tipIds = paths[2]?.split("_0x");
+        paths?.length > 1 && (index = `${tipIds[1].slice(0, 6)}`);
+      }
+      breadCrumbs.push({name: `${Singularize(paths[1])} #${index}`, to: pathname})
+    }
+    if(paths[1] === `projects`){
+      breadCrumbs.push({name: paths[2], to: pathname})
+    }
+    if (paths[1] === 'income') {
+      breadCrumbs.push({
+        name:`${paths[2] === 'slash' ? `Slash ` + paths[3] : paths[2]}`,
+        to:pathname
+      });
+    }
   }
 
   useEffect(() => {
@@ -387,8 +351,7 @@ const TabExampleSecondaryPointing = () => {
       <Container>
         <CustomCard>
           <TopWrapper>
-            <NavLink to={``}>Home</NavLink>
-            {breadCrumbs}
+            <BreadCrumbs breadCrumbs={breadCrumbs}/>
           </TopWrapper>
           <TabWrapper
             menu={{ secondary: true, pointing: true }}
