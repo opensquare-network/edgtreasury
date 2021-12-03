@@ -180,10 +180,15 @@ const TabExampleSecondaryPointing = () => {
     pathname.includes(`/bounties/`) ||
     pathname.includes(`/tips/`)
   ) {
+    let breadCrumbName = pathname.slice(1).replace("s/", " #");
+    if(pathname.includes(`/tips/`)) {
+      const paths = breadCrumbName.split("_0x");
+      paths?.length > 1 && (breadCrumbName = `Tip #${paths[1].slice(0,6)}`);
+    }
     breadCrumbs = (
       <>
         {Caret}
-        <NavLink to={pathname}>{pathname.slice(1).replace("/", " #")}</NavLink>
+        <NavLink to={pathname}>{breadCrumbName}</NavLink>
       </>
     );
   }
