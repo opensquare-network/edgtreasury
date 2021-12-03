@@ -1,5 +1,4 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import testReducer from "./testSlice";
 import tipsReducer from "./tipSlice";
 import proposalsReducer from "./proposalSlice";
 import bountiesReducer from "./bountySlice";
@@ -16,7 +15,6 @@ import toastReducer from "./toastSlice";
 import descriptionReducer from "./descriptionSlice";
 
 export default combineReducers({
-  test: testReducer,
   tips: tipsReducer,
   links: linksReducer,
   proposals: proposalsReducer,
