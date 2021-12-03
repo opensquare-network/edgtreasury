@@ -23,11 +23,11 @@ const Caret = (
 export default function BreadCrumbs ({breadCrumbs = []}) {
   return <>
     <NavLink to={``}>Home</NavLink>
-    {breadCrumbs.map((breadCrumb)=>{
-      return <>
+    {breadCrumbs.map((breadCrumb, index)=>{
+      return <div key={index}>
         {Caret}
         <NavLink to={breadCrumb.to}>{breadCrumb.name}</NavLink>
-      </>;
+      </div>;
     })}
   </>
 }
