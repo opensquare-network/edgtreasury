@@ -233,7 +233,7 @@ const ScanHeight = () => {
   const chain = useSelector(chainSelector);
   const currentNodeSetting = useSelector(currentNodeSelector);
   const nodesSetting = useSelector(nodesSelector);
-  const [networkOpen, setNetorkOpen] = useState(false);
+  const [networkOpen, setNetworkOpen] = useState(false);
   const netWorkRef = useRef(null);
   const [symbolOpen, setSymbolOpen] = useState(false);
   const scanHeight = useSelector(scanHeightSelector);
@@ -257,7 +257,7 @@ const ScanHeight = () => {
     setSymbolOpen(false);
   });
   useOutsideClick(netWorkRef, () => {
-    setNetorkOpen(false);
+    setNetworkOpen(false);
   });
 
   const switchNetwork = (url) => {
@@ -345,7 +345,7 @@ const ScanHeight = () => {
         isActive={networkOpen}
         ref={netWorkRef}
         onClick={() => {
-          setNetorkOpen(!networkOpen);
+          setNetworkOpen(!networkOpen);
         }}
       >
         <Image src={currentNetworkImg} />

@@ -11,8 +11,7 @@ import { getPrecision, toPrecision } from "../../utils";
 import TotalStacked from "./TotalStacked";
 import Income from "./Income";
 import Output from "./Output";
-import { useChainRoute } from "../../utils/hooks";
-import { CHAINS } from "../../constants";
+import { chainSelector } from "../../store/reducers/chainSlice";
 
 const DoughnutWrapper = styled.div`
   display: grid;
@@ -40,10 +39,9 @@ const TableWrapper = styled.div`
 
 const Overview = () => {
   const overview = useSelector(overviewSelector);
+  const chain = useSelector(chainSelector);
 
-  useChainRoute();
-
-  const precision = getPrecision(CHAINS.EDGEWARE);
+  const precision = getPrecision(chain);
 
   const bountySpent = toPrecision(
     overview.output.bounty || 0,

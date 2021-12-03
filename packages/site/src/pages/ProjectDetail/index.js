@@ -10,13 +10,10 @@ import {
   fetchProjectDetail,
   projectDetailSelector,
 } from "../../store/reducers/projectSlice";
-import { useChainRoute } from "../../utils/hooks";
 import InformationTable from "./InformationTable";
 
 
 const ProjectDetail = () => {
-  useChainRoute();
-
   const { projectId } = useParams();
 
   const dispatch = useDispatch();

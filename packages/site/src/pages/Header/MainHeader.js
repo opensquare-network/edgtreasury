@@ -78,13 +78,6 @@ const Right = styled.div`
     > .button button {
       width: 83vw;
     }
-    > .signUp {
-      border: 1px solid #df405d;
-      border-radius: 4px;
-    }
-    > .login {
-      margin-top: 16px;
-    }
     > div {
       margin-right: 0 !important;
     }

@@ -119,24 +119,6 @@ export const useMenuTab = () => {
   }, [pathname, dispatch, symbol]);
 };
 
-export function useChainRoute() {
-  return;
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-  // const location = useLocation();
-  // const symbol = useSelector(chainSymbolSelector).toLowerCase();
-  // const { symbol: paramSymbol } = useParams();
-  // const urlSymbol = paramSymbol?.toLowerCase();
-  // useEffect(() => {
-  //   if (!urlSymbol) {
-  //     return history.push(`${location.pathname}`);
-  //   } else if (urlSymbol !== symbol) {
-  //     dispatch(setChain(urlSymbol));
-  //     window.location.reload();
-  //   }
-  // }, [dispatch, history, location, symbol, urlSymbol]);
-}
-
 export function useOutsideClick(ref, cb) {
   useEffect(() => {
     function handleClickOutside(event) {

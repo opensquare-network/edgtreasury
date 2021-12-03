@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
 
 import Container from "../../components/Container";
 import MainHeader from "./MainHeader";
@@ -14,19 +13,6 @@ const Wrapper = styled.header`
 `;
 
 const Header = () => {
-  const {pathname} = useLocation();
-  const hideSubHeader =
-    [
-      "/login",
-      "/register",
-      "/forget",
-      "/resetpassword",
-      "/settings",
-      "/verifyemail",
-      "/useragreement",
-      "/privacy",
-    ].includes(pathname) || pathname.includes("/settings");
-
   return (
     <>
       <Wrapper>
@@ -34,7 +20,7 @@ const Header = () => {
           <MainHeader />
         </Container>
       </Wrapper>
-      {!hideSubHeader && <SubHeader />}
+      <SubHeader />
     </>
   );
 };
