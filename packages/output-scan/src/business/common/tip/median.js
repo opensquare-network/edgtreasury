@@ -5,11 +5,11 @@ function computeTipValue(tipMeta) {
 
 function median(values) {
   if (!Array.isArray(values)) {
-    return null;
+    return 0;
   }
 
   if (values.length === 0) {
-    return null;
+    return 0;
   }
 
   const sorted = [...values].sort((a, b) => a - b);
