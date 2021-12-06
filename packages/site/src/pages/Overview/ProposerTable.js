@@ -20,9 +20,9 @@ const CardWrapper = styled(Card)`
   @media screen and (max-width: 600px) {
     border-radius: 0;
   }
-  .ui.table td{
-    padding-top: 7px!important;
-    padding-bottom: 7px!important;
+  .ui.table td {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
   }
 `;
 

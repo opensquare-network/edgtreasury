@@ -90,7 +90,7 @@ const getStateWithVotingAyes = (item) => {
   if (isProposalVoting) {
     const nAyes = item.latestState.motionVoting?.ayes?.length;
     if (nAyes !== undefined) {
-      return state + ` (${ nAyes })`;
+      return state + ` (${nAyes})`;
     }
   }
 
@@ -197,6 +197,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                           value={item.value}
                           currency={symbol}
                           usdt={item.symbolPrice}
+                          isAbbreviate={true}
                         />
                       </Table.Cell>
                       <Table.Cell
@@ -211,11 +212,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                         />
                       </Table.Cell>
                       <Table.Cell className="link-cell hidden">
-                        <NavLink
-                          to={`/proposals/${
-                            item.proposalIndex
-                          }`}
-                        >
+                        <NavLink to={`/proposals/${item.proposalIndex}`}>
                           <RightButton />
                         </NavLink>
                       </Table.Cell>
