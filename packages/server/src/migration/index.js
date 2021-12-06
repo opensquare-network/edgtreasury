@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { getProposalCollection } = require("../mongo");
 const { getLinkCollection, getDescriptionCollection } = require("../mongo-admin");
 

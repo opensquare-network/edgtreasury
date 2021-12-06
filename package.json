@@ -17,6 +17,7 @@
     "node": ">=15.0.0"
   },
   "scripts": {
+    "start": "yarn workspace @edgtreasury/site start"
   },
   "devDependencies": {
     "husky": "^7.0.2",

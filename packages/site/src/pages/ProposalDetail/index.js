@@ -55,7 +55,7 @@ function timelineItemHeight(timelineItem) {
 function normalizeReferendumTimelineItem(referendum, scanHeight) {
   return {
     index: referendum.index,
-    defaultUnfold: !referendum.info.Finished,
+    defaultUnfold: !referendum.info?.Finished,
     subTimeline:  (referendum.timeline || []).map((item) => ({
       name: item.method === "Started" ? `Referendum #${referendum.index}` : item.method,
       extrinsicIndexer: item.type === "extrinsic" ? item.indexer : undefined,
