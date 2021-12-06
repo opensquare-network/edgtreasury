@@ -6,7 +6,7 @@ async function getPrice(time) {
     .find({
       $and: [
         { openTime: { $lte: time } },
-        { openTime: { $gt: time - 24*3600*1000 } },
+        { openTime: { $gt: time - 3*24*3600*1000 } },
       ]
     })
     .sort({ openTime: -1 })
