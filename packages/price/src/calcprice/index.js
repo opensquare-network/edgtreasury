@@ -21,9 +21,6 @@ async function savePrice(col) {
   const items = await col.find({}).toArray();
 
   for (const item of items) {
-    if (item.symbolPrice !== undefined) {
-      continue;
-    }
     const blockTime = item.indexer?.blockTime;
     if (blockTime) {
       const price = await getPrice(blockTime);
