@@ -4,7 +4,10 @@ async function getPrice(time) {
   const priceCol = await getEdgUsdtCollection();
   const [price] = await priceCol
     .find({
-      openTime: { $lte: time },
+      $and: [
+        { openTime: { $lte: time } },
+        { openTime: { $gt: time - 24*3600*1000 } },
+      ]
     })
     .sort({ openTime: -1 })
     .limit(1)
