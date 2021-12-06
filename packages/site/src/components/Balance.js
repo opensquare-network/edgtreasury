@@ -5,7 +5,7 @@ import PairText from "./PairText";
 import { toPrecision, getPrecision } from "../utils";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../store/reducers/chainSlice";
-import { toLocaleStringWithFixed } from "../utils";
+import { toLocaleStringWithFixed, abbreviateBigNumber } from "../utils";
 
 const Wrapper = styled.div`
   display: flex;
@@ -56,16 +56,21 @@ const Balance = ({
   reverse = false,
   isUnitPrice = true,
   horizontal = false,
+  isAbbreviate = false,
 }) => {
   const symbol = useSelector(chainSymbolSelector);
   let usdtNumber = Number(usdt);
   if (value === null || value === undefined) value = 0;
   const precision = toPrecision(value, getPrecision(currency || symbol), false);
   const localePrecision = Number(precision).toLocaleString();
+  const abbreviated = abbreviateBigNumber(precision);
   if (isUnitPrice) usdtNumber = usdtNumber * precision;
   return (
     <Wrapper reverse={reverse} horizontal={horizontal}>
-      <PairText value={localePrecision} unit={currency || symbol} />
+      <PairText
+        value={isAbbreviate ? abbreviated : localePrecision}
+        unit={currency || symbol}
+      />
       {usdt && !isNaN(usdtNumber) && (
         <UsdtWrapper horizontal={horizontal}>{`${
           usdtNumber === 0 ? "" : "≈ "
