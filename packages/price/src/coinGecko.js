@@ -5,7 +5,7 @@ async function getKlines(startTime = '1582329600') {
   const url = new URL("/api/v3/coins/edgeware/market_chart/range", "https://api.coingecko.com");
   url.searchParams.set("vs_currency", `usd`);
   url.searchParams.set("from", `${startTime}`);
-  url.searchParams.set("to", `${parseInt(startTime) + 7200}`);
+  url.searchParams.set("to", `${parseInt(startTime) + 18000}`);
 
   const controller = new AbortController();
   const timeout = setTimeout(() => {
