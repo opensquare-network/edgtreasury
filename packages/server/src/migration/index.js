@@ -3,14 +3,13 @@ require("dotenv").config();
 const { getProposalCollection } = require("../mongo");
 const { getLinkCollection, getDescriptionCollection } = require("../mongo-admin");
 
-const migrateLink = async (chain) => {
+const migrateLink = async () => {
   try {
-    console.log(`${chain} link migration start`);
-    const proposalCol = await getProposalCollection(chain);
+    console.log(`link migration start`);
+    const proposalCol = await getProposalCollection();
     const linkCol = await getLinkCollection();
     const proposalLinks = await linkCol
       .find({
-        "indexer.chain": chain,
         "indexer.type": "proposal",
       })
       .toArray();
@@ -26,20 +25,19 @@ const migrateLink = async (chain) => {
         );
       })
     );
-    console.log(`${chain} link migration success`);
+    console.log(`link migration success`);
   } catch (err) {
-    console.log(`${chain} link migration error`, err);
+    console.log(`link migration error`, err);
   }
 };
 
-const migrateDescription = async (chain) => {
+const migrateDescription = async () => {
   try {
-    console.log(`${chain} description migration start`);
-    const proposalCol = await getProposalCollection(chain);
+    console.log(`description migration start`);
+    const proposalCol = await getProposalCollection();
     const descriptionCol = await getDescriptionCollection();
     const descriptions = await descriptionCol
       .find({
-        "indexer.chain": chain,
         "indexer.type": "proposal",
       })
       .toArray();
@@ -55,9 +53,9 @@ const migrateDescription = async (chain) => {
         );
       })
     );
-    console.log(`${chain} description migration success`);
+    console.log(`description migration success`);
   } catch (err) {
-    console.log(`${chain} description migration error`, err);
+    console.log(`description migration error`, err);
   }
 };
 
