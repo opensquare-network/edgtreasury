@@ -36,10 +36,12 @@ const InformationTable = ({ loading, proposalIndex }) => {
   const descriptionDetail = useSelector(descriptionSelector);
   const [openDesModal, setOpenDesModal] = useState(false);
   const [description, setDescription] = useState("");
+  const [curator, setCurator] = useState("");
   const nowAddress = useSelector(nowAddressSelector);
 
   useEffect(() => {
     setDescription(descriptionDetail?.description ?? "");
+    setCurator(descriptionDetail?.curator ?? "");
   }, [descriptionDetail]);
 
   const addDes = () => {
@@ -48,6 +50,7 @@ const InformationTable = ({ loading, proposalIndex }) => {
         "proposal",
         parseInt(proposalIndex),
         description,
+        curator,
         nowAddress
       )
     );
@@ -96,10 +99,7 @@ const InformationTable = ({ loading, proposalIndex }) => {
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Curator"}>
-                  {
-                    //TODO migrate this data to Curator
-                  }
-                  <User address={proposalDetail.beneficiary} />
+                  {descriptionDetail.curator && <User address={descriptionDetail.curator} />}
                 </TableCell>
               </Table.Cell>
             </Table.Row>
@@ -133,7 +133,7 @@ const InformationTable = ({ loading, proposalIndex }) => {
         open={openDesModal}
         onClose={() => setOpenDesModal(false)}
       >
-        <Modal.Header>Description</Modal.Header>
+        <Modal.Header>Edit Proposal Infomation</Modal.Header>
         <Modal.Content>
           <Form>
             <Form.Input
@@ -141,6 +141,17 @@ const InformationTable = ({ loading, proposalIndex }) => {
               fluid
               label="Description"
               onChange={(_, { value }) => setDescription(value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addDes();
+                }
+              }}
+            />
+            <Form.Input
+              value={curator}
+              fluid
+              label="Curator"
+              onChange={(_, { value }) => setCurator(value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   addDes();

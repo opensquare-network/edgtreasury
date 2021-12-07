@@ -185,10 +185,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                         )}
                       </Table.Cell>
                       <Table.Cell className="proposal-user-cell">
-                          <User
-                            address={" "}
-                            //TODO add curator field from server-side
-                          />
+                        {item.curator && <User address={item.curator}/>}
                       </Table.Cell>
                       <Table.Cell className="proposal-description-cell">
                         <DescriptionCell description={item.description} />

@@ -46,10 +46,10 @@ class DescriptionService {
     return true;
   }
 
-  async setDescription({ indexer, description }, addressAndSignature) {
+  async setDescription({ indexer, description, curator }, addressAndSignature) {
     await this.verifySignature(
       addressAndSignature,
-      JSON.stringify({ ...indexer, description })
+      JSON.stringify({ ...indexer, description, curator })
     );
 
     const descriptionCol = await getDescriptionCollection();
@@ -58,6 +58,7 @@ class DescriptionService {
       {
         $set: {
           description,
+          curator,
         },
       },
       { upsert: true }

@@ -44,6 +44,7 @@ class ProposalsController {
         symbolPrice: item.symbolPrice,
         beneficiary: item.beneficiary,
         links: item.links || [],
+        curator: item.curator,
         description: item.description,
         latestState: {
           state: item.state?.state || item.state?.name,
@@ -192,7 +193,7 @@ class ProposalsController {
 
   async setProposalDescription(ctx) {
     const proposalIndex = parseInt(ctx.params.proposalIndex);
-    const { description } = ctx.request.body;
+    const { description, curator } = ctx.request.body;
 
     ctx.body = await descriptionService.setDescription(
       {
@@ -201,6 +202,7 @@ class ProposalsController {
           index: proposalIndex,
         },
         description,
+        curator,
       },
       ctx.request.headers.signature
     );

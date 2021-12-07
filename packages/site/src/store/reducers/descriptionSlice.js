@@ -27,12 +27,13 @@ export const fetchDescription =
   };
 
 export const putDescription =
-  (type, index, description, address) => async (dispatch) => {
+  (type, index, description,curator, address) => async (dispatch) => {
     const signature = await signMessage(
       JSON.stringify({
         type,
         index,
         description,
+        curator,
       }),
       address
     );
@@ -46,7 +47,7 @@ export const putDescription =
           "Content-Type": "application/json",
           Signature: address ? `${address}/${signature}` : "",
         },
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({ description, curator }),
       }
     );
     dispatch(fetchDescription(type, index));
