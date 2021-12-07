@@ -126,6 +126,7 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                       {isBeneficiary ? "Beneficiary" : "Proposer"}
                     </BeneficiarySwitch>
                   </Table.HeaderCell>
+                  <Table.HeaderCell>Curator</Table.HeaderCell>
                   <Table.HeaderCell>Description</Table.HeaderCell>
                   <Table.HeaderCell>Related links</Table.HeaderCell>
                   <Table.HeaderCell textAlign={"right"}>Value</Table.HeaderCell>
@@ -182,6 +183,9 @@ const ProposalsTable = ({ data, loading, header, footer }) => {
                             }
                           />
                         )}
+                      </Table.Cell>
+                      <Table.Cell className="proposal-user-cell">
+                        {item.curator && <User address={item.curator}/>}
                       </Table.Cell>
                       <Table.Cell className="proposal-description-cell">
                         <DescriptionCell description={item.description} />

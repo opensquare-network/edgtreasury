@@ -48,7 +48,10 @@ const migrateDescription = async () => {
             proposalIndex: item.indexer.index,
           },
           {
-            $set: { description: item.description },
+            $set: {
+              description: item.description,
+              curator: item.curator,
+            },
           }
         );
       })
