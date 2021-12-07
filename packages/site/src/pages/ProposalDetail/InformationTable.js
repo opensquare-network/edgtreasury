@@ -95,6 +95,16 @@ const InformationTable = ({ loading, proposalIndex }) => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
+                <TableCell title={"Curator"}>
+                  {
+                    //TODO migrate this data to Curator
+                  }
+                  <User address={proposalDetail.beneficiary} />
+                </TableCell>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
                 <TableCell title={"Value"}>
                   <Balance
                     value={proposalDetail.value}
