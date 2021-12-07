@@ -46,7 +46,10 @@ export const getLinkNameAndSrc = (link) => {
 
     let src = "";
     let name = "";
-    if (url.host.endsWith("youtube.com") || url.host.endsWith("youtu.be")) {
+    if (url.host.endsWith("commonwealth.im")) {
+      src = "/imgs/commonwealth.svg";
+      name = "Commonwealth";
+    } else if (url.host.endsWith("youtube.com") || url.host.endsWith("youtu.be")) {
       src = "/imgs/youtube-logo.svg";
       name = "YouTube";
     } else if (
@@ -147,9 +150,9 @@ export const getGravatarSrc = (email) => {
   // default img url
   // https%3A%2F%2www.dotreasury.com%2imgs%2avatar.png
   if (email && typeof email === "string") {
-    return `https://www.gravatar.com/avatar/${md5(
+    return `https://www.gravatar.com/avatar/${ md5(
       email.trim().toLocaleLowerCase()
-    )}?d=https://www.dotreasury.com/imgs/avatar.png`;
+    ) }?d=https://www.dotreasury.com/imgs/avatar.png`;
   }
   return "/imgs/avatar.png";
 };
