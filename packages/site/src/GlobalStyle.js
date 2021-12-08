@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     background: #FBFBFB;
     * {
       box-sizing: border-box !important;
+      -webkit-font-smoothing: antialiased;
     }
   }
   

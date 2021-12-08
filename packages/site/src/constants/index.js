@@ -1,5 +1,6 @@
 export const TEXT_DARK_MAJOR = "#1D253C";
-export const TEXT_DARK_MINOR = "rgba(29, 37, 60, 0.3)";
+export const TEXT_DARK_MINOR = "rgba(0, 0, 0, 0.65)";
+export const TEXT_DARK_ACCESSORY = "rgba(0, 0, 0, 0.3)";
 export const TEXT_DARK_DISABLE = "rgba(29, 37, 60, 0.24)";
 export const PRIMARY_THEME_COLOR = "#DF405D";
 export const SECONDARY_THEME_COLOR = "#FFEEF1";

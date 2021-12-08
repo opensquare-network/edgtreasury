@@ -25,12 +25,12 @@ import { mrgap } from "../../styles";
 import { abbreviateBigNumber } from "../../utils";
 
 const Wrapper = styled(Card)`
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1336px) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 8px;
   }
-  @media screen and (min-width: 1320px) {
+  @media screen and (min-width: 1336px) {
     display: flex;
     justify-content: space-between;
   }
