@@ -7,6 +7,7 @@ import SubHeader from "./SubHeader";
 
 const Wrapper = styled.header`
   background-image: url("/imgs/bg-edgewa.png");
+  background-size: 100%;
   max-height: 136px;
   margin-bottom: -43px;
   padding-bottom: 43px;
