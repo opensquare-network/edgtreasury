@@ -80,8 +80,8 @@ const InflationTable = ({ data, loading, header, footer }) => {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Time</Table.HeaderCell>
-                  <Table.HeaderCell style={{width: 120}}>Event ID</Table.HeaderCell>
-                  <Table.HeaderCell textAlign={"right"}>
+                  <Table.HeaderCell style={{width: 180}}>Event ID</Table.HeaderCell>
+                  <Table.HeaderCell style={{width: "100%"}} textAlign={"right"}>
                     Balance
                   </Table.HeaderCell>
                 </Table.Row>
@@ -91,7 +91,7 @@ const InflationTable = ({ data, loading, header, footer }) => {
                   data.length > 0 &&
                   data.map((item, index) => (
                     <TableRow key={index}>
-                      <Table.Cell className="propose-time-cell">
+                      <Table.Cell className="propose-time-cell" style={{width: 280}}>
                         <TimeWrapper>
                           <Text>
                             {dayjs(parseInt(item.indexer.blockTime)).format(

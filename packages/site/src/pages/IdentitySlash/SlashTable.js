@@ -81,7 +81,7 @@ const SlashTable = ({ data, loading, header, footer }) => {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Time</Table.HeaderCell>
-                  <Table.HeaderCell style={{width: 120}}>Event ID</Table.HeaderCell>
+                  <Table.HeaderCell style={{width: 180}}>Event ID</Table.HeaderCell>
                   <Table.HeaderCell>Event Name</Table.HeaderCell>
                   <Table.HeaderCell>Account</Table.HeaderCell>
                   <Table.HeaderCell textAlign={"right"}>
