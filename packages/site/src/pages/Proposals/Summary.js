@@ -17,31 +17,30 @@ import {
 } from "../../store/reducers/chainSlice";
 import { fetchTreasury, treasurySelector, } from "../../store/reducers/burntSlice";
 import { abbreviateBigNumber } from "../../utils";
+import { TEXT_DARK_ACCESSORY } from "../../constants";
 
 const Wrapper = styled(Card)`
+  position: relative;
   padding: 16px 20px 8px;
   border-radius: 8px;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
-  & > div:not(:last-child) {
-    margin-right: 16px;
-  }
   & > div {
     margin-bottom: 8px;
   }
   justify-content: space-between;
   flex-wrap: wrap;
-  @media screen and (max-width: 1140px) {
-    justify-content: flex-start;
-  }
 `;
 
 const Item = styled.div`
   min-width: 120px;
-  &.grow {
-    flex-grow: 1;
+  
+  &.absolute {
+    position: absolute;
+    right: 24px;
   }
+  &.grow {}
   &.countdown {
     min-width: 0;
   }
@@ -55,14 +54,8 @@ const Item = styled.div`
   &.spend-period {
     min-width: 180px;
   }
-  & > div:last-child {
-    justify-content: flex-end;
-  }
 
   @media screen and (max-width: 1140px) {
-    &.grow {
-      flex-grow: 0;
-    }
     &.countdown {
       display: none;
     }
@@ -84,6 +77,7 @@ const Item = styled.div`
 
 const Title = styled(TextMinor)`
   line-height: 24px;
+  color: ${TEXT_DARK_ACCESSORY} !important;
 `;
 
 const Value = styled(Text)`
@@ -137,14 +131,14 @@ const Summary = () => {
         <Title>Total</Title>
         <Value>{summary.total}</Value>
       </Item>
-      <Item className="right available">
+      <Item className="available">
         <Title>Available</Title>
         <ValueWrapper>
           <Value>{abbreviateBigNumber(treasury.free, 2)}</Value>
           <Unit>{symbol}</Unit>
         </ValueWrapper>
       </Item>
-      <Item className="right next-burn">
+      <Item className="next-burn">
         <Title>Next burn</Title>
         <ValueWrapper>
           <Value>
@@ -153,7 +147,7 @@ const Summary = () => {
           <Unit>{symbol}</Unit>
         </ValueWrapper>
       </Item>
-      <Item className="right spend-period">
+      <Item className="spend-period">
         <Title>Spend period</Title>
         <BlocksTime
           blocks={spendPeriod.restBlocks}
@@ -165,7 +159,7 @@ const Summary = () => {
           pluralUnitMapper={{ d: "Days" }}
         />
       </Item>
-      <Item className="countdown">
+      <Item className="absolute countdown">
         <CountDown percent={spendPeriod.progress} />
       </Item>
     </Wrapper>

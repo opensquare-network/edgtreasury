@@ -117,7 +117,7 @@ const Item = styled.div`
 const ExpenseWrapper = styled.div`
   display: flex;
   & > .unit {
-    margin-left: 8px;
+    margin-left: 4px;
   }
   & > .dollar {
     margin-left: 8px;

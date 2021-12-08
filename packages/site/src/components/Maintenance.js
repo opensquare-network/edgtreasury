@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   line-height: 24px;
   font-weight: bold;
   color: #ffffff;
-  background: linear-gradient(90deg, #f23252 0%, #f2b12f 100%);
+  background: linear-gradient(90deg, #FF3B80 0%, #f2b12f 100%);
   text-align: center;
 `;
 

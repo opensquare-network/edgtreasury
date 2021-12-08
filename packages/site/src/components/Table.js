@@ -25,7 +25,7 @@ const CustomTable = styled(Table)`
     padding: 12px 24px !important;
     background: #fafafa !important;
     line-height: 18px !important;
-    color: rgba(0, 0, 0, 0.3) !important;
+    color: rgba(0, 0, 0, 0.65) !important;
   }
   .user-cell {
     width: 192px !important;

@@ -6,12 +6,12 @@ const Container = styled.div`
   overflow-x: visible;
   overflow-y: visible;
 
-  @media screen and (min-width: 1320px) {
-    width: 1320px;
+  @media screen and (min-width: 1336px) {
+    width: 1336px;
     margin: 0 auto;
   }
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1336px) {
     margin: 0 16px;
     width: calc(100vw - 32px);
   }

@@ -105,7 +105,7 @@ const ValueWrapper = styled.div`
     p.disabled &&
     css`
       & > * {
-        color: rgba(29, 37, 60, 0.24);
+        color: rgba(0, 0, 0, 0.65);
       }
     `}
 `;
