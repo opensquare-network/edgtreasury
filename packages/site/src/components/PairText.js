@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   p {
     display: inline;
     :last-child {
-      margin-left: 8px;
+      margin-left: 4px;
     }
   }
 `;
