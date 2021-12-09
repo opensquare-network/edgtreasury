@@ -77,8 +77,9 @@ const ProposeTimeWrapper = styled.div`
 
 const BeneficiarySwitch = styled.div`
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.65) !important;
   :hover {
-    color: rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, 0.65) !important;
   }
 `;
 
