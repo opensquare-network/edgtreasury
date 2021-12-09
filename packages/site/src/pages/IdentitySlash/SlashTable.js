@@ -80,7 +80,7 @@ const SlashTable = ({ data, loading, header, footer }) => {
             <StyledTable unstackable>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Time</Table.HeaderCell>
+                  <Table.HeaderCell style={{width: 280}}>Time</Table.HeaderCell>
                   <Table.HeaderCell style={{width: 180}}>Event ID</Table.HeaderCell>
                   <Table.HeaderCell>Event Name</Table.HeaderCell>
                   <Table.HeaderCell>Account</Table.HeaderCell>
