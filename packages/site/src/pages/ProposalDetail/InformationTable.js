@@ -85,21 +85,21 @@ const InformationTable = ({ loading, proposalIndex }) => {
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Proposer"}>
-                  <User address={proposalDetail.proposer} />
+                  <User address={proposalDetail.proposer} ellipsis={false} />
                 </TableCell>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Beneficiary"}>
-                  <User address={proposalDetail.beneficiary} />
+                  <User address={proposalDetail.beneficiary}  ellipsis={false}  />
                 </TableCell>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>
                 <TableCell title={"Curator"}>
-                  {descriptionDetail.curator && <User address={descriptionDetail.curator} />}
+                  {descriptionDetail.curator && <User address={descriptionDetail.curator}  ellipsis={false}  />}
                 </TableCell>
               </Table.Cell>
             </Table.Row>
