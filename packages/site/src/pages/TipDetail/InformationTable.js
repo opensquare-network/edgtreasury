@@ -37,14 +37,14 @@ const InformationTable = ({ loading }) => {
           <Table.Row>
             <Table.Cell>
               <TableCell title={"Finder"}>
-                <User address={tipDetail.finder} />
+                <User address={tipDetail.finder} ellipsis={false} />
               </TableCell>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>
               <TableCell title={"Beneficiary"}>
-                <User address={tipDetail.beneficiary} />
+                <User address={tipDetail.beneficiary} ellipsis={false} />
               </TableCell>
             </Table.Cell>
           </Table.Row>

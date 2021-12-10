@@ -67,7 +67,7 @@ const InformationTable = ({ loading }) => {
           <Table.Row>
             <Table.Cell>
               <TableCell title={"Proposer"}>
-                <User address={bountyDetail.proposer} />
+                <User address={bountyDetail.proposer} ellipsis={false} />
               </TableCell>
             </Table.Cell>
           </Table.Row>

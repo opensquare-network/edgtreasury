@@ -5,7 +5,7 @@ import Username from "./Username";
 import Avatar from "./Avatar";
 import Badge from "./Badge";
 import ExplorerLink from "../../components/ExplorerLink";
-import { useIdentity } from "../../utils/hooks";
+import { useIdentity, useWindowSize } from "../../utils/hooks";
 import DeletedAccount from "./DeletedAccount";
 
 const Wrapper = styled.div`
@@ -24,6 +24,11 @@ const BadgeWrapper = styled.div`
 
 const User = ({ address, ellipsis = true, popup = true, popupContent }) => {
   const { name, badgeData } = useIdentity(address);
+  const [width] = useWindowSize();
+  let ellipsisName = name;
+  if((ellipsis && name)){
+    ellipsisName = name?.slice(0,5) + '...';
+  }
 
   return (
     <>
@@ -34,9 +39,9 @@ const User = ({ address, ellipsis = true, popup = true, popupContent }) => {
             <Badge {...badgeData} />
             <ExplorerLink href={`/account/${address}`}>
               <Username
-                name={name}
+                name={ellipsisName}
                 address={address}
-                ellipsis={ellipsis}
+                ellipsis={ellipsis || (width <= 500)}
                 popup={popup}
                 popupContent={popupContent}
               />
