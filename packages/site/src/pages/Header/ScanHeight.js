@@ -290,7 +290,7 @@ const ScanHeight = () => {
           <div className="scanBlockHeight">
             <Icon src="/imgs/icon-edgeware-color.svg" />
             <DarkMinorLabel>Height</DarkMinorLabel>
-            <DarkMajorLabel>{`#${scanHeight}`}</DarkMajorLabel>
+            <DarkMajorLabel>{`#${scanHeight.toLocaleString()}`}</DarkMajorLabel>
           </div>
           <Button
             ref={symbolRef}
