@@ -129,6 +129,13 @@ const ScanHeightWrapper = styled.div`
   background: #fbfbfb;
   height: 32px;
   padding: 4px 8px;
+  padding-right: 0;
+  div.scanBlockHeight {
+    padding-right: 8px;
+    display: flex; 
+    flex-grow: 1;
+  }
+  cursor: pointer;
 `;
 
 const Icon = styled(Image)`
@@ -139,7 +146,7 @@ const Icon = styled(Image)`
 `;
 
 const Label = styled.div`
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -158,9 +165,6 @@ const DarkMinorLabel = styled(Label)`
 const DarkMajorLabel = styled(Label)`
   margin-right: 4px;
   color: ${TEXT_DARK_MAJOR};
-  &:hover {
-    text-decoration-line: underline;
-  }
   @media screen and (max-width: 600px) {
     display: none;
   }
@@ -280,66 +284,65 @@ const ScanHeight = () => {
   return (
     <NetworkWrapper>
       <Wrapper>
-        <ScanHeightWrapper>
-          <Icon src="/imgs/icon-edgeware-color.svg" />
-          <DarkMinorLabel>Height</DarkMinorLabel>
-          <ExplorerLink href={`/block/${scanHeight}`}>
+        <ScanHeightWrapper onClick={() => {
+          setSymbolOpen(!symbolOpen);
+        }}>
+          <div className="scanBlockHeight">
+            <Icon src="/imgs/icon-edgeware-color.svg" />
+            <DarkMinorLabel>Height</DarkMinorLabel>
             <DarkMajorLabel>{`#${scanHeight}`}</DarkMajorLabel>
-          </ExplorerLink>
+          </div>
+          <Button
+            ref={symbolRef}
+            isActive={symbolOpen}
+          >
+            <Image
+              src={`${
+                symbolOpen
+                  ? "/imgs/icon-triangle-up.svg"
+                  : "/imgs/icon-triangle-down.svg"
+              }`}
+            />
+            {symbolOpen && (
+              <SymbolWrapper>
+                <SymbolItem
+                  isActive={true}
+                  onClick={() => {
+                    setSymbolOpen(false);
+                  }}
+                >
+                  <Image src="/imgs/icon-edgeware-color.svg" />
+                  <div>Edgeware</div>
+                  <div className="unit">EDG</div>
+                </SymbolItem>
+                <ExternalLink href="https://www.dotreasury.com/dot">
+                  <SymbolItem
+                    isActive={false}
+                    onClick={() => {
+                      setSymbolOpen(false);
+                    }}
+                  >
+                    <Image src="/imgs/logo-polkadot.svg" />
+                    <div>Polkadot</div>
+                    <div className="unit">DOT</div>
+                  </SymbolItem>
+                </ExternalLink>
+                <ExternalLink href="https://www.dotreasury.com/ksm">
+                  <SymbolItem
+                    isActive={false}
+                    onClick={() => {
+                      setSymbolOpen(false);
+                    }}
+                  >
+                    <Image src="/imgs/logo-kusama.svg" />
+                    <div>Kusama</div>
+                    <div className="unit">KSM</div>
+                  </SymbolItem>
+                </ExternalLink>
+              </SymbolWrapper>
+            )}
+          </Button>
         </ScanHeightWrapper>
-        <Button
-          onClick={() => {
-            setSymbolOpen(!symbolOpen);
-          }}
-          ref={symbolRef}
-          isActive={symbolOpen}
-        >
-          <Image
-            src={`${
-              symbolOpen
-                ? "/imgs/icon-triangle-up.svg"
-                : "/imgs/icon-triangle-down.svg"
-            }`}
-          />
-          {symbolOpen && (
-            <SymbolWrapper>
-              <SymbolItem
-                isActive={true}
-                onClick={() => {
-                  setSymbolOpen(false);
-                }}
-              >
-                <Image src="/imgs/icon-edgeware-color.svg" />
-                <div>Edgeware</div>
-                <div className="unit">EDG</div>
-              </SymbolItem>
-              <ExternalLink href="https://www.dotreasury.com/dot">
-                <SymbolItem
-                  isActive={false}
-                  onClick={() => {
-                    setSymbolOpen(false);
-                  }}
-                >
-                  <Image src="/imgs/logo-polkadot.svg" />
-                  <div>Polkadot</div>
-                  <div className="unit">DOT</div>
-                </SymbolItem>
-              </ExternalLink>
-              <ExternalLink href="https://www.dotreasury.com/ksm">
-                <SymbolItem
-                  isActive={false}
-                  onClick={() => {
-                    setSymbolOpen(false);
-                  }}
-                >
-                  <Image src="/imgs/logo-kusama.svg" />
-                  <div>Kusama</div>
-                  <div className="unit">KSM</div>
-                </SymbolItem>
-              </ExternalLink>
-            </SymbolWrapper>
-          )}
-        </Button>
       </Wrapper>
       <NetworkButton
         isActive={networkOpen}
