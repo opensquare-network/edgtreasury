@@ -16,7 +16,6 @@ import {
 import { useOutsideClick } from "../../utils/hooks";
 import useUpdateNodesDelay from "../../utils/useUpdateNodesDelay";
 import { addToast } from "../../store/reducers/toastSlice";
-import ExplorerLink from "../../components/ExplorerLink";
 import ExternalLink from "../../components/ExternalLink";
 
 const NetworkWrapper = styled.div`
@@ -286,14 +285,15 @@ const ScanHeight = () => {
       <Wrapper>
         <ScanHeightWrapper onClick={() => {
           setSymbolOpen(!symbolOpen);
-        }}>
+        }}
+        ref={symbolRef}
+        >
           <div className="scanBlockHeight">
             <Icon src="/imgs/icon-edgeware-color.svg" />
             <DarkMinorLabel>Height</DarkMinorLabel>
             <DarkMajorLabel>{`#${scanHeight.toLocaleString()}`}</DarkMajorLabel>
           </div>
           <Button
-            ref={symbolRef}
             isActive={symbolOpen}
           >
             <Image
