@@ -83,10 +83,8 @@ export const getBlockTime = async (number) => {
 };
 
 export const estimateBlocksTime = async (blocks) => {
-  return;
-  // const api = await getApi();
-  // const nsPerBlock = api.consts.babe.expectedBlockTime.toNumber();
-  // return nsPerBlock * blocks;
+  // FIXME: find a better way to calculate block time
+  return 6000 * blocks
 };
 
 export const encodeKusamaAddress = (address) => {
