@@ -32,7 +32,7 @@ async function handleBountyEvent(event, indexer, events, extrinsic) {
   } else if (BountyEvents.BountyClaimed === method) {
     await handleBountyClaimed(event, indexer);
   } else if (BountyEvents.BountyCanceled === method) {
-    await handleBountyCanceled(event, indexer, extrinsic);
+    await handleBountyCanceled(event, indexer, events, extrinsic);
   } else if (BountyEvents.BountyExtended === method) {
     await handleBountyExtended(event, indexer, events, extrinsic);
   } else if (BountyEvents.BountyBecameActive === method) {
