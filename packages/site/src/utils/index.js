@@ -16,7 +16,7 @@ export function getPrecision(chainSymbol) {
     return 18;
   }
 
-  return 12;
+  return 18;
 }
 
 export function toPrecision(value, precision = 0, paddingZero = true) {

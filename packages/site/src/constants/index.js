@@ -42,9 +42,6 @@ export const ProposalStatus = {
 export const TreasuryAccount =
   "jz77v8cHXwEWbPnbfQScXnU9Qy5VkHnDLfpDsuDYUZ7ELae";
 
-export const REACTION_THUMBUP = 1;
-export const REACTION_THUMBDOWN = 2;
-
 export const DEFAULT_EDGEWARE_NODE_URL =
   "wss://edgeware.api.onfinality.io/public-ws";
 export const DEFAULT_EDGEWARE_NODES = [
