@@ -46,7 +46,10 @@ export const getLinkNameAndSrc = (link) => {
 
     let src = "";
     let name = "";
-    if (url.host.endsWith("commonwealth.im")) {
+    if (
+      url.host.endsWith("commonwealth.im") ||
+      url.host.endsWith("gov.edgewa.re")
+    ) {
       src = "/imgs/commonwealth.svg";
       name = "Commonwealth";
     } else if (url.host.endsWith("youtube.com") || url.host.endsWith("youtu.be")) {
