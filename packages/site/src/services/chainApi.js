@@ -1,6 +1,6 @@
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { isWeb3Injected, web3FromAddress } from "@polkadot/extension-dapp";
-import { stringToHex } from "@polkadot/util";
+import { stringToHex, BN, BN_THOUSAND, BN_TWO, bnToBn } from "@polkadot/util";
 import { encodeAddress } from "@polkadot/keyring";
 import { spec } from "@edgeware/node-types";
 
@@ -82,9 +82,31 @@ export const getBlockTime = async (number) => {
   return time;
 };
 
+const DEFAULT_TIME = new BN(6_000);
+const THRESHOLD = BN_THOUSAND.div(BN_TWO);
+
 export const estimateBlocksTime = async (blocks) => {
-  // FIXME: find a better way to calculate block time
-  return 6000 * blocks
+  const api = await getApi();
+  const blockTime = (
+    // Babe
+    api.consts.babe?.expectedBlockTime ||
+    // POW, eg. Kulupu
+    api.consts.difficulty?.targetBlockTime ||
+    // Subspace
+    api.consts.subspace?.expectedBlockTime || (
+      // Check against threshold to determine value validity
+      api.consts.timestamp?.minimumPeriod.gte(THRESHOLD)
+        // Default minimum period config
+        ? api.consts.timestamp.minimumPeriod.mul(BN_TWO)
+        : api.query.parachainSystem
+          // default guess for a parachain
+          ? DEFAULT_TIME.mul(BN_TWO)
+          // default guess for others
+          : DEFAULT_TIME
+    )
+  );
+  const value = blockTime.mul(bnToBn(blocks)).toNumber();
+  return value;
 };
 
 export const encodeKusamaAddress = (address) => {
