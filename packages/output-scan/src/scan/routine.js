@@ -74,6 +74,10 @@ async function oneStepScan(startHeight) {
       logger.error(`Error with block scan ${ block.height }`, e);
       // process.exit(1);
     } finally {
+      if (block.height % 300000 === 0) {
+        process.exit(0);
+      }
+
       const memoryInGb = getHeadUsedInGB()
       if (memoryInGb > 1) {
         console.log(
