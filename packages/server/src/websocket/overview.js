@@ -123,7 +123,7 @@ async function calcCount(
   };
 
   const unFinishedBounties = bounties.filter(
-    ({ state: { name: stateName } }) => {
+    ({ state: { state: stateName } }) => {
       return ![
         "BountyRejected",
         "Rejected",
