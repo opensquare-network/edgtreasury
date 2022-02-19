@@ -124,7 +124,12 @@ async function calcCount(
 
   const unFinishedBounties = bounties.filter(
     ({ state: { name: stateName } }) => {
-      return !["BountyRejected", "BountyClaimed", "BountyCanceled"].includes(
+      return ![
+        "BountyRejected",
+        "Rejected",
+        "BountyClaimed",
+        "Claimed",
+        "BountyCanceled"].includes(
         stateName
       );
     }
