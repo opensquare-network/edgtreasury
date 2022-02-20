@@ -206,10 +206,6 @@ function processTimeline(bountyDetail, scanHeight, symbol) {
             const { caller, slashed } = item.args;
             fields = [
               {
-                title: "Closed by",
-                value: <User address={caller} />,
-              },
-              {
                 title: "Proposer slashed",
                 value: <Balance value={slashed} currency={symbol} />,
               },
