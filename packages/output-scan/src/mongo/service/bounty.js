@@ -1,4 +1,5 @@
 const { getBountyCollection } = require("../index");
+const isEmpty = require("lodash.isempty");
 
 async function insertBounty(bountyObj) {
   const col = await getBountyCollection();
@@ -36,7 +37,9 @@ async function updateBounty(bountyIndex, updates, timelineItem, motionInfo) {
     }
   }
 
-  await col.updateOne({ bountyIndex }, update);
+  if (!isEmpty(updates)) {
+    await col.updateOne({ bountyIndex }, update);
+  }
 }
 
 
