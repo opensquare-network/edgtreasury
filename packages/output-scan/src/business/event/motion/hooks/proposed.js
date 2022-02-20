@@ -1,12 +1,13 @@
 const { isProposalMotion } = require("../../../common/motion/utils");
 const { updateProposal } = require("../../../../mongo/service/proposal");
 const { isStateChangeBountyMotion, isBountyMotion } = require("../../../common/bounty/utils/motion");
-const { updateBounty } = require("../../../../mongo/service/bounty");
+const { updateBounty, getBounty, } = require("../../../../mongo/service/bounty");
 const { handleWrappedCall } = require("../../../common/call");
 const {
   TreasuryProposalMethods,
   MotionState,
   BountyMethods,
+  BountyStatus,
 } = require("../../../common/constants");
 const { logger } = require("../../../../logger");
 
@@ -50,6 +51,15 @@ async function handleBountyCall(motion, call, author, indexer) {
   }
 
   const treasuryBountyIndex = args[0].toJSON();
+  const bounty = await getBounty(treasuryBountyIndex);
+  if (!bounty || [
+    BountyStatus.Canceled,
+    BountyStatus.Rejected,
+    BountyStatus.Claimed
+  ].includes(bounty.state?.state)) {
+    return
+  }
+
   const motionInfo = {
     indexer,
     index: motion.index,

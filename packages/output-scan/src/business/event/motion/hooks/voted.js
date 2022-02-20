@@ -1,11 +1,12 @@
 const { updateProposal } = require("../../../../mongo/service/proposal");
 const { isStateChangeBountyMotion } = require("../../../common/bounty/utils/motion");
-const { updateBounty } = require("../../../../mongo/service/bounty");
+const { updateBounty, getBounty, } = require("../../../../mongo/service/bounty");
 const { getMotionCollection } = require("../../../../mongo");
 const {
   TreasuryProposalMethods,
   MotionState,
   BountyMethods,
+  BountyStatus,
 } = require("../../../common/constants");
 const { logger } = require("../../../../logger")
 
@@ -35,6 +36,15 @@ async function updateProposalState(proposalInfo, motion, voting, indexer) {
 
 async function updateBountyState(bountyInfo, motion, voting, indexer) {
   const { index: bountyIndex, method } = bountyInfo;
+  const bounty = await getBounty(bountyIndex);
+  if (!bounty || [
+    BountyStatus.Canceled,
+    BountyStatus.Rejected,
+    BountyStatus.Claimed
+  ].includes(bounty.state?.state)) {
+    return
+  }
+
   if (!isStateChangeBountyMotion(method)) {
     return
   }

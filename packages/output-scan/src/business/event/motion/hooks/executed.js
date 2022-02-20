@@ -1,4 +1,4 @@
-const { updateBounty } = require("../../../../mongo/service/bounty");
+const { updateBounty, getBounty } = require("../../../../mongo/service/bounty");
 const { getBountyMeta } = require("../../../common/bounty/meta");
 const { getMotionCollection } = require("../../../../mongo");
 const {
@@ -8,6 +8,15 @@ const {
 
 async function handleBounty(bountyInfo, indexer) {
   const { index: bountyIndex, method } = bountyInfo;
+
+  const bounty = await getBounty(bountyIndex);
+  if (!bounty || [
+    BountyStatus.Canceled,
+    BountyStatus.Rejected,
+    BountyStatus.Claimed
+  ].includes(bounty.state?.state)) {
+    return
+  }
 
   let updates = {};
 

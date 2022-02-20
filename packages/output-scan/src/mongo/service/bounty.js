@@ -11,6 +11,11 @@ async function insertBounty(bountyObj) {
   await col.insertOne(bountyObj);
 }
 
+async function getBounty(bountyIndex) {
+  const col = await getBountyCollection();
+  return await col.findOne({ bountyIndex });
+}
+
 async function updateBounty(bountyIndex, updates, timelineItem, motionInfo) {
   const col = await getBountyCollection();
   let update = {
@@ -37,5 +42,6 @@ async function updateBounty(bountyIndex, updates, timelineItem, motionInfo) {
 
 module.exports = {
   insertBounty,
+  getBounty,
   updateBounty,
 }
