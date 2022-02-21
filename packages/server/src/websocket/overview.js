@@ -129,7 +129,9 @@ async function calcCount(
         "Rejected",
         "BountyClaimed",
         "Claimed",
-        "BountyCanceled"].includes(
+        "Canceled",
+        "BountyCanceled"
+      ].includes(
         stateName
       );
     }
