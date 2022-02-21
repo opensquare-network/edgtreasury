@@ -8,9 +8,7 @@
       "**/@polkadot/**",
       "**/react",
       "**/react/**",
-      "**/@osn/**",
-      "**/eslint",
-      "**/eslint/**"
+      "**/@osn/**"
     ]
   },
   "repository": "git@github.com:opensquare-network/edgtreasury.git",
