@@ -11,8 +11,16 @@ async function getApi() {
 
     api = await ApiPromise.create({ provider, typesBundle: spec.typesBundle, });
     console.log(`Connected to ${ getEndpoint() }`)
-  }
 
+    api.on("error", (err) => {
+      console.error("api error, will restart:", err);
+      process.exit(0);
+    });
+    api.on("disconnected", () => {
+      console.error("api disconnected, will restart:");
+      process.exit(0);
+    });
+  }
 
   return api
 }
