@@ -25,10 +25,6 @@ const BadgeWrapper = styled.div`
 const User = ({ address, ellipsis = true, popup = true, popupContent }) => {
   const { name, badgeData } = useIdentity(address);
   const [width] = useWindowSize();
-  let ellipsisName = name;
-  if((ellipsis && name)){
-    ellipsisName = name?.slice(0,5) + '...';
-  }
 
   return (
     <>
@@ -39,7 +35,7 @@ const User = ({ address, ellipsis = true, popup = true, popupContent }) => {
             <Badge {...badgeData} />
             <ExplorerLink href={`/account/${address}`}>
               <Username
-                name={ellipsisName}
+                name={name}
                 address={address}
                 ellipsis={ellipsis || (width <= 500)}
                 popup={popup}

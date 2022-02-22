@@ -40,8 +40,12 @@ const Username = ({ address, name, ellipsis, popup, popupContent }) => {
       displayAddress = address.id;
     }
   }
+  let ellipsisName = name;
+  if(ellipsis && name && name?.length > 15){
+    ellipsisName = name?.slice(0, 15) + '...';
+  }
 
-  const displayName = name ? name : displayAddress;
+  const displayName = ellipsisName ? ellipsisName : displayAddress;
   return (
     <Popup
       content={
