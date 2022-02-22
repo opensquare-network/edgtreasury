@@ -40,8 +40,11 @@ const Username = ({ address, name, ellipsis, popup, popupContent }) => {
       displayAddress = address.id;
     }
   }
+  let displayName = name;
+  if(ellipsis && name && name?.length > 15){
+    displayName = name?.slice(0, 15) + '...';
+  }
 
-  const displayName = name ? name : displayAddress;
   return (
     <Popup
       content={
@@ -49,7 +52,7 @@ const Username = ({ address, name, ellipsis, popup, popupContent }) => {
       }
       size="mini"
       disabled={!popup || disabledPopup}
-      trigger={<TextUsername>{displayName}</TextUsername>}
+      trigger={<TextUsername>{displayName || displayAddress}</TextUsername>}
     />
   );
 };
