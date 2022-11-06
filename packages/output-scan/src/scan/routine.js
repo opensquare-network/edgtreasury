@@ -27,7 +27,7 @@ async function beginScan() {
 }
 
 async function oneStepScan(startHeight) {
-  const chainHeight = getLatestHeight() - 100;
+  const chainHeight = getLatestHeight();
   if (startHeight > chainHeight) {
     // Just wait if the to scan height greater than current chain height
     await sleep(3000);

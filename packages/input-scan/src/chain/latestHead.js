@@ -6,7 +6,7 @@ async function subscribeChainHeight() {
   const api = await getApi();
 
   await new Promise((resolve) => {
-    api.rpc.chain.subscribeNewHeads((header) => {
+    api.rpc.chain.subscribeFinalizedHeads((header) => {
       latestHeight = header.number.toNumber();
       resolve();
     });
