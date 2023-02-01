@@ -1,6 +1,6 @@
 const { getEndpoint } = require("../env");
 const { ApiPromise, WsProvider } = require("@polkadot/api");
-const { spec } = require("@edgeware/node-types")
+const typesBundle = require("./typesBundle");
 
 let provider = null;
 let api = null;
@@ -9,7 +9,10 @@ async function getApi() {
   if (!api) {
     provider = new WsProvider(getEndpoint(), 1000);
 
-    api = await ApiPromise.create({ provider, typesBundle: spec.typesBundle, });
+    api = await ApiPromise.create({
+      provider,
+      typesBundle,
+    });
     console.log(`Connected to ${ getEndpoint() }`)
 
     api.on("error", (err) => {
