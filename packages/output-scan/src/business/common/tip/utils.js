@@ -13,7 +13,7 @@ const {
 } = require("@osn/scan-common");
 
 async function getTipMetaFromStorage(indexer, tipHash) {
-  const blockApi = await findBlockApi(blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
 
   let rawMeta;
   if (blockApi.query.treasury?.tips) {
