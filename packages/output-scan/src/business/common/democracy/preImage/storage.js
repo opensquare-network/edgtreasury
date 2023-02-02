@@ -1,15 +1,10 @@
-const { findDecorated } = require("../../../../chain/specs");
-const { findRegistry } = require("../../../../chain/specs");
 const { hexToU8a } = require("@polkadot/util");
-const { getApi } = require("../../../../chain/api");
 const { normalizeCall } = require("../../call/normalize");
+const { chain: { findBlockApi, findRegistry } } = require("@osn/scan-common");
 
 async function queryImageCall(imageHash, indexer) {
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.democracy.preimages, imageHash];
-
-  const api = await getApi();
-  const raw = await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  const raw = await blockApi.query.democracy.preimages(imageHash);
   if (!raw.isSome) {
     return null;
   }
@@ -26,7 +21,7 @@ async function queryImageCall(imageHash, indexer) {
     availableImage = raw.unwrap().asAvailable.toJSON();
   }
 
-  const registry = await findRegistry(indexer.blockHeight);
+  const registry = await findRegistry(indexer);
 
   try {
     return registry.createType("Proposal", availableImage.data);
@@ -36,11 +31,8 @@ async function queryImageCall(imageHash, indexer) {
 }
 
 async function getPreImageFromStorage(imageHash, indexer) {
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.democracy.preimages, imageHash];
-
-  const api = await getApi();
-  const raw = await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  const raw = await blockApi.query.democracy.preimages(imageHash);
   if (!raw.isSome) {
     return {};
   }
@@ -57,7 +49,7 @@ async function getPreImageFromStorage(imageHash, indexer) {
     availableImage = raw.unwrap().asAvailable.toJSON();
   }
 
-  const registry = await findRegistry(indexer.blockHeight);
+  const registry = await findRegistry(indexer);
   try {
     const call = registry.createType("Proposal", hexToU8a(availableImage.data));
     return {

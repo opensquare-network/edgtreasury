@@ -4,11 +4,11 @@ const {
 } = require("../common/constants");
 const { getBurntCollection } = require("../../mongo");
 const { getTreasuryBalance } = require("../common/balance/freeBalance");
-const { getMetadataConstByBlockHash } = require("../common/metadata/const");
+const { chain: { findBlockApi } } = require("@osn/scan-common");
 
 async function getBurnPercent(blockHash) {
-  const v = await getMetadataConstByBlockHash(blockHash, "Treasury", "Burn");
-  return v ? v.toHuman() : v;
+  const blockApi = await findBlockApi(blockHash);
+  return blockApi.consts.treasury?.burn.toHuman()
 }
 
 async function handleBurntEvent(event, eventIndexer) {

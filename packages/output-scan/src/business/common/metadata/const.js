@@ -1,4 +1,4 @@
-const { getApi } = require("../../../chain/api");
+const { chain: { getApi } } = require("@osn/scan-common");
 
 function getConstFromRegistry(registry, moduleName, constantName) {
   let iterVersion = 0;
@@ -34,16 +34,6 @@ function getConstFromRegistry(registry, moduleName, constantName) {
   return null;
 }
 
-async function getMetadataConstByBlockHash(
-  blockHash,
-  moduleName,
-  constantName
-) {
-  const api = await getApi();
-  const registry = await api.getBlockRegistry(blockHash);
-  return getConstFromRegistry(registry, moduleName, constantName);
-}
-
 async function getMetadataConstsByBlockHash(blockHash, constants) {
   const api = await getApi();
   const registry = await api.getBlockRegistry(blockHash);
@@ -53,6 +43,5 @@ async function getMetadataConstsByBlockHash(blockHash, constants) {
 }
 
 module.exports = {
-  getMetadataConstByBlockHash,
   getMetadataConstsByBlockHash,
 }

@@ -1,6 +1,3 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getMetadataConstByBlockHash, getMetadataConstsByBlockHash } = require("../metadata/const");
-const { getApi } = require("../../../chain/api");
 const {
   Modules,
   ProxyMethods,
@@ -11,32 +8,32 @@ const {
 const { GenericCall } = require("@polkadot/types");
 const { blake2AsHex } = require("@polkadot/util-crypto");
 const { isHex, hexToString } = require("@polkadot/util");
+const {
+  chain: { findBlockApi }
+} = require("@osn/scan-common");
 
 async function getTipMetaFromStorage(indexer, tipHash) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-  let key;
-  if (decorated.query.treasury?.tips) {
-    key = [decorated.query.treasury?.tips, tipHash];
+  const blockApi = await findBlockApi(blockHash);
+
+  let rawMeta;
+  if (blockApi.query.treasury?.tips) {
+    rawMeta = await blockApi.query.treasury?.tips(tipHash);
   } else {
-    key = [decorated.query.tips?.tips, tipHash];
+    rawMeta = await blockApi.query.tips.tips(tipHash);
   }
 
-  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   return rawMeta.toJSON();
 }
 
 async function getTipReason(indexer, reasonHash) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-  let key;
-  if (decorated.query.treasury?.reasons) {
-    key = [decorated.query.treasury?.tips, reasonHash];
+  const blockApi = await findBlockApi(blockHash);
+  let rawMeta;
+  if (blockApi.query.treasury?.reasons) {
+    rawMeta = await blockApi.query.treasury?.reasons(reasonHash);
   } else {
-    key = [decorated.query.tips?.reasons, reasonHash];
+    rawMeta = await blockApi.query.tips.reasons(reasonHash);
   }
 
-  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   const maybeTxt = rawMeta.toHuman();
   if (isHex(maybeTxt)) {
     return hexToString(maybeTxt);
@@ -95,27 +92,25 @@ function getNewTipCall(registry, call, reasonHash) {
 }
 
 async function getTippersCountFromApi(blockHash) {
-  const v = await getMetadataConstByBlockHash(
-    blockHash,
-    "Elections",
-    "DesiredMembers"
-  );
-  return v ? v.toNumber() : v;
+  const blockApi = await findBlockApi(blockHash);
+  if (blockApi.consts.electionsPhragmen?.desiredMembers) {
+    return blockApi.consts.electionsPhragmen?.desiredMembers.toNumber()
+  } else if (blockApi.consts.phragmenElection?.desiredMembers) {
+    return blockApi.consts.phragmenElection?.desiredMembers.toNumber()
+  }
+
+  throw new Error("can not get elections desired members");
 }
 
 async function getTipFindersFeeFromApi(blockHash) {
-  const constants = await getMetadataConstsByBlockHash(blockHash, [
-    {
-      moduleName: "Tips",
-      constantName: "TipFindersFee",
-    },
-    {
-      moduleName: "Treasury",
-      constantName: "TipFindersFee",
-    },
-  ]);
+  const blockApi = await findBlockApi(blockHash);
+  if (blockApi.consts.tips?.tipFindersFee) {
+    return blockApi.consts.tips?.tipFindersFee.toNumber()
+  } else if (blockApi.consts.treasury?.tipFindersFee) {
+    return blockApi.consts.treasury?.tipFindersFee.toNumber()
+  }
 
-  return (constants[0] ?? constants[1])?.toJSON();
+  return null;
 }
 
 module.exports = {

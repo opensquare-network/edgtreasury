@@ -1,12 +1,8 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api");
+const { chain: { getApi, findBlockApi } } = require("@osn/scan-common");
 
 async function getMotionVoting(indexer, motionHash) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.council.voting, motionHash];
-
-  const raw = await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  const raw = await blockApi.query.council.voting(motionHash);
   return raw.toJSON();
 }
 

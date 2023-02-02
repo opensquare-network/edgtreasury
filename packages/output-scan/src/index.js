@@ -1,10 +1,21 @@
 require("dotenv").config();
 
 const { beginScan } = require("./scan/routine");
-const { subscribeChainHeight } = require("./chain/latestHead");
+const {
+  chain: {
+    disconnect,
+    subscribeChainHeight,
+    updateSpecs, checkSpecs,
+  },
+  env: { isUseMetaDb },
+} = require("@osn/scan-common");
 
 async function main() {
   await subscribeChainHeight();
+  if (isUseMetaDb()) {
+    await updateSpecs();
+    checkSpecs();
+  }
 
   await beginScan();
 }
@@ -12,3 +23,8 @@ async function main() {
 main()
   .then(() => console.log("Scan finished"))
   .catch(console.error)
+  .finally(cleanUp);
+
+async function cleanUp() {
+  await disconnect();
+}

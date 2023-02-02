@@ -1,5 +1,3 @@
-const { findRegistry } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api");
 const { edgTreasuryAccount } = require("../constants");
 const {
   blake2AsU8a,
@@ -7,6 +5,7 @@ const {
   xxhashAsU8a,
 } = require("@polkadot/util-crypto");
 const { u8aToHex } = require("@polkadot/util");
+const { chain: { getApi, findRegistry } } = require("@osn/scan-common");
 
 let balanceKey = getFreeBalanceAccountKey(edgTreasuryAccount);
 
@@ -24,7 +23,7 @@ async function getBalance(indexer) {
   const api = await getApi();
   if (indexer.blockHeight <= 3139200) {
     const balancesValue = await api.rpc.state.getStorage(balanceKey, indexer.blockHash);
-    const registry = await findRegistry(indexer.blockHeight);
+    const registry = await findRegistry(indexer);
     const accountData = registry.createType("AccountData", balancesValue.toHex(), true)
     return accountData.free.toString()
   }

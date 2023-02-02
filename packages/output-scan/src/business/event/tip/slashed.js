@@ -4,7 +4,7 @@ const {
   TimelineItemTypes,
 } = require("../../common/constants");
 const { getTipCommonUpdates } = require("../../common/tip/updates");
-const { getBlockHash } = require("../../common/block/blockHash");
+const { chain: { getBlockHash } } = require("@osn/scan-common");
 
 async function updateTipWithTipSlashed(event, indexer) {
   const eventData = event.data.toJSON();

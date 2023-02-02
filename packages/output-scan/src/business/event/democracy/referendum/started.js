@@ -43,7 +43,7 @@ async function handleStarted(event, indexer, blockEvents = []) {
   await insertDemocracyReferendum(obj);
   let proposalHash = referendumInfo.proposalHash;
   if (!proposalHash) {
-    proposalHash = referendumInfo.Ongoing.proposalHash;
+    proposalHash = (referendumInfo.Ongoing || referendumInfo.ongoing).proposalHash;
   }
   await handleBusinessWhenReferendumStarted(referendumIndex, proposalHash, indexer);
 }

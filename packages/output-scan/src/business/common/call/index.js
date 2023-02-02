@@ -1,19 +1,18 @@
-const {
-  Modules,
-  MultisigMethods,
-  ProxyMethods,
-  UtilityMethods,
-  SudoMethods,
-} = require("../constants");
-const { findRegistry } = require("../../../chain/specs");
 const { GenericCall } = require("@polkadot/types");
-const { logger } = require("../../../logger")
-const { createKeyMulti, encodeAddress } = require("@polkadot/util-crypto");
-
-function calcMultisigAddress(signatories, threshold, chainSS58) {
-  const multiPub = createKeyMulti(signatories, threshold);
-  return encodeAddress(multiPub, chainSS58);
-}
+const {
+  logger,
+  chain: { findRegistry },
+  consts: {
+    Modules,
+    MultisigMethods,
+    ProxyMethods,
+    UtilityMethods,
+    SudoMethods,
+  },
+  utils: {
+    calcMultisigAddress
+  }
+} = require("@osn/scan-common")
 
 async function unwrapProxy(call, signer, indexer, events, cb) {
   const real = call.args[0].toJSON();
@@ -22,7 +21,7 @@ async function unwrapProxy(call, signer, indexer, events, cb) {
 }
 
 async function handleMultisig(call, signer, indexer, events, cb) {
-  const registry = await findRegistry(indexer.blockHeight);
+  const registry = await findRegistry(indexer);
   const callHex = call.args[3];
   const threshold = call.args[0].toNumber();
   const otherSignatories = call.args[1].toJSON();

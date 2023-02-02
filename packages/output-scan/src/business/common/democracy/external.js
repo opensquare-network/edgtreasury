@@ -1,13 +1,10 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api")
+const {
+  chain: { getApi }
+} = require("@osn/scan-common");
 
 async function getExternalFromStorage(indexer) {
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.democracy.nextExternal];
-
-
-  const api = await getApi();
-  const raw = await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  const raw = await blockApi.query.democracy.nextExternal();
   return raw.toJSON();
 }
 

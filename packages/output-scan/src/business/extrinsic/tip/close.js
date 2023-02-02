@@ -1,7 +1,6 @@
 const { updateTipByHash } = require("../../../mongo/service/tip");
 const { getActiveTipByHash } = require("../../../mongo/service/tip");
 const { getTipCommonUpdates } = require("../../common/tip/updates");
-const { getBlockHash } = require("../../common/block/blockHash");
 const {
   TimelineItemTypes,
   TipMethods,
@@ -10,6 +9,7 @@ const {
   BalancesEvents,
   edgTreasuryAccount,
 } = require("../../common/constants");
+const { chain: { getBlockHash } } = require("@osn/scan-common");
 
 async function handleTipCloseCall(call, signer, indexer, events) {
   if (

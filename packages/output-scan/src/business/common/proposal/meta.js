@@ -1,12 +1,8 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api");
+const { chain: { findBlockApi } } = require("@osn/scan-common");
 
 async function getTreasuryProposalMeta(indexer, proposalIndex) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.treasury.proposals, proposalIndex];
-
-  const raw = await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  const raw = await blockApi.query.treasury.proposals(proposalIndex);
   return raw.toJSON();
 }
 

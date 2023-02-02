@@ -1,5 +1,5 @@
 const { getBlockIndexer } = require("../business/common/block/getBlockIndexer");
-const { getApi } = require("../chain/api");
+const { chain: { getApi } } = require("@osn/scan-common");
 
 async function getBlockIndexerByHeight(blockHeight) {
   const api = await getApi();

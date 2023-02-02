@@ -1,18 +1,14 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api");
+const { chain: { getApi, findBlockApi } } = require("@osn/scan-common");
 
 async function getBountyMeta(indexer, bountyIndex) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-
-  let key;
-  if (decorated.query.treasury?.bounties) {
-    key = [decorated.query.treasury?.bounties, bountyIndex];
+  const blockApi = await findBlockApi(indexer.blockHash);
+  let rawMeta;
+  if (blockApi.query.treasury?.bounties) {
+    rawMeta = await blockApi.query.treasury?.bounties(bountyIndex);
   } else {
-    key = [decorated.query.bounties?.bounties, bountyIndex];
+    rawMeta = await blockApi.query.bounties.bounties(bountyIndex);
   }
 
-  const rawMeta = await api.rpc.state.getStorage(key, indexer.blockHash);
   return rawMeta.toJSON();
 }
 
