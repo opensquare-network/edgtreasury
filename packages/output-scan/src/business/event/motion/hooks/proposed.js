@@ -9,7 +9,7 @@ const {
   BountyMethods,
   BountyStatus,
 } = require("../../../common/constants");
-const { logger } = require("../../../../logger");
+const { busLogger: logger } = require("@osn/scan-common");
 
 async function handleProposalCall(motion, call, author, indexer) {
   const { section, method, args } = call;

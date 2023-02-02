@@ -8,7 +8,7 @@ const {
   BountyMethods,
   BountyStatus,
 } = require("../../../common/constants");
-const { logger } = require("../../../../logger")
+const { busLogger: logger } = require("@osn/scan-common");
 
 function getState(name, motion, voting, indexer) {
   return {

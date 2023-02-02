@@ -1,17 +1,10 @@
-const { findDecorated } = require("../../../chain/specs");
-const { getApi } = require("../../../chain/api");
 const { normalizeCall } = require("./utils");
-const {
-  findRegistry,
-} = require("../../../chain/specs");
 const { GenericCall } = require("@polkadot/types");
+const { chain: { getApi, findBlockApi, findRegistry } } = require("@osn/scan-common");
 
 async function getMotionProposal(indexer, motionHash) {
-  const api = await getApi();
-  const decorated = await findDecorated(indexer.blockHeight);
-  const key = [decorated.query.council.proposalOf, motionHash];
-
-  return await api.rpc.state.getStorage(key, indexer.blockHash);
+  const blockApi = await findBlockApi(indexer.blockHash);
+  return await blockApi.query.council.proposalOf(motionHash);
 }
 
 async function getMotionProposalCall(motionHash, indexer) {

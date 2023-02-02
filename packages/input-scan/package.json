@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@osn/scan-common": "^0.4.0",
-    "@edgeware/node-types": "3.6.2-wako",
-    "@polkadot/api": "9.10.3",
     "bignumber.js": "^9.0.1",
     "dotenv": "^10.0.0",
     "lodash.findlast": "^4.6.0",

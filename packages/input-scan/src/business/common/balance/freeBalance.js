@@ -5,7 +5,7 @@ const {
   xxhashAsU8a,
 } = require("@polkadot/util-crypto");
 const { u8aToHex } = require("@polkadot/util");
-const { chain: { findRegistry } } = require("@osn/scan-common");
+const { chain: { getApi, findRegistry } } = require("@osn/scan-common");
 
 let balanceKey = getFreeBalanceAccountKey(edgTreasuryAccount);
 

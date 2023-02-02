@@ -6,7 +6,7 @@ const {
 
 async function test() {
   const blockHeights = [
-    15321623,
+    14255998,
   ];
 
   const api = await getApi();

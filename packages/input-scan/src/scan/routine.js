@@ -1,20 +1,22 @@
 const { handleSpecialBlock } = require("./block");
 const { specialHeights } = require("./specialHeights");
-const { getMetaScanHeight } = require("../chain/specs");
-const { updateSpecs } = require("../chain/specs");
-const { logger } = require("../logger");
 const { tryCreateStatPoint } = require("./stats");
-const { getHeadUsedInGB } = require("../utils/memory");
-const { getBlockIndexer } = require("../business/common/block/getBlockIndexer");
 const { updateScanStatus } = require("../mongo/scanHeight");
 const { scanNormalizedBlock } = require("./block");
-const { fetchBlocks } = require("./fetchBlock");
-const { getScanStep, isUseMetaDb } = require("../env");
-const { getLatestHeight } = require("../chain/latestHead");
-const { sleep } = require("../utils/sleep");
-const { getApi } = require("../chain/api");
 const { getNextScanHeight } = require("../mongo/scanHeight");
 const last = require("lodash.last");
+const {
+  chain: {
+    getApi,
+    getLatestHeight,
+    updateSpecs, getMetaScanHeight,
+    fetchBlocks,
+    getBlockIndexer,
+  },
+  logger,
+  env: { getScanStep, isUseMetaDb },
+  utils: { sleep, getHeadUsedInGB },
+} = require("@osn/scan-common");
 
 async function beginScan() {
   let scanHeight = await getNextScanHeight();

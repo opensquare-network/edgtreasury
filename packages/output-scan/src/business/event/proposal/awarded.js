@@ -3,7 +3,7 @@ const {
   TreasuryProposalEvents,
   TimelineItemTypes,
 } = require("../../common/constants");
-const { logger } = require("../../../logger")
+const { busLogger: logger } = require("@osn/scan-common");
 
 async function handleAwarded(event, eventIndexer) {
   const eventData = event.data.toJSON();

@@ -1,4 +1,4 @@
-const { getApi } = require("../../../chain/api");
+const { chain: { getApi } } = require("@osn/scan-common");
 
 async function queryMintingInterval(blockHash) {
   const api = await getApi()

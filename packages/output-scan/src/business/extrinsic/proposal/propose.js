@@ -7,7 +7,7 @@ const {
   TreasuryProposalEvents,
   TimelineItemTypes,
 } = require("../../common/constants");
-const { logger } = require("../../../logger")
+const { busLogger: logger } = require("@osn/scan-common");
 
 async function handleTreasuryProposeCall(call, author, indexer, events) {
   if (
