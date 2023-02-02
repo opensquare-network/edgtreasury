@@ -18,7 +18,7 @@ async function handleMinting(event, indexer,) {
     return "62000000000000000000";
   }
 
-  return event.data[0].toString();
+  return "0";
 }
 
 module.exports = {
